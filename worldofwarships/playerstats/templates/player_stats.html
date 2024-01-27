@@ -178,11 +178,11 @@
                 <div class="dropdown">
                     <button class="dropbtn">Random Battles</button>
                     <div class="dropdown-content">
-                        <a href="#">Random Battles</a>
-                        <a href="#">Co-op Battles</a>
-                        <a href="#">Operations</a>
-                        <a href="#">Ranked Battles</a>
-                        <a href="#">Ranked Battles (Legacy)</a>
+                        <a href="#" onclick="showTable('random-battles')">Random Battles</a>
+                        <a href="#" onclick="showTable('coop-battles')">Co-op Battles</a>
+                        <a href="#" onclick="showTable('operations')">Operations</a>
+                        <a href="#" onclick="showTable('ranked-battles')">Ranked Battles</a>
+                        <a href="#" onclick="showTable('ranked-battles-legacy')">Ranked Battles (Legacy)</a>
                     </div>
                 </div>
             </td>
@@ -197,6 +197,9 @@
     <!--  -------------------------------------------------------------------------------------------- -->
     <!--  -------------------------------------------------------------------------------------------- -->
 
+    <div id="operations" class="table-container hidden">
+        <!-- Table structure for Operations -->
+    
     <div class="stats-container">
         <!-- First Column -->
         <div class="stat-column">
@@ -378,6 +381,8 @@
             <!-- Repeat stat-row for other stats in the third column -->
         </div>
     </div>
+    
+    </div>
 
     <!--  -------------------------------------------------------------------------------------------- -->
     <!--  -------------------------------------------------------------------------------------------- -->
@@ -386,7 +391,9 @@
     <!--  -------------------------------------------------------------------------------------------- -->
     <!--  -------------------------------------------------------------------------------------------- -->
 
-    <br></br>
+
+    <div id="random-battles" class="table-container hidden">
+        <!-- Table structure for Random Battles -->
 
     <div class="stats-container">
         <!-- First Column -->
@@ -539,6 +546,8 @@
         </div>
     </div>
 
+    </div>
+
     <br></br>
 
     <!-- <h3 class="statistics-table-header"><center>Weapons Statistics</center></h3>
@@ -589,6 +598,23 @@
 
     <br></br>
     <br></br>
+
+
+    <script>
+        function showTable(tableId) {
+            // Hide all tables
+            var tables = document.getElementsByClassName('table-container');
+            for (var i = 0; i < tables.length; i++) {
+                tables[i].style.display = 'none';
+            }
+
+            // Show the selected table
+            var selectedTable = document.getElementById(tableId);
+            if (selectedTable) {
+                selectedTable.style.display = 'block';
+            }
+        }
+    </script>
 
 </body>
 </html>
