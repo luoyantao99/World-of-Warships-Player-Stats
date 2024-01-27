@@ -1,0 +1,10 @@
+{% if data %}
+    <div>
+        <h2>Player Stats for {{ data['data'][0]['nickname'] }}</h2>
+        <p>Last Battle Time: {{ data['data'][0]['last_battle_time'] }}</p>
+        <p>Account ID: {{ data['data'][0]['account_id'] }}</p>
+        <!-- Add more fields as needed -->
+    </div>
+{% else %}
+    <p>No data available. Please enter a username.</p>
+{% endif %}
