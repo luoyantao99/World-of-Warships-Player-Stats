@@ -8,8 +8,10 @@ import datetime
 def get_player_data(request):
     application_id = '586c12b8bcdeebae9fa17747f47d67ec'
     account_id = '1005419424'
-    response = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=statistics.oper_div%2C+statistics.oper_solo')
-    data = response.json()
+    
+    data = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=statistics.oper_div%2C+statistics.oper_solo').json()
+
+    shipData = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={application_id}&account_id={account_id}&extra=oper_solo%2C+oper_div').json()
 
     account_data = data['data'][account_id] # Just for convenience and readability
     account_data['last_battle_time'] = datetime.datetime.fromtimestamp(account_data['last_battle_time'])
@@ -36,7 +38,10 @@ def get_player_data(request):
         combine_oper(account_stats['oper']['wins_by_tasks'], account_stats['oper_solo']['wins_by_tasks'], account_stats['oper_div']['wins_by_tasks'], f'{i}')
 
     
-    context = {'data': data}
+    context = {
+        'data': data, 
+        'shipData': shipData
+    }
     template = loader.get_template('player_stats.html')
     return HttpResponse(template.render(context, request))
 
