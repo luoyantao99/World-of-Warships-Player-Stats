@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>World of Warships Player Stats</title>
+    <title>World of Warships Player Profile</title>
     <style>
 
         .stats-container {
@@ -147,12 +147,11 @@
 
         .normal-text {
             font-family: Arial, sans-serif; 
-            font-size: 16px;
+            font-size: 17px;
             color: white;
             text-shadow: 0.7px 0.7px 0.7px #000;
-            line-height: 1.4;
+            line-height: 1.3;
         }
-
 
     </style>
 </head>
@@ -161,28 +160,35 @@
 <body>
     {% load humanize %}
 
-    <h1>World of Warships Player Stats</h1>
+    <h1>World of Warships Player Profile</h1>
 
-    <div class="normal-text">
-        Account Name: {{ data.data.1005419424.nickname }}<br>
-        Account ID: {{ data.data.1005419424.account_id }}<br>
-        Last Battle Time: {{ data.data.1005419424.last_battle_time }}<br>
-        Updated At: {{ data.data.1005419424.updated_at }}<br><br>
-    </div>
+    <table style="white-space:nowrap;">
+        <tr>
+            <td>
+                <div class="normal-text">
+                    Account Name: {{ data.data.1005419424.nickname }}<br>
+                    Last Battle Time: {{ data.data.1005419424.last_battle_time }}<br>
+                    Updated At: {{ data.data.1005419424.updated_at }}<br><br>
+                </div>
+            </td>
+            <td>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            </td>
+            <td>
+                <div class="dropdown">
+                    <button class="dropbtn">Random Battles</button>
+                    <div class="dropdown-content">
+                        <a href="#">Random Battles</a>
+                        <a href="#">Co-op Battles</a>
+                        <a href="#">Operations</a>
+                        <a href="#">Ranked Battles</a>
+                        <a href="#">Ranked Battles (Legacy)</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+      </table>
 
-
-    <div class="dropdown">
-        <button class="dropbtn">Random Battles</button>
-        <div class="dropdown-content">
-            <a href="#">Random Battles</a>
-            <a href="#">Co-op Battles</a>
-            <a href="#">Operations</a>
-            <a href="#">Ranked Battles</a>
-            <a href="#">Ranked Battles (Legacy)</a>
-        </div>
-    </div>
-
-    <br></br>
 
     <!--  -------------------------------------------------------------------------------------------- -->
     <!--  -------------------------------------------------------------------------------------------- -->
@@ -216,7 +222,6 @@
                 <div class="stat-label">Wins Survived</div>
                 <div class="stat-value">{{ data.data.1005419424.statistics.oper.survived_wins|intcomma }}</div>
             </div>
-            <br></br>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
                 <div class="stat-value">{{ data.data.1005419424.statistics.oper.xp|intcomma }}</div>
@@ -277,7 +282,6 @@
                 <div class="stat-label">Wins Survived</div>
                 <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.survived_wins|intcomma }}</div>
             </div>
-            <br></br>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
                 <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.xp|intcomma }}</div>
@@ -338,7 +342,6 @@
                 <div class="stat-label">Wins Survived</div>
                 <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.survived_wins|intcomma }}</div>
             </div>
-            <br></br>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
                 <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.xp|intcomma }}</div>
