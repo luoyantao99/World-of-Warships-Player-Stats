@@ -1,9 +1,11 @@
 import requests
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.template import loader
 
 def get_player_data(request):
-    return HttpResponse("Hello world!")
+    template = loader.get_template('player_stats.html')
+    return HttpResponse(template.render())
 
     if request.method == 'GET' and 'username' in request.GET:
         application_id = '586c12b8bcdeebae9fa17747f47d67ec'
