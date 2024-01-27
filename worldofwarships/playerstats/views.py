@@ -2,10 +2,7 @@ import requests
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-
 import datetime
-import pytz
-from django.utils import timezone
 
 
 def get_player_data(request):
