@@ -9,13 +9,29 @@
             margin: auto;
             background: rgba(0, 0, 0, 0.6); /* Adjust the opacity as needed */
             color: white;
-            padding: 50px;
+            padding: 40px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
             font-family: Arial, sans-serif;
             display: flex;
             flex-wrap: wrap; /* Wrap the children if the container is too narrow */
-            gap: 20px; /* Add some space between the columns */
+            gap: 40px; /* Add some space between the columns */
+            text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
+            justify-content: space-between; /* Space out the columns */
+        }
+
+        .stats-container-oper {
+            max-width: 800px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.6); /* Adjust the opacity as needed */
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap; /* Wrap the children if the container is too narrow */
+            gap: 40px; /* Add some space between the columns */
             text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
             justify-content: space-between; /* Space out the columns */
         }
@@ -171,7 +187,7 @@
     <!--  -------------------------------------------------------------------------------------------- -->
 
     <h3 class="statistics-table-header"><center>Operations</center></h3>
-    <div class="stats-container">
+    <div class="stats-container-oper">
         <!-- First Column -->
         <div class="stat-column">
             <div class="column-title">Operations (Solo)</div>
