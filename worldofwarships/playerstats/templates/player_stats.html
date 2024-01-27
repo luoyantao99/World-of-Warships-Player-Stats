@@ -2,6 +2,145 @@
 <html>
 <head>
     <title>Player Stats</title>
+    <style>
+
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .stats-table td {
+            padding: 8px;
+            border-bottom: 1px dotted #ddd; /* Dotted line for separation */
+        }
+
+        .stats-table th {
+            background-color: #f2f2f2;
+        }
+
+        .stats-table .label {
+            text-align: left;
+        }
+
+        .stats-table .value {
+            text-align: right;
+        }
+
+        .stats-table .value {
+            text-align: right;
+        }
+
+        .stat-header {
+            text-align: center;
+            font-weight: bold;
+        }
+
+
+
+
+
+
+        .stats-container {
+            max-width: 2000px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.6); /* Adjust the opacity as needed */
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap; /* Wrap the children if the container is too narrow */
+            gap: 20px; /* Add some space between the columns */
+            justify-content: space-between; /* Space out the columns */
+        }
+        
+        .column-title {
+            font-size: 18px;
+            margin-bottom: 10px; /* Space between title and first stat row */
+            text-align: center; /* Center the column title */
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between; /* Space between label and number */
+            border-bottom: 1px dotted #fff; /* Dotted line for separation */
+            padding: 10px 0; /* Padding for top and bottom */
+        }
+
+        .stat-column {
+            flex: 1; /* Each column takes up equal space */
+            min-width: 200px; /* Minimum width for each column */
+        }
+
+        .stat-label {
+            text-align: left;
+            flex: 1; /* Take up the available space */
+        }
+
+        .stat-value {
+            text-align: right;
+            flex: 0; /* Do not grow, just enough space to fit content */
+        }
+
+
+
+
+
+
+
+        /* Container for the dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown button */
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+    </style>
 </head>
 <body>
     <h1>World of Warships Player Stats</h1>
@@ -17,5 +156,296 @@
     {% else %}
         <p>No data available.</p>
     {% endif %}
+
+
+    <div class="dropdown">
+        <button class="dropbtn">Random Battles</button>
+        <div class="dropdown-content">
+            <a href="#">Random Battles</a>
+            <a href="#">Co-op Battles</a>
+            <a href="#">Operations</a>
+            <a href="#">Ranked Battles</a>
+            <a href="#">Ranked Battles (Legacy)</a>
+        </div>
+    </div>
+
+    <br></br>
+
+
+
+
+    <div class="stats-container">
+        <!-- First Column -->
+        <div class="stat-column">
+            <div class="column-title">Battles Played</div>
+            <div class="stat-row">
+                <div class="stat-label">Battles Played</div>
+                <div class="stat-value">5,578</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Victories</div>
+                <div class="stat-value">5,578</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Defeats</div>
+                <div class="stat-value">5,578</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Draws</div>
+                <div class="stat-value">5,578</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Battles Survived</div>
+                <div class="stat-value">5,578</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Main Battery Guns Hit Ratio</div>
+                <div class="stat-value">5,578</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Torpedoes Hit Ratio</div>
+                <div class="stat-value">5,578</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Contribution to Capture</div>
+                <div class="stat-value">5,578</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Contribution to Defense</div>
+                <div class="stat-value">5,578</div>
+            </div>
+            <!-- Repeat stat-row for other stats in the first column -->
+        </div>
+
+        <!-- Second Column -->
+        <div class="stat-column">
+            <div class="column-title">Total Score</div>
+            <div class="stat-row">
+                <div class="stat-label">Warships Destroyed</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Aircraft Destroyed</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Damage</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">XP</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Ships Spotted</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Spotting Damage</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Potential Damage</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <!-- Repeat stat-row for other stats in the second column -->
+        </div>
+
+        <!-- Third Column -->
+        <div class="stat-column">
+            <div class="column-title">Average Score per Battle 	</div>
+            <div class="stat-row">
+                <div class="stat-label">Warships Destroyed</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Aircraft Destroyed</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Damage</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">XP</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Ships Spotted</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Spotting Damage</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Potential Damage</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <!-- Repeat stat-row for other stats in the third column -->
+        </div>
+
+        <!-- Fourth Column -->
+        <div class="stat-column">
+            <div class="column-title">Most per Battle</div>
+            <div class="stat-row">
+                <div class="stat-label">Warships Destroyed</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Aircraft Destroyed</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Damage</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">XP</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Ships Spotted</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Spotting Damage</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Potential Damage</div>
+                <div class="stat-value">7,656</div>
+            </div>
+            <!-- Repeat stat-row for other stats in the fourth column -->
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <table class="stats-table">
+        <!-- Table Header -->
+        <thead>
+            <tr>
+                <th class="stat-header">Battles Played</th>
+                <th class="stat-header">Total Score</th>
+                <th class="stat-header">Average Score per Battle</th>
+                <th class="stat-header">Most per Battle</th>
+            </tr>
+        </thead>
+        <!-- Table Body -->
+        <tbody>
+            <!-- Row for Battles Played -->
+            <tr>
+                <!-- <td class="label">Victories</td>
+                <td class="value">3,855</td> -->
+                <td>
+                    Battles Played: <br>
+                    Victories: {{ data.data.1005419424.statistics.pvp.wins }}<br>
+                    Defeats: {{ data.data.1005419424.statistics.pvp.losses }}<br>
+                    Draws: {{ draws }}<br>
+                    Battles Survived: {{ battles_survived }}<br><br>
+                    Main Battery Guns Hit Ratio: {{ battles_survived }}<br>
+                    Torpedoes Hit Ratio: {{ battles_survived }}<br><br>
+                    Contribution to capture: {{ battles_survived }}<br>
+                    Contribution to defense: {{ battles_survived }}
+                </td>
+                <!-- Row for Total Score -->
+                <td>
+                    Warships Destroyed: {{ avg_warships_destroyed }}<br>
+                    Aircraft Destroyed: {{ avg_aircraft_destroyed }}<br>
+                    Damage: {{ avg_damage }}<br>
+                    XP: {{ avg_xp }}<br><br>
+                    Ships Spotted: {{ avg_ships_spotted }}<br>
+                    Spotting Damage: {{ avg_spotting_damage }}<br>
+                    Potential Damage: {{ avg_potential_damage }}
+                </td>
+                <!-- Row for Average Score per Battle -->
+                <td>
+                    Warships Destroyed: {{ avg_warships_destroyed }}<br>
+                    Aircraft Destroyed: {{ avg_aircraft_destroyed }}<br>
+                    Damage: {{ avg_damage }}<br>
+                    XP: {{ avg_xp }}<br><br>
+                    Ships Spotted: {{ avg_ships_spotted }}<br>
+                    Spotting Damage: {{ avg_spotting_damage }}<br>
+                    Potential Damage: {{ avg_potential_damage }}
+                </td>
+                <!-- Row for Most per Battle -->
+                <td>
+                    Warships Destroyed: {{ most_warships_destroyed }}<br>
+                    Aircraft Destroyed: {{ most_aircraft_destroyed }}<br>
+                    Damage: {{ most_damage }}<br>
+                    XP: {{ data.data.1005419424.statistics.pvp.max_xp }}<br><br>
+                    Ships Spotted: {{ most_ships_spotted }}<br>
+                    Spotting Damage: {{ most_spotting_damage }}<br>
+                    Potential Damage: {{ most_potential_damage }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h3 class="statistics-table-header"><center>Weapons Statistics</center></h3>
+    <table>
+        <tr class="header-row">
+            <th></th>
+            <th>Warships destroyed</th>
+            <th>Hit Ratio</th>
+            <th>Maximum kills</th>
+        </tr>
+        <tr>
+            <td>Main Battery</td>
+            <td>{{ data.data.1005419424.statistics.pvp.main_battery.frags }}</td>
+            <td>xxxx %</td>
+            <td>8<br>Giulio Cesare</td>
+        </tr>
+        <tr>
+            <td>Secondary Battery</td>
+            <td>xxxx</td>
+            <td>xxxx %</td>
+            <td>1<br>Ohio</td>
+        </tr>
+        <tr>
+            <td>Torpedoes</td>
+            <td>xxxx</td>
+            <td>xxxx %</td>
+            <td>4<br>Benham</td>
+        </tr>
+        <tr>
+            <td>Aircraft</td>
+            <td>xxxx</td>
+            <td>-</td>
+            <td>7<br>Enterprise</td>
+        </tr>
+        <tr>
+            <td>Ramming</td>
+            <td>xxxx</td>
+            <td>-</td>
+            <td>1<br>Conqueror</td>
+        </tr>
+        <tr>
+            <td>Depth Charges</td>
+            <td>xxxx</td>
+            <td>-</td>
+            <td>1<br>Conqueror</td>
+        </tr>
+    </table>
+    
+
 </body>
 </html>
