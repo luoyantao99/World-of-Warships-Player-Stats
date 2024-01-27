@@ -5,33 +5,17 @@
     <style>
 
         .stats-container {
-            max-width: 2000px;
+            max-width: 1600px;
             margin: auto;
             background: rgba(0, 0, 0, 0.6); /* Adjust the opacity as needed */
             color: white;
-            padding: 40px;
+            padding: 50px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
             font-family: Arial, sans-serif;
             display: flex;
             flex-wrap: wrap; /* Wrap the children if the container is too narrow */
-            gap: 40px; /* Add some space between the columns */
-            text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
-            justify-content: space-between; /* Space out the columns */
-        }
-
-        .stats-container-oper {
-            max-width: 800px;
-            margin: auto;
-            background: rgba(0, 0, 0, 0.6); /* Adjust the opacity as needed */
-            color: white;
-            padding: 40px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-wrap: wrap; /* Wrap the children if the container is too narrow */
-            gap: 40px; /* Add some space between the columns */
+            gap: 50px; /* Add some space between the columns */
             text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
             justify-content: space-between; /* Space out the columns */
         }
@@ -52,7 +36,7 @@
         .stat-column {
             flex: 1; /* Each column takes up equal space */
             min-width: 200px; /* Minimum width for each column */
-            max-width: 400px;
+            max-width: 500px;
         }
 
         .stat-label {
@@ -187,8 +171,69 @@
     <!--  -------------------------------------------------------------------------------------------- -->
 
     <h3 class="statistics-table-header"><center>Operations</center></h3>
-    <div class="stats-container-oper">
+    <div class="stats-container">
         <!-- First Column -->
+        <div class="stat-column">
+            <div class="column-title">Operations</div>
+            <div class="stat-row">
+                <div class="stat-label">Battles Played</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.battles }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Victories</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Defeats</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.losses }}</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Battles Survived</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.survived_battles }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Wins Survived</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.survived_wins }}</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">XP</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.xp }}</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Wins By Tasks</div>
+                <div class="stat-value"></div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">0 Star</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.0 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">1 Star</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.1 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">2 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.2 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">3 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.3 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">4 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.4 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">5 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.5 }}</div>
+            </div>
+            <!-- Repeat stat-row for other stats in the first column -->
+        </div>
+
+        <!-- Second Column -->
         <div class="stat-column">
             <div class="column-title">Operations (Solo)</div>
             <div class="stat-row">
@@ -246,10 +291,10 @@
                 <div class="stat-label">5 Stars</div>
                 <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.5 }}</div>
             </div>
-            <!-- Repeat stat-row for other stats in the first column -->
+            <!-- Repeat stat-row for other stats in the second column -->
         </div>
 
-        <!-- Second Column -->
+        <!-- Third Column -->
         <div class="stat-column">
             <div class="column-title">Operations (Division)</div>
             <div class="stat-row">
@@ -307,7 +352,7 @@
                 <div class="stat-label">5 Stars</div>
                 <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.5 }}</div>
             </div>
-            <!-- Repeat stat-row for other stats in the second column -->
+            <!-- Repeat stat-row for other stats in the third column -->
         </div>
     </div>
 
