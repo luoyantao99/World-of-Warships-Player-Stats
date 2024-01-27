@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Player Stats</title>
+    <title>World of Warships Player Stats</title>
     <style>
 
         .stats-container {
-            max-width: 1600px;
+            max-width: 1700px;
             margin: auto;
             background: rgba(0, 0, 0, 0.6); /* Adjust the opacity as needed */
             color: white;
@@ -21,7 +21,7 @@
         }
         
         .column-title {
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 10px; /* Space between title and first stat row */
             text-align: center; /* Center the column title */
         }
@@ -94,7 +94,8 @@
             background-color: #4CAF50;
             color: white;
             padding: 16px;
-            font-size: 16px;
+            font-size: 18px;
+            text-shadow: 0.7px 0.7px 0.7px #000;
             border: none;
             cursor: pointer;
             border-radius: 4px;
@@ -134,21 +135,39 @@
             background-color: #3e8e41;
         }
 
+
+        body {
+            background-image: url('https://ips4-wowslegends-global.gcdn.co/monthly_2023_01/Pommern.png.1e9d81637ac03d4bcf6491b5395eec8f.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 20px;
+        }
+
+        .normal-text {
+            font-family: Arial, sans-serif; 
+            font-size: 16px;
+            color: white;
+            text-shadow: 0.7px 0.7px 0.7px #000;
+            line-height: 1.4;
+        }
+
+
     </style>
 </head>
 
 
 <body>
-    <h1>World of Warships Player Stats</h1>
-    
     {% load humanize %}
-    
-    <div>
-        <h2>Stats for Player: {{ data.data.1005419424.nickname }}</h2>
-        <p>Account ID: {{ data.data.1005419424.account_id }}</p>
 
-        <p>Last Battle Time: {{ data.data.1005419424.last_battle_time }}</p>
-        <p>Updated At: {{ data.data.1005419424.updated_at }}</p>
+    <h1>World of Warships Player Stats</h1>
+
+    <div class="normal-text">
+        Account Name: {{ data.data.1005419424.nickname }}<br>
+        Account ID: {{ data.data.1005419424.account_id }}<br>
+        Last Battle Time: {{ data.data.1005419424.last_battle_time }}<br>
+        Updated At: {{ data.data.1005419424.updated_at }}<br><br>
     </div>
 
 
@@ -172,7 +191,6 @@
     <!--  -------------------------------------------------------------------------------------------- -->
     <!--  -------------------------------------------------------------------------------------------- -->
 
-    <h3 class="statistics-table-header"><center>Operations</center></h3>
     <div class="stats-container">
         <!-- First Column -->
         <div class="stat-column">
@@ -367,11 +385,10 @@
 
     <br></br>
 
-    <h3 class="statistics-table-header"><center>Random Battles</center></h3>
     <div class="stats-container">
         <!-- First Column -->
         <div class="stat-column">
-            <div class="column-title">Battles Played</div>
+            <div class="column-title">Random Battles</div>
             <div class="stat-row">
                 <div class="stat-label">Battles Played</div>
                 <div class="stat-value">{{ data.data.1005419424.statistics.pvp.battles|intcomma }}</div>
@@ -519,11 +536,9 @@
         </div>
     </div>
 
-
     <br></br>
 
-
-    <h3 class="statistics-table-header"><center>Weapons Statistics</center></h3>
+    <!-- <h3 class="statistics-table-header"><center>Weapons Statistics</center></h3>
     <table class="statistics-table">
         <tr>
             <th></th>
@@ -534,36 +549,41 @@
         <tr>
             <td>Main Battery</td>
             <td>{{ data.data.1005419424.statistics.pvp.main_battery.frags|intcomma }}</td>
-            <td>33.74 %</td>
+            <td>-1 %</td>
             <td>8<br>Giulio Cesare</td>
         </tr>
         <tr>
             <td>Secondary Battery</td>
-            <td>52</td>
-            <td>14.77 %</td>
+            <td>-1</td>
+            <td>-1 %</td>
             <td>1<br>Ohio</td>
         </tr>
         <tr>
             <td>Torpedoes</td>
-            <td>254</td>
-            <td>5.53 %</td>
+            <td>-1</td>
+            <td>-1 %</td>
             <td>4<br>Benham</td>
         </tr>
         <tr>
             <td>Aircraft</td>
-            <td>2142</td>
+            <td>-1</td>
             <td>-</td>
             <td>7<br>Enterprise</td>
         </tr>
         <tr>
-            <td>By Ramming</td>
-            <td>70</td>
+            <td>Ramming</td>
+            <td>-1</td>
             <td>-</td>
             <td>1<br>Conqueror</td>
         </tr>
-    </table>
+        <tr>
+            <td>Depth Charges</td>
+            <td>-1</td>
+            <td>-</td>
+            <td>1<br>Conqueror</td>
+        </tr>
+    </table> -->
 
-    <br></br>
     <br></br>
     <br></br>
 
