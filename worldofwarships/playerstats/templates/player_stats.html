@@ -9,13 +9,14 @@
             margin: auto;
             background: rgba(0, 0, 0, 0.6); /* Adjust the opacity as needed */
             color: white;
-            padding: 20px;
+            padding: 50px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
             font-family: Arial, sans-serif;
             display: flex;
             flex-wrap: wrap; /* Wrap the children if the container is too narrow */
             gap: 20px; /* Add some space between the columns */
+            text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
             justify-content: space-between; /* Space out the columns */
         }
         
@@ -35,6 +36,7 @@
         .stat-column {
             flex: 1; /* Each column takes up equal space */
             min-width: 200px; /* Minimum width for each column */
+            max-width: 400px;
         }
 
         .stat-label {
@@ -46,9 +48,6 @@
             text-align: right;
             flex: 0; /* Do not grow, just enough space to fit content */
         }
-
-
-
 
 
         
@@ -81,12 +80,6 @@
         /* -------------------------------------------------------------------------------------------- */
         /* -------------------------------------------------------------------------------------------- */
         /* -------------------------------------------------------------------------------------------- */
-
-
-
-
-
-
 
 
 
@@ -143,20 +136,18 @@
 
     </style>
 </head>
+
+
 <body>
     <h1>World of Warships Player Stats</h1>
     
-    {% if data %}
-        <div>
-            <h2>Stats for Player: {{ data.data.1005419424.nickname }}</h2>
-            <p>Last Battle Time: {{ data.data.1005419424.last_battle_time }}</p>
-            <p>Account ID: {{ data.data.1005419424.account_id }}</p>
-            <p>Total Battles: {{ data.data.1005419424.statistics.battles }}</p>
-            <!-- Add more fields as you like -->
-        </div>
-    {% else %}
-        <p>No data available.</p>
-    {% endif %}
+    <div>
+        <h2>Stats for Player: {{ data.data.1005419424.nickname }}</h2>
+        <p>Account ID: {{ data.data.1005419424.account_id }}</p>
+
+        <p>Last Battle Time: {{ data.data.1005419424.last_battle_time }}</p>
+        <p>Updated At: {{ data.data.1005419424.updated_at }}</p>
+    </div>
 
 
     <div class="dropdown">
@@ -172,16 +163,155 @@
 
     <br></br>
 
+    <!--  -------------------------------------------------------------------------------------------- -->
+    <!--  -------------------------------------------------------------------------------------------- -->
+    <!--  -------------------------------------------------------------------------------------------- -->
+    <!--  -------------------------------------------------------------------------------------------- -->
+    <!--  -------------------------------------------------------------------------------------------- -->
+    <!--  -------------------------------------------------------------------------------------------- -->
 
+    <h3 class="statistics-table-header"><center>Operations</center></h3>
+    <div class="stats-container">
+        <!-- First Column -->
+        <div class="stat-column">
+            <div class="column-title">Operations (Solo)</div>
+            <div class="stat-row">
+                <div class="stat-label">Battles Played</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.battles }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Victories</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Defeats</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.losses }}</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Battles Survived</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.survived_battles }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Wins Survived</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.survived_wins }}</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">XP</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.xp }}</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Wins By Tasks</div>
+                <div class="stat-value"></div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">0 Star</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.0 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">1 Star</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.1 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">2 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.2 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">3 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.3 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">4 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.4 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">5 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.5 }}</div>
+            </div>
+            <!-- Repeat stat-row for other stats in the first column -->
+        </div>
 
+        <!-- Second Column -->
+        <div class="stat-column">
+            <div class="column-title">Operations (Division)</div>
+            <div class="stat-row">
+                <div class="stat-label">Battles Played</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.battles }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Victories</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Defeats</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.losses }}</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Battles Survived</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.survived_battles }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">Wins Survived</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.survived_wins }}</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">XP</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.xp }}</div>
+            </div>
+            <br></br>
+            <div class="stat-row">
+                <div class="stat-label">Wins By Tasks</div>
+                <div class="stat-value"></div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">0 Star</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.0 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">1 Star</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.1 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">2 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.2 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">3 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.3 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">4 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.4 }}</div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-label">5 Stars</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.5 }}</div>
+            </div>
+            <!-- Repeat stat-row for other stats in the second column -->
+        </div>
+    </div>
 
+    <!--  -------------------------------------------------------------------------------------------- -->
+    <!--  -------------------------------------------------------------------------------------------- -->
+    <!--  -------------------------------------------------------------------------------------------- -->
+    <!--  -------------------------------------------------------------------------------------------- -->
+    <!--  -------------------------------------------------------------------------------------------- -->
+    <!--  -------------------------------------------------------------------------------------------- -->
+
+    <br></br>
+
+    <h3 class="statistics-table-header"><center>Random Battles</center></h3>
     <div class="stats-container">
         <!-- First Column -->
         <div class="stat-column">
             <div class="column-title">Battles Played</div>
             <div class="stat-row">
                 <div class="stat-label">Battles Played</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.battles }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Victories</div>
@@ -193,29 +323,29 @@
             </div>
             <div class="stat-row">
                 <div class="stat-label">Draws</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.draws }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Battles Survived</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.survived_battles }}</div>
             </div>
             <br></br>
             <div class="stat-row">
                 <div class="stat-label">Main Battery Guns Hit Ratio</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Torpedoes Hit Ratio</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <br></br>
             <div class="stat-row">
                 <div class="stat-label">Contribution to Capture</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Contribution to Defense</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <!-- Repeat stat-row for other stats in the first column -->
         </div>
@@ -225,32 +355,32 @@
             <div class="column-title">Total Score</div>
             <div class="stat-row">
                 <div class="stat-label">Warships Destroyed</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.frags }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Aircraft Destroyed</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.planes_killed }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Damage</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.damage_dealt }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.xp }}</div>
             </div>
             <br></br>
             <div class="stat-row">
                 <div class="stat-label">Ships Spotted</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.ships_spotted }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Spotting Damage</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.damage_scouting }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Potential Damage</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <!-- Repeat stat-row for other stats in the second column -->
         </div>
@@ -260,32 +390,32 @@
             <div class="column-title">Average Score per Battle 	</div>
             <div class="stat-row">
                 <div class="stat-label">Warships Destroyed</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Aircraft Destroyed</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Damage</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <br></br>
             <div class="stat-row">
                 <div class="stat-label">Ships Spotted</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Spotting Damage</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Potential Damage</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">--------</div>
             </div>
             <!-- Repeat stat-row for other stats in the third column -->
         </div>
@@ -295,15 +425,15 @@
             <div class="column-title">Most per Battle</div>
             <div class="stat-row">
                 <div class="stat-label">Warships Destroyed</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_frags_battle }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Aircraft Destroyed</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_planes_killed }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Damage</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_damage_dealt }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
@@ -312,28 +442,22 @@
             <br></br>
             <div class="stat-row">
                 <div class="stat-label">Ships Spotted</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_ships_spotted }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Spotting Damage</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_damage_scouting }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Potential Damage</div>
-                <div class="stat-value">000000</div>
+                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_total_agro }}</div>
             </div>
             <!-- Repeat stat-row for other stats in the fourth column -->
         </div>
     </div>
 
 
-
-
-
-
-
-
-
+    <br></br>
 
 
     <h3 class="statistics-table-header"><center>Weapons Statistics</center></h3>
@@ -375,6 +499,10 @@
             <td>1<br>Conqueror</td>
         </tr>
     </table>
+
+    <br></br>
+    <br></br>
+    <br></br>
 
 </body>
 </html>
