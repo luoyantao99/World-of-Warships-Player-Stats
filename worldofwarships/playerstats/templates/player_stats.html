@@ -755,12 +755,12 @@
             var ship = shipData.find(ship => ship.ship_id === shipId);
             if (ship) {
                 var table = document.createElement('table');
-                for (var statKey in ship.pvp) {
+                for (var statKey in ship.oper) {
                     var row = table.insertRow();
                     var cell1 = row.insertCell(0);
                     var cell2 = row.insertCell(1);
                     cell1.textContent = statKey;
-                    cell2.textContent = ship.pvp[statKey];
+                    cell2.textContent = ship.oper[statKey];
                 }
                 detailsCell.appendChild(table);
             }
@@ -774,12 +774,12 @@
         function populateShipList() {
             var shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
             shipData.forEach(function(ship) {
-                if (ship.pvp.battles > 0) {
+                if (ship.oper.battles > 0) {
                     var row = shipList.insertRow();
                     row.insertCell(0).textContent = ship.ship_id;
-                    row.insertCell(1).textContent = ship.pvp.battles;
-                    row.insertCell(2).textContent = ship.pvp.wins;
-                    row.insertCell(3).textContent = ship.pvp.xp;
+                    row.insertCell(1).textContent = ship.oper.battles;
+                    row.insertCell(2).textContent = ship.oper.wins;
+                    row.insertCell(3).textContent = ship.oper.xp;
                     row.className = 'ship-item';
                     row.id = 'shipItem' + ship.ship_id;
                     row.onclick = function() {

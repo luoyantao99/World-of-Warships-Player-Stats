@@ -29,8 +29,9 @@ def get_player_data(request):
     ship_data = ship_json['data'][account_id]
     for ship in ship_data:
         ship['oper'] = {"wins":-1,"losses":-1,"battles":-1,"survived_wins":-1,"xp":-1,"wins_by_tasks":{"0":-1,"1":-1,"2":-1,"3":-1,"4":-1,"5":-1},"survived_battles":-1}
+        fill_oper_wins_by_tasks(ship)
+        combine_oper_stats(ship)
         
-
     
     context = {
         'account_data': account_data, 
