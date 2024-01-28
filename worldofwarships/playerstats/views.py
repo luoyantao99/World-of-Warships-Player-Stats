@@ -9,26 +9,22 @@ def get_player_data(request):
     application_id = '586c12b8bcdeebae9fa17747f47d67ec'
     account_id = '1005419424'
 
-    account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=statistics.oper_div%2C+statistics.oper_solo').json()
+    account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=private.port%2Cstatistics.clan%2Cstatistics.oper_div%2Cstatistics.oper_solo%2Cstatistics.pve%2Cstatistics.rank_solo').json()
 
-    ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={application_id}&account_id={account_id}&extra=club%2Coper_div%2C+oper_div_hard%2Coper_solo%2Cpve%2Cpve_div2%2Cpve_div3%2Cpve_solo%2Cpvp_div2%2Cpvp_div3%2Cpvp_solo%2Crank_div2%2Crank_div3%2Crank_solo').json()
+    ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={application_id}&account_id={account_id}&extra=oper_div%2Coper_solo%2Cpve%2Crank_solo').json()
 
-    account_data = account_json['data'][account_id] # Just for convenience and readability
+    account_data = account_json['data'][account_id]
+    ship_data = ship_json['data'][account_id]
+
+    # adjust time to human readable time
     account_data['last_battle_time'] = datetime.datetime.fromtimestamp(account_data['last_battle_time'])
     account_data['updated_at'] = datetime.datetime.fromtimestamp(account_data['updated_at'])
     account_data['logout_at'] = datetime.datetime.fromtimestamp(account_data['logout_at'])
 
-    # combine oper data for account_data
-    account_stats = account_json['data'][account_id]['statistics']
-    account_stats['oper'] = {"wins":-1,"losses":-1,"battles":-1,"survived_wins":-1,"xp":-1,"wins_by_tasks":{"0":-1,"1":-1,"2":-1,"3":-1,"4":-1,"5":-1},"survived_battles":-1}
-
-    fill_oper_wins_by_tasks(account_stats)
-    combine_oper_stats(account_stats)
-    
-    # combine oper data for ship_data
-    ship_data = ship_json['data'][account_id]
+    # combine operations data
+    fill_oper_wins_by_tasks(account_data['statistics'])
+    combine_oper_stats(account_data['statistics'])
     for ship in ship_data:
-        ship['oper'] = {"wins":-1,"losses":-1,"battles":-1,"survived_wins":-1,"xp":-1,"wins_by_tasks":{"0":-1,"1":-1,"2":-1,"3":-1,"4":-1,"5":-1},"survived_battles":-1}
         fill_oper_wins_by_tasks(ship)
         combine_oper_stats(ship)
         
@@ -42,6 +38,8 @@ def get_player_data(request):
 
 
 def combine_oper_stats(json):
+    json['oper'] = {"wins":-1,"losses":-1,"battles":-1,"survived_wins":-1,"xp":-1,"wins_by_tasks":{"0":-1,"1":-1,"2":-1,"3":-1,"4":-1,"5":-1},"survived_battles":-1}
+
     items = ['battles', 'wins', 'losses', 'survived_battles', 'survived_wins', 'xp']
     for i in items:
         json['oper'][i] = json['oper_solo'][i] + json['oper_div'][i]
