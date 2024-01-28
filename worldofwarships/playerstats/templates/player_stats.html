@@ -674,7 +674,8 @@
                     <th onclick="sortTable(0)" style="cursor: pointer;">Ship ID</th>
                     <th onclick="sortTable(1)" style="cursor: pointer;">Battles</th>
                     <th onclick="sortTable(2)" style="cursor: pointer;">Victories</th>
-                    <th onclick="sortTable(3)" style="cursor: pointer;">XP</th>
+                    <th onclick="sortTable(3)" style="cursor: pointer;">Win Rate</th>
+                    <th onclick="sortTable(4)" style="cursor: pointer;">XP</th>
                 </tr>
             </thead>
             <tbody>
@@ -779,7 +780,8 @@
                     row.insertCell(0).textContent = ship.ship_id;
                     row.insertCell(1).textContent = ship.oper.battles;
                     row.insertCell(2).textContent = ship.oper.wins;
-                    row.insertCell(3).textContent = ship.oper.xp;
+                    row.insertCell(3).textContent = ((ship.oper.wins/ship.oper.battles)*100).toFixed(2) + '%';
+                    row.insertCell(4).textContent = ship.oper.xp;
                     row.className = 'ship-item';
                     row.id = 'shipItem' + ship.ship_id;
                     row.onclick = function() {
