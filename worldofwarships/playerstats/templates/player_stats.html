@@ -689,6 +689,9 @@
     {{ account_data|json_script:"account-data" }}
 
     <script>
+        var currentGameMode = 'oper'; // Default game mode
+        var shipData = JSON.parse(document.getElementById('ship-stats').textContent);
+
         function showTable(tableId) {
             // Hide all tables
             var tables = document.getElementsByClassName('table-container');
@@ -719,17 +722,39 @@
             // Call a function to update the displayed table
             // The function showTable should be defined as in previous examples
             // Ensure the tableId is set correctly based on the element's text
-            var gameMode = element.textContent.trim().toLowerCase().replace(/\s+/g, '-');
-            showTable(gameMode);
+            var currentGameMode = element.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+            showTable(currentGameMode);
+            populateShipList();
         }
 
 
         // ---------------------------------------------------------------------------------
-        // Individual ship stats -----------------------------------------------------------
+        // ---------------------------- individual ship stats ------------------------------
         // ---------------------------------------------------------------------------------
 
-        var shipData = JSON.parse(document.getElementById('ship-stats').textContent);
-        
+        // Modify the row click event in populateShipList to pass the clicked row element
+        function populateShipList() {
+            var shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
+            shipList.innerHTML = ''; // Clear existing rows
+            shipData.forEach(function(ship) {
+                var modeData = ship[currentGameMode]; // Access the correct game mode data
+                if (modeData.battles > 0) {
+                    var row = shipList.insertRow();
+                    row.insertCell(0).textContent = ship.ship_id;
+                    row.insertCell(1).textContent = modeData.battles;
+                    row.insertCell(2).textContent = modeData.wins;
+                    row.insertCell(3).textContent = ((modeData.wins/modeData.battles)*100).toFixed(2) + '%';
+                    row.insertCell(4).textContent = modeData.xp;
+                    row.className = 'ship-item';
+                    row.id = 'shipItem' + ship.ship_id;
+                    row.onclick = function() {
+                        showShipStats(ship.ship_id, row); // Pass the clicked row to the function
+                    };
+                }
+            });
+        }
+
+
         function showShipStats(shipId, clickedRow) {
             // Check if this row already has a details row displayed
             var nextRow = clickedRow.nextElementSibling;
@@ -768,27 +793,6 @@
 
             // Insert the new details row below the clicked ship row
             clickedRow.parentNode.insertBefore(detailsRow, clickedRow.nextSibling);
-        }
-
-
-        // Modify the row click event in populateShipList to pass the clicked row element
-        function populateShipList() {
-            var shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
-            shipData.forEach(function(ship) {
-                if (ship.oper.battles > 0) {
-                    var row = shipList.insertRow();
-                    row.insertCell(0).textContent = ship.ship_id;
-                    row.insertCell(1).textContent = ship.oper.battles;
-                    row.insertCell(2).textContent = ship.oper.wins;
-                    row.insertCell(3).textContent = ((ship.oper.wins/ship.oper.battles)*100).toFixed(2) + '%';
-                    row.insertCell(4).textContent = ship.oper.xp;
-                    row.className = 'ship-item';
-                    row.id = 'shipItem' + ship.ship_id;
-                    row.onclick = function() {
-                        showShipStats(ship.ship_id, row); // Pass the clicked row to the function
-                    };
-                }
-            });
         }
 
 
