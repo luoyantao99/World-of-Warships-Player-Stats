@@ -137,17 +137,26 @@
             font-family: Arial, sans-serif;
             text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
         }
+
+        .ship-stats-table {
+            max-width: 1700px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.3); /* Match the opacity of the stats container */
+            color: white;
+            padding: 50px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-family: Arial, sans-serif;
+            text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
+        }
+
         .ship-item {
             /* Your styles for the ship rows */
             cursor: pointer;
         }
-        .ship-details {
+        .ship-stats-table {
             display: none; /* Initially hide the details */
             /* Additional styles for the details table */
-        }
-        /* Style to show the details */
-        .show {
-            display: block;
         }
 
     </style>
@@ -646,32 +655,17 @@
 
     <br></br>
 
-
-    <div id="battles-played" class="stat-row">
-        <div class="stat-label">Battles Played</div>
-        <div class="stat-value"></div>
-    </div>
-    <div id="victories" class="stat-row">
-        <div class="stat-label">Victories</div>
-        <div class="stat-value"></div>
-    </div>
-
-
-
-    <div id="shipStats" class="stats-table">
-        
-    </div>
-
     <div id="shipList" class="ship-list-container">
-        
+    </div>
+
+    <div id="shipStats" class="ship-stats-table">
     </div>
 
 
-    {{ shipData|json_script:"ship-data" }}
+    {{ shipData|json_script:"ship-stats" }}
+    {{ data|json_script:"stats-data" }}
 
     <script>
-        var statsData = "{{ data.data.1005419424.statistics|safe }}";
-        
         function showTable(tableId) {
             // Hide all tables
             var tables = document.getElementsByClassName('table-container');
@@ -684,7 +678,7 @@
             if (selectedTable) {
                 selectedTable.style.display = 'block';
             }
-          }
+        }
 
         function selectDropdownOption(element) {
             // Get the button by its ID
@@ -704,39 +698,23 @@
             // Ensure the tableId is set correctly based on the element's text
             var gameMode = element.textContent.trim().toLowerCase().replace(/\s+/g, '-');
             showTable(gameMode);
-            updateTable(gameMode);
         }
 
-        function updateTable(gameMode) {
-            // Map the readable game mode to the corresponding key in the statsData
-            var modeMapping = {
-                'random-battles': 'pvp',
-                'co-op-battles': 'pve',
-                // Add mappings for other modes here
-            };
 
-            var modeKey = modeMapping[gameMode];
-            
-            // Check if the selected mode exists in the data
-            if (statsData && modeKey in statsData) {
-                // Update the table fields
-                document.querySelector('#battles-played .stat-value').textContent = statsData[modeKey].battles.toLocaleString();
-                document.querySelector('#victories .stat-value').textContent = statsData[modeKey].wins.toLocaleString();
-                // ... update other fields similarly ...
-            }
-        }
+        // ---------------------------------------------------------------------------------
+        // Individual ship stats -----------------------------------------------------------
+        // ---------------------------------------------------------------------------------
 
-        var shipJSON = JSON.parse(document.getElementById('ship-data').textContent);
+        var shipJSON = JSON.parse(document.getElementById('ship-stats').textContent);
         var shipData = shipJSON.data['1005419424'];
         
-
         function populateShipList() {
             var shipList = document.getElementById('shipList');
             shipData.forEach(function(ship, index) {
                 var shipItem = document.createElement('div');
                 shipItem.textContent = ship.ship_id + ' - Battles: ' + ship.pvp.battles + ', Victories: ' + ship.pvp.wins + ', XP: ' + ship.pvp.xp;
                 shipItem.className = 'ship-item';
-                shipItem.id = 'shipItem' + index;
+                shipItem.id = 'shipItem' + ship.ship_id;
 
                 var shipStats = document.createElement('div');
                 var table = document.createElement('table');
@@ -747,9 +725,10 @@
                     cell1.textContent = statKey;
                     cell2.textContent = ship.pvp[statKey];
                 }
+
                 shipStats.appendChild(table);
-                shipStats.className = 'stats-table active-table'; // Make the table visible
-                shipStats.id = 'shipStats' + index;
+                shipStats.className = 'ship-stats-table active-table'; // Make the table visible
+                shipStats.id = 'shipStats' + ship.ship_id;
                 shipStats.style.display = 'none';
 
                 shipItem.onclick = function() {
@@ -759,43 +738,24 @@
                         hideAllShip();
                         shipStats.style.display = 'block';
                     }
-
-                    //displayShipStats(ship);
                 };
-                shipList.appendChild(shipItem);
 
+                shipList.appendChild(shipItem);
                 shipList.appendChild(shipStats);
             });
         }
 
-        //
+        
         function hideAllShip() {
             shipData.forEach(function(ship, index) {
-                var shipItem = document.getElementById('shipStats' + index);
+                var shipItem = document.getElementById('shipStats' + ship.ship_id);
                 shipItem.style.display = 'none';
             })  
         }
 
-        // Function to display stats for the selected ship
-        function displayShipStats(ship) {
-            var shipStats = document.getElementById('shipStats');
-            shipStats.innerHTML = ''; // Clear previous stats
-            
-            // Create and populate the stats table for the selected ship
-            var table = document.createElement('table');
-            for (var statKey in ship.pvp) {
-                var row = table.insertRow();
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                cell1.textContent = statKey;
-                cell2.textContent = ship.pvp[statKey];
-            }
-            shipStats.appendChild(table);
-            shipStats.className = 'stats-table active-table'; // Make the table visible
-        }
-
         // Call populateShipList on page load
         window.onload = populateShipList;
+
     </script>
 
 </body>
