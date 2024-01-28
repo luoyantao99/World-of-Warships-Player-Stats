@@ -656,9 +656,23 @@
     <br></br>
 
     <div id="shipList" class="ship-list-container">
+        <table id="shipTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">Ship ID</th>
+                    <th onclick="sortTable(1)">Battles</th>
+                    <th onclick="sortTable(2)">Victories</th>
+                    <th onclick="sortTable(3)">XP</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Ship rows will be populated here -->
+            </tbody>
+        </table>
     </div>
 
     <div id="shipStats" class="ship-stats-table">
+        <!-- Ship stats details will be shown here -->
     </div>
 
 
@@ -708,50 +722,175 @@
         var shipJSON = JSON.parse(document.getElementById('ship-stats').textContent);
         var shipData = shipJSON.data['1005419424'];
         
-        function populateShipList() {
-            var shipList = document.getElementById('shipList');
-            shipData.forEach(function(ship, index) {
-                var shipItem = document.createElement('div');
-                shipItem.textContent = ship.ship_id + ' - Battles: ' + ship.pvp.battles + ', Victories: ' + ship.pvp.wins + ', XP: ' + ship.pvp.xp;
-                shipItem.className = 'ship-item';
-                shipItem.id = 'shipItem' + ship.ship_id;
 
-                var shipStats = document.createElement('div');
-                var table = document.createElement('table');
-                for (var statKey in ship.pvp) {
-                    var row = table.insertRow();
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
-                    cell1.textContent = statKey;
-                    cell2.textContent = ship.pvp[statKey];
-                }
 
-                shipStats.appendChild(table);
-                shipStats.className = 'ship-stats-table active-table'; // Make the table visible
-                shipStats.id = 'shipStats' + ship.ship_id;
-                shipStats.style.display = 'none';
+        // function populateShipList() {
+        //     var shipList = document.getElementById('shipList');
+        //     shipData.forEach(function(ship, index) {
+        //         var shipItem = document.createElement('div');
+        //         shipItem.textContent = ship.ship_id + ' - Battles: ' + ship.pvp.battles + ', Victories: ' + ship.pvp.wins + ', XP: ' + ship.pvp.xp;
+        //         shipItem.className = 'ship-item';
+        //         shipItem.id = 'shipItem' + ship.ship_id;
 
-                shipItem.onclick = function() {
-                    if(shipStats.style.display == 'block')
-                        shipStats.style.display = 'none';
-                    else if(shipStats.style.display == 'none') {
-                        hideAllShip();
-                        shipStats.style.display = 'block';
-                    }
-                };
+        //         var shipStats = document.createElement('div');
+        //         var table = document.createElement('table');
+        //         for (var statKey in ship.pvp) {
+        //             var row = table.insertRow();
+        //             var cell1 = row.insertCell(0);
+        //             var cell2 = row.insertCell(1);
+        //             cell1.textContent = statKey;
+        //             cell2.textContent = ship.pvp[statKey];
+        //         }
 
-                shipList.appendChild(shipItem);
-                shipList.appendChild(shipStats);
-            });
-        }
+        //         shipStats.appendChild(table);
+        //         shipStats.className = 'ship-stats-table active-table'; // Make the table visible
+        //         shipStats.id = 'shipStats' + ship.ship_id;
+        //         shipStats.style.display = 'none';
+
+        //         shipItem.onclick = function() {
+        //             if(shipStats.style.display == 'block')
+        //                 shipStats.style.display = 'none';
+        //             else if(shipStats.style.display == 'none') {
+        //                 hideAllShip();
+        //                 shipStats.style.display = 'block';
+        //             }
+        //         };
+
+        //         shipList.appendChild(shipItem);
+        //         shipList.appendChild(shipStats);
+        //     });
+        // }
 
         
-        function hideAllShip() {
-            shipData.forEach(function(ship, index) {
-                var shipItem = document.getElementById('shipStats' + ship.ship_id);
-                shipItem.style.display = 'none';
-            })  
+        // function hideAllShip() {
+        //     shipData.forEach(function(ship, index) {
+        //         var shipItem = document.getElementById('shipStats' + ship.ship_id);
+        //         shipItem.style.display = 'none';
+        //     })  
+        // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        function showShipStats(shipId, clickedRow) {
+    // Remove any previously displayed details row
+    var existingDetails = document.querySelector('.details-row');
+    if (existingDetails) {
+        existingDetails.remove();
+    }
+
+    // Create a new row for the ship stats
+    var detailsRow = document.createElement('tr');
+    detailsRow.className = 'details-row'; // Add a class for styling if needed
+    var detailsCell = detailsRow.insertCell(0);
+    detailsCell.colSpan = clickedRow.cells.length; // Span across all columns
+
+    // Find the ship by shipId and populate the detailsCell with its stats
+    var ship = shipData.find(ship => ship.ship_id === shipId);
+    if (ship) {
+        var table = document.createElement('table');
+        for (var statKey in ship.pvp) {
+            var row = table.insertRow();
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.textContent = statKey;
+            cell2.textContent = ship.pvp[statKey];
         }
+        detailsCell.appendChild(table);
+    }
+
+    // Insert the new details row below the clicked ship row
+    clickedRow.parentNode.insertBefore(detailsRow, clickedRow.nextSibling);
+}
+
+// Modify the row click event in populateShipList to pass the clicked row element
+function populateShipList() {
+    var shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
+    shipData.forEach(function(ship) {
+        var row = shipList.insertRow();
+        row.insertCell(0).textContent = ship.ship_id;
+        row.insertCell(1).textContent = ship.pvp.battles;
+        row.insertCell(2).textContent = ship.pvp.wins;
+        row.insertCell(3).textContent = ship.pvp.xp;
+        row.className = 'ship-item';
+        row.id = 'shipItem' + ship.ship_id;
+        row.onclick = function() {
+            showShipStats(ship.ship_id, row); // Pass the clicked row to the function
+        };
+    });
+}
+
+    function hideAllShip() {
+        var shipStatsDiv = document.getElementById('shipStats');
+        shipStatsDiv.style.display = 'none';
+    }
+
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("shipTable");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc";
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            rows = table.getElementsByTagName("TR");
+            /* Loop through all table rows (except the
+            first, which contains table headers): */
+            for (i = 1; i < (rows.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /* Check if the two rows should switch place,
+                based on the direction, asc or desc: */
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                rows[i].parentNode
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                // Each time a switch is done, increase this count by 1:
+                switchcount++;      
+            } else {
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+
 
         // Call populateShipList on page load
         window.onload = populateShipList;
