@@ -104,7 +104,7 @@
 
 
         body {
-            /* background-image: url('https://ips4-wowslegends-global.gcdn.co/monthly_2023_01/Pommern.png.1e9d81637ac03d4bcf6491b5395eec8f.png'); */
+            background-image: url('https://ips4-wowslegends-global.gcdn.co/monthly_2023_01/Pommern.png.1e9d81637ac03d4bcf6491b5395eec8f.png');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -123,7 +123,6 @@
         .hidden {
             display: none;
         }
-
 
 
         .ship-list-container {
@@ -154,9 +153,22 @@
             /* Your styles for the ship rows */
             cursor: pointer;
         }
-        .ship-stats-table {
-            display: none; /* Initially hide the details */
-            /* Additional styles for the details table */
+
+
+        #shipTable {
+            width: 100%;
+            table-layout: fixed; /* This enables even column spacing */
+            border-collapse: collapse; /* Optional, for styling */
+        }
+
+        #shipTable th, #shipTable td {
+            text-align: left;
+            border: 1px solid #ddd; /* Optional, for styling */
+            padding: 8px; /* Optional, for styling */
+        }
+
+        #shipTable th {
+            background-color: rgba(0, 0, 0, 0.2); /* Optional, for styling */
         }
 
     </style>
@@ -659,20 +671,16 @@
         <table id="shipTable">
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)">Ship ID</th>
-                    <th onclick="sortTable(1)">Battles</th>
-                    <th onclick="sortTable(2)">Victories</th>
-                    <th onclick="sortTable(3)">XP</th>
+                    <th onclick="sortTable(0)" style="cursor: pointer;">Ship ID</th>
+                    <th onclick="sortTable(1)" style="cursor: pointer;">Battles</th>
+                    <th onclick="sortTable(2)" style="cursor: pointer;">Victories</th>
+                    <th onclick="sortTable(3)" style="cursor: pointer;">XP</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Ship rows will be populated here -->
             </tbody>
         </table>
-    </div>
-
-    <div id="shipStats" class="ship-stats-table">
-        <!-- Ship stats details will be shown here -->
     </div>
 
 
