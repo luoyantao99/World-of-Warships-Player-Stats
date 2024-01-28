@@ -8,7 +8,7 @@ import datetime
 def get_player_data(request):
     application_id = '586c12b8bcdeebae9fa17747f47d67ec'
     account_id = '1005419424'
-    
+
     data = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=statistics.oper_div%2C+statistics.oper_solo').json()
 
     shipData = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={application_id}&account_id={account_id}&extra=oper_solo%2C+oper_div').json()
@@ -48,3 +48,4 @@ def get_player_data(request):
 
 def combine_oper(oper, oper_solo, oper_div, field):
     oper[field] = oper_solo[field] + oper_div[field]
+    
