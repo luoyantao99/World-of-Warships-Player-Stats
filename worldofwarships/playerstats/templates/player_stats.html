@@ -184,9 +184,9 @@
         <tr>
             <td>
                 <div class="normal-text">
-                    Account Name: {{ data.data.1005419424.nickname }}<br>
-                    Last Battle Time: {{ data.data.1005419424.last_battle_time }}<br>
-                    Updated At: {{ data.data.1005419424.updated_at }}<br><br>
+                    Account Name: {{ account_data.nickname }}<br>
+                    Last Battle Time: {{ account_data.last_battle_time }}<br>
+                    Updated At: {{ account_data.updated_at }}<br><br>
                 </div>
             </td>
             <td>
@@ -224,28 +224,28 @@
             <div class="column-title">Operations</div>
             <div class="stat-row">
                 <div class="stat-label">Battles Played</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.battles|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.battles|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Victories</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.wins|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Defeats</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.losses|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.losses|intcomma }}</div>
             </div>
             <br></br>
             <div class="stat-row">
                 <div class="stat-label">Battles Survived</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.survived_battles|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.survived_battles|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Wins Survived</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.survived_wins|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.survived_wins|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.xp|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.xp|intcomma }}</div>
             </div>
             <br></br>
             <div class="stat-row">
@@ -254,27 +254,27 @@
             </div>
             <div class="stat-row">
                 <div class="stat-label">0 Star</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.0|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.0|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">1 Star</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.1|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.1|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">2 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.2|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.2|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">3 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.3|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.3|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">4 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.4|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.4|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">5 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper.wins_by_tasks.5|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.5|intcomma }}</div>
             </div>
             <!-- Repeat stat-row for other stats in the first column -->
         </div>
@@ -284,28 +284,28 @@
             <div class="column-title">Operations (Solo)</div>
             <div class="stat-row">
                 <div class="stat-label">Battles Played</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.battles|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.battles|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Victories</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.wins|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Defeats</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.losses|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.losses|intcomma }}</div>
             </div>
             <br></br>
             <div class="stat-row">
                 <div class="stat-label">Battles Survived</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.survived_battles|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.survived_battles|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Wins Survived</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.survived_wins|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.survived_wins|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.xp|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.xp|intcomma }}</div>
             </div>
             <br></br>
             <div class="stat-row">
@@ -314,27 +314,27 @@
             </div>
             <div class="stat-row">
                 <div class="stat-label">0 Star</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.0|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.0|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">1 Star</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.1|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.1|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">2 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.2|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.2|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">3 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.3|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.3|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">4 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.4|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.4|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">5 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_solo.wins_by_tasks.5|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.5|intcomma }}</div>
             </div>
             <!-- Repeat stat-row for other stats in the second column -->
         </div>
@@ -344,28 +344,28 @@
             <div class="column-title">Operations (Division)</div>
             <div class="stat-row">
                 <div class="stat-label">Battles Played</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.battles|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.battles|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Victories</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.wins|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Defeats</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.losses|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.losses|intcomma }}</div>
             </div>
             <br></br>
             <div class="stat-row">
                 <div class="stat-label">Battles Survived</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.survived_battles|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.survived_battles|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Wins Survived</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.survived_wins|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.survived_wins|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.xp|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.xp|intcomma }}</div>
             </div>
             <br></br>
             <div class="stat-row">
@@ -374,27 +374,27 @@
             </div>
             <div class="stat-row">
                 <div class="stat-label">0 Star</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.0|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.0|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">1 Star</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.1|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.1|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">2 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.2|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.2|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">3 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.3|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.3|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">4 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.4|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.4|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">5 Stars</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.oper_div.wins_by_tasks.5|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.5|intcomma }}</div>
             </div>
             <!-- Repeat stat-row for other stats in the third column -->
         </div>
@@ -419,23 +419,23 @@
             <div class="column-title">Random Battles</div>
             <div class="stat-row">
                 <div class="stat-label">Battles Played</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.battles|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.battles|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Victories</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.wins|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.wins|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Defeats</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.losses|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.losses|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Draws</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.draws|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.draws|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Battles Survived</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.survived_battles|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.survived_battles|intcomma }}</div>
             </div>
             <br></br>
             <div class="stat-row">
@@ -463,28 +463,28 @@
             <div class="column-title">Total Score</div>
             <div class="stat-row">
                 <div class="stat-label">Warships Destroyed</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.frags|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.frags|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Aircraft Destroyed</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.planes_killed|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.planes_killed|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Damage</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.damage_dealt|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.damage_dealt|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.xp|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.xp|intcomma }}</div>
             </div>
             <br></br>
             <div class="stat-row">
                 <div class="stat-label">Ships Spotted</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.ships_spotted|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.ships_spotted|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Spotting Damage</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.damage_scouting|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.damage_scouting|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Potential Damage</div>
@@ -533,32 +533,32 @@
             <div class="column-title">Most per Battle</div>
             <div class="stat-row">
                 <div class="stat-label">Warships Destroyed</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_frags_battle|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.max_frags_battle|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Aircraft Destroyed</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_planes_killed|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.max_planes_killed|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Damage</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_damage_dealt|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.max_damage_dealt|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">XP</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_xp|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.max_xp|intcomma }}</div>
             </div>
             <br></br>
             <div class="stat-row">
                 <div class="stat-label">Ships Spotted</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_ships_spotted|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.max_ships_spotted|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Spotting Damage</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_damage_scouting|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.max_damage_scouting|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Potential Damage</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.max_total_agro|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.max_total_agro|intcomma }}</div>
             </div>
             <!-- Repeat stat-row for other stats in the fourth column -->
         </div>
@@ -576,7 +576,7 @@
             <div class="column-title">Warships Destroyed by Weapon Type</div>
             <div class="stat-row">
                 <div class="stat-label">Main Battery</div>
-                <div class="stat-value">{{ data.data.1005419424.statistics.pvp.main_battery.frags|intcomma }}</div>
+                <div class="stat-value">{{ account_data.statistics.pvp.main_battery.frags|intcomma }}</div>
             </div>
             <div class="stat-row">
                 <div class="stat-label">Secondary Battery</div>
@@ -684,8 +684,8 @@
     </div>
 
 
-    {{ shipData|json_script:"ship-stats" }}
-    {{ data|json_script:"stats-data" }}
+    {{ ship_data|json_script:"ship-stats" }}
+    {{ account_data|json_script:"account-data" }}
 
     <script>
         function showTable(tableId) {
@@ -727,10 +727,8 @@
         // Individual ship stats -----------------------------------------------------------
         // ---------------------------------------------------------------------------------
 
-        var shipJSON = JSON.parse(document.getElementById('ship-stats').textContent);
-        var shipData = shipJSON.data['1005419424'];
+        var shipData = JSON.parse(document.getElementById('ship-stats').textContent);
         
-
         function showShipStats(shipId, clickedRow) {
             // Check if this row already has a details row displayed
             var nextRow = clickedRow.nextElementSibling;
@@ -776,16 +774,18 @@
         function populateShipList() {
             var shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
             shipData.forEach(function(ship) {
-                var row = shipList.insertRow();
-                row.insertCell(0).textContent = ship.ship_id;
-                row.insertCell(1).textContent = ship.pvp.battles;
-                row.insertCell(2).textContent = ship.pvp.wins;
-                row.insertCell(3).textContent = ship.pvp.xp;
-                row.className = 'ship-item';
-                row.id = 'shipItem' + ship.ship_id;
-                row.onclick = function() {
-                    showShipStats(ship.ship_id, row); // Pass the clicked row to the function
-                };
+                if (ship.pvp.battles > 0) {
+                    var row = shipList.insertRow();
+                    row.insertCell(0).textContent = ship.ship_id;
+                    row.insertCell(1).textContent = ship.pvp.battles;
+                    row.insertCell(2).textContent = ship.pvp.wins;
+                    row.insertCell(3).textContent = ship.pvp.xp;
+                    row.className = 'ship-item';
+                    row.id = 'shipItem' + ship.ship_id;
+                    row.onclick = function() {
+                        showShipStats(ship.ship_id, row); // Pass the clicked row to the function
+                    };
+                }
             });
         }
 
