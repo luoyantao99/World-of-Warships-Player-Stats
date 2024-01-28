@@ -215,7 +215,7 @@
     <!--  -------------------------------------------------------------------------------------------- -->
     <!--  -------------------------------------------------------------------------------------------- -->
 
-    <div id="operations" class="table-container">
+    <div id="oper" class="table-container">
         <!-- Table structure for Operations -->
     
     <div class="stats-container">
@@ -410,7 +410,7 @@
     <!--  -------------------------------------------------------------------------------------------- -->
 
 
-    <div id="random-battles" class="table-container hidden">
+    <div id="pvp" class="table-container hidden">
         <!-- Table structure for Random Battles -->
 
     <div class="stats-container">
@@ -690,6 +690,14 @@
 
     <script>
         var currentGameMode = 'oper'; // Default game mode
+        var gameModeMapping = {
+            "Random Battles": "pvp",
+            "Co-op Battles": "pve",
+            "Operations": "oper",
+            "Ranked Battles": "rank_solo",
+            "Ranked Battles (Legacy)": "rank_old"
+        };
+
         var shipData = JSON.parse(document.getElementById('ship-stats').textContent);
 
         function showTable(tableId) {
@@ -719,10 +727,8 @@
             }
             element.classList.add('active');
 
-            // Call a function to update the displayed table
-            // The function showTable should be defined as in previous examples
-            // Ensure the tableId is set correctly based on the element's text
-            var currentGameMode = element.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+            var gameModeText = element.textContent.trim();
+            currentGameMode = gameModeMapping[gameModeText];
             showTable(currentGameMode);
             populateShipList();
         }

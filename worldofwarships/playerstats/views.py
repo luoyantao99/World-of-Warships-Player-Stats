@@ -11,7 +11,7 @@ def get_player_data(request):
 
     account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=statistics.oper_div%2C+statistics.oper_solo').json()
 
-    ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={application_id}&account_id={account_id}&extra=oper_solo%2C+oper_div').json()
+    ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={application_id}&account_id={account_id}&extra=club%2Coper_div%2C+oper_div_hard%2Coper_solo%2Cpve%2Cpve_div2%2Cpve_div3%2Cpve_solo%2Cpvp_div2%2Cpvp_div3%2Cpvp_solo%2Crank_div2%2Crank_div3%2Crank_solo').json()
 
     account_data = account_json['data'][account_id] # Just for convenience and readability
     account_data['last_battle_time'] = datetime.datetime.fromtimestamp(account_data['last_battle_time'])
