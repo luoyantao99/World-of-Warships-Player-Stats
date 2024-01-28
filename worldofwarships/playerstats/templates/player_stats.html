@@ -638,18 +638,29 @@
 
     <br></br>
 
+
+    <div id="battles-played" class="stat-row">
+        <div class="stat-label">Battles Played</div>
+        <div class="stat-value"></div>
+    </div>
+    <div id="victories" class="stat-row">
+        <div class="stat-label">Victories</div>
+        <div class="stat-value"></div>
+    </div>
+
+
+
     <div id="shipStats" class="stats-table">
-        <!-- Stats table will be updated here -->
+        
     </div>
 
     <div id="shipList" class="ship-list-container">
-        <!-- Ship list will be populated here -->
+        
     </div>
     
-
-    {{ data|json_script:"shipData" }}
-
     <script>
+        var statsData = "{{ data.data.1005419424.statistics|safe }}";
+        
         function showTable(tableId) {
             // Hide all tables
             var tables = document.getElementsByClassName('table-container');
@@ -680,14 +691,36 @@
             // Call a function to update the displayed table
             // The function showTable should be defined as in previous examples
             // Ensure the tableId is set correctly based on the element's text
-            var tableId = element.textContent.trim().toLowerCase().replace(/\s+/g, '-');
-            showTable(tableId);
+            var gameMode = element.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+            showTable(gameMode);
+            updateTable(gameMode);
+        }
+
+        function updateTable(gameMode) {
+            // Map the readable game mode to the corresponding key in the statsData
+            var modeMapping = {
+                'random-battles': 'pvp',
+                'co-op-battles': 'pve',
+                // Add mappings for other modes here
+            };
+
+            var modeKey = modeMapping[gameMode];
+            
+            // Check if the selected mode exists in the data
+            if (statsData && modeKey in statsData) {
+                // Update the table fields
+                document.querySelector('#battles-played .stat-value').textContent = statsData[modeKey].battles.toLocaleString();
+                document.querySelector('#victories .stat-value').textContent = statsData[modeKey].wins.toLocaleString();
+                // ... update other fields similarly ...
+            }
         }
 
         // const jsonData = JSON.parse("{{shipData|escapejs}}");
         var jsonData = {"status":"ok","meta":{"count":1,"hidden":null},"data":{"1005419424":[{"pvp":{"max_xp":123,"damage_to_buildings":0,"main_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"suppressions_count":0,"max_damage_scouting":0,"art_agro":0,"ships_spotted":0,"second_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"xp":0,"survived_battles":0,"dropped_capture_points":0,"max_damage_dealt_to_buildings":0,"torpedo_agro":0,"draws":0,"battles_since_510":0,"planes_killed":0,"battles":0,"max_ships_spotted":0,"team_capture_points":0,"frags":0,"damage_scouting":0,"max_total_agro":0,"max_frags_battle":0,"capture_points":0,"ramming":{"max_frags_battle":0,"frags":0},"torpedoes":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"aircraft":{"max_frags_battle":0,"frags":0},"survived_wins":0,"max_damage_dealt":0,"wins":0,"losses":0,"damage_dealt":0,"max_planes_killed":0,"max_suppressions_count":0,"team_dropped_capture_points":0,"battles_since_512":0},"last_battle_time":0,"oper_div":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0},"account_id":1005419424,"distance":0,"updated_at":1704249195,"battles":0,"ship_id":4284430032,"private":null,"oper_solo":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0}},{"pvp":{"max_xp":456,"damage_to_buildings":0,"main_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"suppressions_count":0,"max_damage_scouting":0,"art_agro":0,"ships_spotted":0,"second_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"xp":0,"survived_battles":0,"dropped_capture_points":0,"max_damage_dealt_to_buildings":0,"torpedo_agro":0,"draws":0,"battles_since_510":0,"planes_killed":0,"battles":0,"max_ships_spotted":0,"team_capture_points":0,"frags":0,"damage_scouting":0,"max_total_agro":0,"max_frags_battle":0,"capture_points":0,"ramming":{"max_frags_battle":0,"frags":0},"torpedoes":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"aircraft":{"max_frags_battle":0,"frags":0},"survived_wins":0,"max_damage_dealt":0,"wins":0,"losses":0,"damage_dealt":0,"max_planes_killed":0,"max_suppressions_count":0,"team_dropped_capture_points":0,"battles_since_512":0},"last_battle_time":1694795354,"oper_div":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0},"account_id":1005419424,"distance":125,"updated_at":1702441596,"battles":6,"ship_id":3763222224,"private":null,"oper_solo":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0}},{"pvp":{"max_xp":789,"damage_to_buildings":0,"main_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"suppressions_count":0,"max_damage_scouting":0,"art_agro":0,"ships_spotted":0,"second_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"xp":0,"survived_battles":0,"dropped_capture_points":0,"max_damage_dealt_to_buildings":0,"torpedo_agro":0,"draws":0,"battles_since_510":0,"planes_killed":0,"battles":0,"max_ships_spotted":0,"team_capture_points":0,"frags":0,"damage_scouting":0,"max_total_agro":0,"max_frags_battle":0,"capture_points":0,"ramming":{"max_frags_battle":0,"frags":0},"torpedoes":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"aircraft":{"max_frags_battle":0,"frags":0},"survived_wins":0,"max_damage_dealt":0,"wins":0,"losses":0,"damage_dealt":0,"max_planes_killed":0,"max_suppressions_count":0,"team_dropped_capture_points":0,"battles_since_512":0},"last_battle_time":1706320059,"oper_div":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0},"account_id":1005419424,"distance":412,"updated_at":1706320350,"battles":21,"ship_id":4075697456,"private":null,"oper_solo":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0}}]}};
+        // var jsonData = "{{ shipData|safe }}";
         var shipData = jsonData.data['1005419424'];
         
+
         function populateShipList() {
             var shipList = document.getElementById('shipList');
             shipData.forEach(function(ship, index) {
