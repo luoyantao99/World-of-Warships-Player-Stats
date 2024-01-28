@@ -752,12 +752,13 @@
                     row.insertCell(3).textContent = ((modeData.wins/modeData.battles)*100).toFixed(2) + '%';
                     row.insertCell(4).textContent = modeData.xp;
                     row.className = 'ship-item';
-                    row.id = 'shipItem' + ship.ship_id;
                     row.onclick = function() {
                         showShipStats(ship.ship_id, row); // Pass the clicked row to the function
                     };
                 }
             });
+            // Sort the table by the "Battles" column (index 1) in descending order after populating
+            sortTable(1);
         }
 
 
@@ -787,12 +788,12 @@
             var ship = shipData.find(ship => ship.ship_id === shipId);
             if (ship) {
                 var table = document.createElement('table');
-                for (var statKey in ship.oper) {
+                for (var statKey in ship[currentGameMode]) {
                     var row = table.insertRow();
                     var cell1 = row.insertCell(0);
                     var cell2 = row.insertCell(1);
                     cell1.textContent = statKey;
-                    cell2.textContent = ship.oper[statKey];
+                    cell2.textContent = ship[currentGameMode][statKey];
                 }
                 detailsCell.appendChild(table);
             }
