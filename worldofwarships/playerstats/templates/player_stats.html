@@ -127,7 +127,15 @@
 
 
         .ship-list-container {
-            /* Your styles for the container */
+            max-width: 1700px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.6); /* Match the opacity of the stats container */
+            color: white;
+            padding: 50px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            font-family: Arial, sans-serif;
+            text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
         }
         .ship-item {
             /* Your styles for the ship rows */
@@ -657,7 +665,10 @@
     <div id="shipList" class="ship-list-container">
         
     </div>
-    
+
+
+    {{ shipData|json_script:"ship-data" }}
+
     <script>
         var statsData = "{{ data.data.1005419424.statistics|safe }}";
         
@@ -673,7 +684,7 @@
             if (selectedTable) {
                 selectedTable.style.display = 'block';
             }
-        }
+          }
 
         function selectDropdownOption(element) {
             // Get the button by its ID
@@ -715,23 +726,54 @@
             }
         }
 
-        // const jsonData = JSON.parse("{{shipData|escapejs}}");
-        var jsonData = {"status":"ok","meta":{"count":1,"hidden":null},"data":{"1005419424":[{"pvp":{"max_xp":123,"damage_to_buildings":0,"main_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"suppressions_count":0,"max_damage_scouting":0,"art_agro":0,"ships_spotted":0,"second_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"xp":0,"survived_battles":0,"dropped_capture_points":0,"max_damage_dealt_to_buildings":0,"torpedo_agro":0,"draws":0,"battles_since_510":0,"planes_killed":0,"battles":0,"max_ships_spotted":0,"team_capture_points":0,"frags":0,"damage_scouting":0,"max_total_agro":0,"max_frags_battle":0,"capture_points":0,"ramming":{"max_frags_battle":0,"frags":0},"torpedoes":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"aircraft":{"max_frags_battle":0,"frags":0},"survived_wins":0,"max_damage_dealt":0,"wins":0,"losses":0,"damage_dealt":0,"max_planes_killed":0,"max_suppressions_count":0,"team_dropped_capture_points":0,"battles_since_512":0},"last_battle_time":0,"oper_div":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0},"account_id":1005419424,"distance":0,"updated_at":1704249195,"battles":0,"ship_id":4284430032,"private":null,"oper_solo":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0}},{"pvp":{"max_xp":456,"damage_to_buildings":0,"main_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"suppressions_count":0,"max_damage_scouting":0,"art_agro":0,"ships_spotted":0,"second_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"xp":0,"survived_battles":0,"dropped_capture_points":0,"max_damage_dealt_to_buildings":0,"torpedo_agro":0,"draws":0,"battles_since_510":0,"planes_killed":0,"battles":0,"max_ships_spotted":0,"team_capture_points":0,"frags":0,"damage_scouting":0,"max_total_agro":0,"max_frags_battle":0,"capture_points":0,"ramming":{"max_frags_battle":0,"frags":0},"torpedoes":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"aircraft":{"max_frags_battle":0,"frags":0},"survived_wins":0,"max_damage_dealt":0,"wins":0,"losses":0,"damage_dealt":0,"max_planes_killed":0,"max_suppressions_count":0,"team_dropped_capture_points":0,"battles_since_512":0},"last_battle_time":1694795354,"oper_div":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0},"account_id":1005419424,"distance":125,"updated_at":1702441596,"battles":6,"ship_id":3763222224,"private":null,"oper_solo":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0}},{"pvp":{"max_xp":789,"damage_to_buildings":0,"main_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"suppressions_count":0,"max_damage_scouting":0,"art_agro":0,"ships_spotted":0,"second_battery":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"xp":0,"survived_battles":0,"dropped_capture_points":0,"max_damage_dealt_to_buildings":0,"torpedo_agro":0,"draws":0,"battles_since_510":0,"planes_killed":0,"battles":0,"max_ships_spotted":0,"team_capture_points":0,"frags":0,"damage_scouting":0,"max_total_agro":0,"max_frags_battle":0,"capture_points":0,"ramming":{"max_frags_battle":0,"frags":0},"torpedoes":{"max_frags_battle":0,"frags":0,"hits":0,"shots":0},"aircraft":{"max_frags_battle":0,"frags":0},"survived_wins":0,"max_damage_dealt":0,"wins":0,"losses":0,"damage_dealt":0,"max_planes_killed":0,"max_suppressions_count":0,"team_dropped_capture_points":0,"battles_since_512":0},"last_battle_time":1706320059,"oper_div":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0},"account_id":1005419424,"distance":412,"updated_at":1706320350,"battles":21,"ship_id":4075697456,"private":null,"oper_solo":{"wins":0,"losses":0,"battles":0,"survived_wins":0,"xp":0,"wins_by_tasks":{},"survived_battles":0}}]}};
-        // var jsonData = "{{ shipData|safe }}";
-        var shipData = jsonData.data['1005419424'];
+        var shipJSON = JSON.parse(document.getElementById('ship-data').textContent);
+        var shipData = shipJSON.data['1005419424'];
         
 
         function populateShipList() {
             var shipList = document.getElementById('shipList');
             shipData.forEach(function(ship, index) {
                 var shipItem = document.createElement('div');
-                shipItem.textContent = ship.name + ' - Battles: ' + ship.battles + ', Victories: ' + ship.victories + ', XP: ' + ship.xp;
+                shipItem.textContent = ship.ship_id + ' - Battles: ' + ship.pvp.battles + ', Victories: ' + ship.pvp.wins + ', XP: ' + ship.pvp.xp;
                 shipItem.className = 'ship-item';
+                shipItem.id = 'shipItem' + index;
+
+                var shipStats = document.createElement('div');
+                var table = document.createElement('table');
+                for (var statKey in ship.pvp) {
+                    var row = table.insertRow();
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.textContent = statKey;
+                    cell2.textContent = ship.pvp[statKey];
+                }
+                shipStats.appendChild(table);
+                shipStats.className = 'stats-table active-table'; // Make the table visible
+                shipStats.id = 'shipStats' + index;
+                shipStats.style.display = 'none';
+
                 shipItem.onclick = function() {
-                    displayShipStats(ship);
+                    if(shipStats.style.display == 'block')
+                        shipStats.style.display = 'none';
+                    else if(shipStats.style.display == 'none') {
+                        hideAllShip();
+                        shipStats.style.display = 'block';
+                    }
+
+                    //displayShipStats(ship);
                 };
                 shipList.appendChild(shipItem);
+
+                shipList.appendChild(shipStats);
             });
+        }
+
+        //
+        function hideAllShip() {
+            shipData.forEach(function(ship, index) {
+                var shipItem = document.getElementById('shipStats' + index);
+                shipItem.style.display = 'none';
+            })  
         }
 
         // Function to display stats for the selected ship
