@@ -463,7 +463,7 @@
             if (currentGameMode != 'oper'){
                 selectedTable = document.getElementById('non_oper');
                 buildAccountStatsTable();
-                buildWeaponStatsTable();
+                buildWeaponStatsTable(weapons_table_titles, weapons_table_columns);
             }
             if (selectedTable) {
                 selectedTable.style.display = 'block';
@@ -610,58 +610,56 @@
         // --------------------------------- weapon stats ----------------------------------
         // ---------------------------------------------------------------------------------
 
-        function buildWeaponStatsTable() {
-            // Define the table titles
-            const table_titles = [
-                { label: 'Main Battery', key: 'main_battery' },
-                { label: 'Secondary Battery', key: 'second_battery' },
-                { label: 'Torpedoes', key: 'torpedoes' },
-                { label: 'Aircraft', key: 'aircraft' },
-                { label: 'Ramming', key: 'ramming' }
-            ];
+        const weapons_table_titles = [
+            { label: 'Main Battery', key: 'main_battery' },
+            { label: 'Secondary Battery', key: 'second_battery' },
+            { label: 'Torpedoes', key: 'torpedoes' },
+            { label: 'Aircraft', key: 'aircraft' },
+            { label: 'Ramming', key: 'ramming' }
+        ];
 
-            // Define the stats to display for each column
-            const table_columns = {
-                'Main Battery': [
-                    { label: 'Total Frags', key: 'frags' },
-                    { label: 'Max Frags', key: 'max_frags_battle' },
-                    { label: 'Ship ID', key: 'max_frags_ship_id' },
-                    { label: 'br', key: '' },
-                    { label: 'Hit Ratio', key: 'hit_ratio' },
-                    { label: 'Shots Fired', key: 'shots' },
-                    { label: 'Hits', key: 'hits' }
-                ],
-                'Secondary Battery': [
-                    { label: 'Total Frags', key: 'frags' },
-                    { label: 'Max Frags', key: 'max_frags_battle' },
-                    { label: 'Ship ID', key: 'max_frags_ship_id' },
-                    { label: 'br', key: '' },
-                    { label: 'Hit Ratio', key: 'hit_ratio' },
-                    { label: 'Shots Fired', key: 'shots' },
-                    { label: 'Hits', key: 'hits' },
-                    
-                ],
-                'Torpedoes': [
-                    { label: 'Total Frags', key: 'frags' },
-                    { label: 'Max Frags', key: 'max_frags_battle' },
-                    { label: 'Ship ID', key: 'max_frags_ship_id' },
-                    { label: 'br', key: '' },
-                    { label: 'Hit Ratio', key: 'hit_ratio' },
-                    { label: 'Shots Fired', key: 'shots' },
-                    { label: 'Hits', key: 'hits' }
-                ],
-                'Aircraft': [
-                    { label: 'Total Frags', key: 'frags' },
-                    { label: 'Max Frags', key: 'max_frags_battle' },
-                    { label: 'Ship ID', key: 'max_frags_ship_id' },
-                ],
-                'Ramming': [
-                    { label: 'Total Frags', key: 'frags' },
-                    { label: 'Max Frags', key: 'max_frags_battle' },
-                    { label: 'Ship ID', key: 'max_frags_ship_id' },
-                ]
-            };
+        const weapons_table_columns = {
+            'Main Battery': [
+                { label: 'Total Frags', key: 'frags' },
+                { label: 'Max Frags', key: 'max_frags_battle' },
+                { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'br', key: '' },
+                { label: 'Hit Ratio', key: 'hit_ratio' },
+                { label: 'Shots Fired', key: 'shots' },
+                { label: 'Hits', key: 'hits' }
+            ],
+            'Secondary Battery': [
+                { label: 'Total Frags', key: 'frags' },
+                { label: 'Max Frags', key: 'max_frags_battle' },
+                { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'br', key: '' },
+                { label: 'Hit Ratio', key: 'hit_ratio' },
+                { label: 'Shots Fired', key: 'shots' },
+                { label: 'Hits', key: 'hits' },
 
+            ],
+            'Torpedoes': [
+                { label: 'Total Frags', key: 'frags' },
+                { label: 'Max Frags', key: 'max_frags_battle' },
+                { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'br', key: '' },
+                { label: 'Hit Ratio', key: 'hit_ratio' },
+                { label: 'Shots Fired', key: 'shots' },
+                { label: 'Hits', key: 'hits' }
+            ],
+            'Aircraft': [
+                { label: 'Total Frags', key: 'frags' },
+                { label: 'Max Frags', key: 'max_frags_battle' },
+                { label: 'Ship ID', key: 'max_frags_ship_id' },
+            ],
+            'Ramming': [
+                { label: 'Total Frags', key: 'frags' },
+                { label: 'Max Frags', key: 'max_frags_battle' },
+                { label: 'Ship ID', key: 'max_frags_ship_id' },
+            ]
+        };
+
+        function buildWeaponStatsTable(table_titles, table_columns) {
             // Empty pre existing table if any
             const container = document.querySelector('.weapon-stats-table');
             container.innerHTML = '';
@@ -696,7 +694,12 @@
                         const statValue = document.createElement('div');
                         statValue.className = 'stat-value';
                         // Use currentGameMode to access the correct value
-                        statValue.textContent = accountData.statistics[currentGameMode][title.key][stat.key];
+                        if ([title.key]) {
+                            statValue.textContent = accountData.statistics[currentGameMode][title.key][stat.key];
+                        }
+                        else {
+                            statValue.textContent = accountData.statistics[currentGameMode][stat.key];
+                        }
                         statRow.appendChild(statValue);
 
                         column.appendChild(statRow);
@@ -886,7 +889,7 @@
         window.onload = function() {
             populateShipList();
             buildAccountStatsTable();
-            buildWeaponStatsTable();
+            buildWeaponStatsTable(weapons_table_titles, weapons_table_columns);
         };
     </script>
 
