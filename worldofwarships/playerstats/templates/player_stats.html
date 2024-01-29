@@ -185,8 +185,9 @@
             <td>
                 <div class="normal-text">
                     Account Name: {{ account_data.nickname }}<br>
+                    Battles Fought: {{ account_data.statistics.battles|intcomma }}<br>
                     Last Battle Time: {{ account_data.last_battle_time }}<br>
-                    Updated At: {{ account_data.updated_at }}<br><br>
+                    Data Updated At: {{ account_data.updated_at }}<br><br>
                 </div>
             </td>
             <td>
@@ -412,7 +413,7 @@
 
     <div id="pvp" class="table-container hidden">
         <!-- Table structure for Random Battles -->
-
+    
     <div class="stats-container">
         <!-- First Column -->
         <div class="stat-column">
@@ -700,6 +701,11 @@
 
         var shipData = JSON.parse(document.getElementById('ship-stats').textContent);
 
+
+        // ---------------------------------------------------------------------------------
+        // -------------------------------- dropdown menu ----------------------------------
+        // ---------------------------------------------------------------------------------
+
         function showTable(tableId) {
             // Hide all tables
             var tables = document.getElementsByClassName('table-container');
@@ -848,9 +854,9 @@
                 }
             }
         }
+        
 
-
-        // Call populateShipList on page load
+        // On page load
         window.onload = populateShipList;
     </script>
 
