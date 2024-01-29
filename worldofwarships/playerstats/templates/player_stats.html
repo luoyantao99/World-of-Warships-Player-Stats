@@ -206,7 +206,13 @@
                 </div>
             </td>
         </tr>
-      </table>
+    </table>
+
+
+    <div class="account-stats-location"></div>
+
+    <br></br>
+    <br></br>
 
 
     <!--  -------------------------------------------------------------------------------------------- -->
@@ -666,6 +672,9 @@
     </div>
 
 
+
+    
+
     <br></br>
 
     <div id="shipList" class="ship-list-container">
@@ -699,6 +708,7 @@
             "Ranked Battles (Legacy)": "rank_old"
         };
 
+        var accountData = JSON.parse(document.getElementById('account-data').textContent);
         var shipData = JSON.parse(document.getElementById('ship-stats').textContent);
 
 
@@ -737,6 +747,111 @@
             currentGameMode = gameModeMapping[gameModeText];
             showTable(currentGameMode);
             populateShipList();
+            buildStatsTable(accountData);
+        }
+
+
+        // ---------------------------------------------------------------------------------
+        // -------------------------------- account stats ----------------------------------
+        // ---------------------------------------------------------------------------------
+
+        function buildStatsTable(accountData) {
+            // Define the table titles
+            const table_titles = [
+                'Battle Statistics',
+                'Total Score',
+                'Average Score per Battle',
+                'Most per Battle'
+            ];
+
+            // Define the stats to display for each column
+            const table_columns = {
+                'Battle Statistics': [
+                    { label: 'Battles Played', key: 'battles' },
+                    { label: 'Victories', key: 'wins' },
+                    { label: 'Defeats', key: 'losses' },
+                    { label: 'Draws', key: 'draws' },
+                    { label: 'Battles Survived', key: 'survived_battles' },
+                    { label: 'Main Battery Guns Hit Ratio', key: '' },
+                    { label: 'Torpedoes Hit Ratio', key: '' },
+                    { label: 'Contribution to Capture', key: '' },
+                    { label: 'Contribution to Defense', key: '' }
+                ],
+                'Total Score': [
+                    { label: 'Warships Destroyed', key: 'frags' },
+                    { label: 'Aircraft Destroyed', key: 'planes_killed' },
+                    { label: 'Damage', key: 'damage_dealt' },
+                    { label: 'XP', key: 'xp' },
+                    { label: 'Ships Spotted', key: 'ships_spotted' },
+                    { label: 'Spotting Damage', key: 'damage_scouting' },
+                    { label: 'Potential Damage', key: '' }
+                ],
+                'Average Score per Battle': [
+                    { label: 'Warships Destroyed', key: '' },
+                    { label: 'Aircraft Destroyed', key: '' },
+                    { label: 'Damage', key: '' },
+                    { label: 'XP', key: '' },
+                    { label: 'Ships Spotted', key: '' },
+                    { label: 'Spotting Damage', key: '' },
+                    { label: 'Potential Damage', key: '' }
+                ],
+                'Most per Battle': [
+                    { label: 'Warships Destroyed', key: 'max_frags_battle' },
+                    { label: 'Aircraft Destroyed', key: 'max_planes_killed' },
+                    { label: 'Damage', key: 'max_damage_dealt' },
+                    { label: 'XP', key: 'max_xp' },
+                    { label: 'Ships Spotted', key: 'max_ships_spotted' },
+                    { label: 'Spotting Damage', key: 'max_damage_scouting' },
+                    { label: 'Potential Damage', key: 'max_total_agro' }
+                ]
+            };
+
+            // Empty pre existing table if any
+            const container = document.querySelector('.account-stats-location');
+            container.innerHTML = '';
+
+            // Create the container for the stats
+            const statsContainer = document.createElement('div');
+            statsContainer.className = 'stats-container';
+
+            // Loop through each table column
+            table_titles.forEach(title => {
+                const column = document.createElement('div');
+                column.className = 'stat-column';
+
+                const columnTitle = document.createElement('div');
+                columnTitle.className = 'column-title';
+                columnTitle.textContent = title;
+                column.appendChild(columnTitle);
+
+                // Loop through the stats for the current game mode
+                table_columns[title].forEach(stat => {
+                    const statRow = document.createElement('div');
+                    statRow.className = 'stat-row';
+
+                    const statLabel = document.createElement('div');
+                    statLabel.className = 'stat-label';
+                    statLabel.textContent = stat.label;
+                    statRow.appendChild(statLabel);
+
+                    const statValue = document.createElement('div');
+                    statValue.className = 'stat-value';
+                    // Use currentGameMode to access the correct value
+                    statValue.textContent = accountData.statistics[currentGameMode][stat.key];
+                    statRow.appendChild(statValue);
+
+                    column.appendChild(statRow);
+                });
+
+                // Add a break for visual separation
+                column.appendChild(document.createElement('br'));
+
+                // Append the complete column to the stats container
+                statsContainer.appendChild(column);
+            });
+
+            // Append the stats container to the desired location in the DOM
+            document.querySelector('.account-stats-location').appendChild(statsContainer);
         }
 
 
@@ -854,10 +969,13 @@
                 }
             }
         }
-        
+
 
         // On page load
-        window.onload = populateShipList;
+        window.onload = function() {
+            populateShipList();
+            buildStatsTable(accountData);
+        };
     </script>
 
 </body>
