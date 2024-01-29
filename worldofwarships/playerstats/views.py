@@ -9,7 +9,7 @@ def get_player_data(request):
     application_id = '586c12b8bcdeebae9fa17747f47d67ec'
     account_id = '1005419424'
 
-    account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=private.port%2Cstatistics.clan%2Cstatistics.oper_div%2Cstatistics.oper_solo%2Cstatistics.pve%2Cstatistics.rank_solo').json()
+    account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=private.port%2Cstatistics.clan%2Cstatistics.oper_div%2Cstatistics.oper_solo%2Cstatistics.pve%2Cstatistics.rank_solo%2Cstatistics.rank_div2%2Cstatistics.rank_div3').json()
 
     ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={application_id}&account_id={account_id}&extra=oper_div%2Coper_solo%2Cpve%2Crank_solo').json()
 

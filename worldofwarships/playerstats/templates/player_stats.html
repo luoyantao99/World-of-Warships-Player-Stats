@@ -178,8 +178,6 @@
 <body>
     {% load humanize %}
 
-    <h1>World of Warships Player Profile</h1>
-
     <table style="white-space:nowrap;">
         <tr>
             <td>
@@ -201,7 +199,7 @@
                         <a href="#" onclick="selectDropdownOption(this)">Co-op Battles</a>
                         <a href="#" onclick="selectDropdownOption(this)">Operations</a>
                         <a href="#" onclick="selectDropdownOption(this)">Ranked Battles</a>
-                        <a href="#" onclick="selectDropdownOption(this)">Ranked Battles (Legacy)</a>
+                        <!-- <a href="#" onclick="selectDropdownOption(this)">Ranked Battles (Legacy)</a> -->
                     </div>
                 </div>
             </td>
@@ -209,471 +207,294 @@
     </table>
 
 
-    <div class="account-stats-location"></div>
+    <div id="non_oper" class="table-container hidden">
+        <!-- Table structure for non Operation Battles -->
+        <div class="account-stats-location"></div>
 
-    <br></br>
-    <br></br>
+        <br></br>
 
+        <div class="stats-container">
+            <!-- First Column -->
+            <div class="stat-column">
+                <div class="column-title">Warships Destroyed by Weapon Type</div>
+                <div class="stat-row">
+                    <div class="stat-label">Main Battery</div>
+                    <div class="stat-value">{{ account_data.statistics.pvp.main_battery.frags|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Secondary Battery</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Torpedoes</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Aircraft</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Ramming</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Depth Charges</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <!-- Repeat stat-row for other stats in the first column -->
+            </div>
+    
+            <!-- Second Column -->
+            <div class="stat-column">
+                <div class="column-title">Hit Ratio</div>
+                <div class="stat-row">
+                    <div class="stat-label">Main Battery</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Secondary Battery</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Torpedoes</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Aircraft</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Ramming</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Depth Charges</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <!-- Repeat stat-row for other stats in the second column -->
+            </div>
+    
+            <!-- Third Column -->
+            <div class="stat-column">
+                <div class="column-title">Maximum Kills by Weapon Type</div>
+                <div class="stat-row">
+                    <div class="stat-label">Main Battery</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Secondary Battery</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Torpedoes</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Aircraft</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Ramming</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Depth Charges</div>
+                    <div class="stat-value">{{ -1 }}</div>
+                </div>
+                <!-- Repeat stat-row for other stats in the third column -->
+            </div>
+        </div>
 
-    <!--  -------------------------------------------------------------------------------------------- -->
-    <!--  -------------------------------------------------------------------------------------------- -->
-    <!--  -------------------------------------------------------------------------------------------- -->
-    <!--  -------------------------------------------------------------------------------------------- -->
-    <!--  -------------------------------------------------------------------------------------------- -->
-    <!--  -------------------------------------------------------------------------------------------- -->
+    </div>
+
+    <!--  ------------------------------------------------------------------------------------------ -->
+    <!--  --------------------------------------- Operations --------------------------------------- -->
+    <!--  ------------------------------------------------------------------------------------------ -->
 
     <div id="oper" class="table-container">
         <!-- Table structure for Operations -->
-    
-    <div class="stats-container">
-        <!-- First Column -->
-        <div class="stat-column">
-            <div class="column-title">Operations</div>
-            <div class="stat-row">
-                <div class="stat-label">Battles Played</div>
-                <div class="stat-value">{{ account_data.statistics.oper.battles|intcomma }}</div>
+        <div class="stats-container">
+            <!-- First Column -->
+            <div class="stat-column">
+                <div class="column-title">Operations</div>
+                <div class="stat-row">
+                    <div class="stat-label">Battles Played</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.battles|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Victories</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.wins|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Defeats</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.losses|intcomma }}</div>
+                </div>
+                <br></br>
+                <div class="stat-row">
+                    <div class="stat-label">Battles Survived</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.survived_battles|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Wins Survived</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.survived_wins|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">XP</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.xp|intcomma }}</div>
+                </div>
+                <br></br>
+                <div class="stat-row">
+                    <div class="stat-label">Wins By Tasks</div>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">0 Star</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.0|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">1 Star</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.1|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">2 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.2|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">3 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.3|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">4 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.4|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">5 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.5|intcomma }}</div>
+                </div>
+                <!-- Repeat stat-row for other stats in the first column -->
             </div>
-            <div class="stat-row">
-                <div class="stat-label">Victories</div>
-                <div class="stat-value">{{ account_data.statistics.oper.wins|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Defeats</div>
-                <div class="stat-value">{{ account_data.statistics.oper.losses|intcomma }}</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Battles Survived</div>
-                <div class="stat-value">{{ account_data.statistics.oper.survived_battles|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Wins Survived</div>
-                <div class="stat-value">{{ account_data.statistics.oper.survived_wins|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">XP</div>
-                <div class="stat-value">{{ account_data.statistics.oper.xp|intcomma }}</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Wins By Tasks</div>
-                <div class="stat-value"></div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">0 Star</div>
-                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.0|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">1 Star</div>
-                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.1|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">2 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.2|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">3 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.3|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">4 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.4|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">5 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper.wins_by_tasks.5|intcomma }}</div>
-            </div>
-            <!-- Repeat stat-row for other stats in the first column -->
-        </div>
 
-        <!-- Second Column -->
-        <div class="stat-column">
-            <div class="column-title">Operations (Solo)</div>
-            <div class="stat-row">
-                <div class="stat-label">Battles Played</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.battles|intcomma }}</div>
+            <!-- Second Column -->
+            <div class="stat-column">
+                <div class="column-title">Operations (Solo)</div>
+                <div class="stat-row">
+                    <div class="stat-label">Battles Played</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.battles|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Victories</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.wins|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Defeats</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.losses|intcomma }}</div>
+                </div>
+                <br></br>
+                <div class="stat-row">
+                    <div class="stat-label">Battles Survived</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.survived_battles|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Wins Survived</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.survived_wins|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">XP</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.xp|intcomma }}</div>
+                </div>
+                <br></br>
+                <div class="stat-row">
+                    <div class="stat-label">Wins By Tasks</div>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">0 Star</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.0|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">1 Star</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.1|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">2 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.2|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">3 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.3|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">4 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.4|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">5 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.5|intcomma }}</div>
+                </div>
+                <!-- Repeat stat-row for other stats in the second column -->
             </div>
-            <div class="stat-row">
-                <div class="stat-label">Victories</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.wins|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Defeats</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.losses|intcomma }}</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Battles Survived</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.survived_battles|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Wins Survived</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.survived_wins|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">XP</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.xp|intcomma }}</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Wins By Tasks</div>
-                <div class="stat-value"></div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">0 Star</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.0|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">1 Star</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.1|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">2 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.2|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">3 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.3|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">4 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.4|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">5 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper_solo.wins_by_tasks.5|intcomma }}</div>
-            </div>
-            <!-- Repeat stat-row for other stats in the second column -->
-        </div>
 
-        <!-- Third Column -->
-        <div class="stat-column">
-            <div class="column-title">Operations (Division)</div>
-            <div class="stat-row">
-                <div class="stat-label">Battles Played</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.battles|intcomma }}</div>
+            <!-- Third Column -->
+            <div class="stat-column">
+                <div class="column-title">Operations (Division)</div>
+                <div class="stat-row">
+                    <div class="stat-label">Battles Played</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.battles|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Victories</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.wins|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Defeats</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.losses|intcomma }}</div>
+                </div>
+                <br></br>
+                <div class="stat-row">
+                    <div class="stat-label">Battles Survived</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.survived_battles|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">Wins Survived</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.survived_wins|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">XP</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.xp|intcomma }}</div>
+                </div>
+                <br></br>
+                <div class="stat-row">
+                    <div class="stat-label">Wins By Tasks</div>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">0 Star</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.0|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">1 Star</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.1|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">2 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.2|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">3 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.3|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">4 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.4|intcomma }}</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-label">5 Stars</div>
+                    <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.5|intcomma }}</div>
+                </div>
+                <!-- Repeat stat-row for other stats in the third column -->
             </div>
-            <div class="stat-row">
-                <div class="stat-label">Victories</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.wins|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Defeats</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.losses|intcomma }}</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Battles Survived</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.survived_battles|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Wins Survived</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.survived_wins|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">XP</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.xp|intcomma }}</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Wins By Tasks</div>
-                <div class="stat-value"></div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">0 Star</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.0|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">1 Star</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.1|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">2 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.2|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">3 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.3|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">4 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.4|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">5 Stars</div>
-                <div class="stat-value">{{ account_data.statistics.oper_div.wins_by_tasks.5|intcomma }}</div>
-            </div>
-            <!-- Repeat stat-row for other stats in the third column -->
-        </div>
-    </div>
-    
-    </div>
-
-    <!--  -------------------------------------------------------------------------------------------- -->
-    <!--  -------------------------------------------------------------------------------------------- -->
-    <!--  -------------------------------------------------------------------------------------------- -->
-    <!--  -------------------------------------------------------------------------------------------- -->
-    <!--  -------------------------------------------------------------------------------------------- -->
-    <!--  -------------------------------------------------------------------------------------------- -->
-
-
-    <div id="pvp" class="table-container hidden">
-        <!-- Table structure for Random Battles -->
-    
-    <div class="stats-container">
-        <!-- First Column -->
-        <div class="stat-column">
-            <div class="column-title">Random Battles</div>
-            <div class="stat-row">
-                <div class="stat-label">Battles Played</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.battles|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Victories</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.wins|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Defeats</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.losses|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Draws</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.draws|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Battles Survived</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.survived_battles|intcomma }}</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Main Battery Guns Hit Ratio</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Torpedoes Hit Ratio</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Contribution to Capture</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Contribution to Defense</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <!-- Repeat stat-row for other stats in the first column -->
-        </div>
-
-        <!-- Second Column -->
-        <div class="stat-column">
-            <div class="column-title">Total Score</div>
-            <div class="stat-row">
-                <div class="stat-label">Warships Destroyed</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.frags|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Aircraft Destroyed</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.planes_killed|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Damage</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.damage_dealt|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">XP</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.xp|intcomma }}</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Ships Spotted</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.ships_spotted|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Spotting Damage</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.damage_scouting|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Potential Damage</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <!-- Repeat stat-row for other stats in the second column -->
-        </div>
-
-        <!-- Third Column -->
-        <div class="stat-column">
-            <div class="column-title">Average Score per Battle 	</div>
-            <div class="stat-row">
-                <div class="stat-label">Warships Destroyed</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Aircraft Destroyed</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Damage</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">XP</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Ships Spotted</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Spotting Damage</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Potential Damage</div>
-                <div class="stat-value">--------</div>
-            </div>
-            <!-- Repeat stat-row for other stats in the third column -->
-        </div>
-
-        <!-- Fourth Column -->
-        <div class="stat-column">
-            <div class="column-title">Most per Battle</div>
-            <div class="stat-row">
-                <div class="stat-label">Warships Destroyed</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.max_frags_battle|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Aircraft Destroyed</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.max_planes_killed|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Damage</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.max_damage_dealt|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">XP</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.max_xp|intcomma }}</div>
-            </div>
-            <br></br>
-            <div class="stat-row">
-                <div class="stat-label">Ships Spotted</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.max_ships_spotted|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Spotting Damage</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.max_damage_scouting|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Potential Damage</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.max_total_agro|intcomma }}</div>
-            </div>
-            <!-- Repeat stat-row for other stats in the fourth column -->
         </div>
     </div>
-
-    <br></br>
-
-    <!--  ------------------------------------ Weapons Statistics PVP ------------------------------------ -->
-    <!--  ------------------------------------ Weapons Statistics PVP ------------------------------------ -->
-    <!--  ------------------------------------ Weapons Statistics PVP ------------------------------------ -->
-
-    <div class="stats-container">
-        <!-- First Column -->
-        <div class="stat-column">
-            <div class="column-title">Warships Destroyed by Weapon Type</div>
-            <div class="stat-row">
-                <div class="stat-label">Main Battery</div>
-                <div class="stat-value">{{ account_data.statistics.pvp.main_battery.frags|intcomma }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Secondary Battery</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Torpedoes</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Aircraft</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Ramming</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Depth Charges</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <!-- Repeat stat-row for other stats in the first column -->
-        </div>
-
-        <!-- Second Column -->
-        <div class="stat-column">
-            <div class="column-title">Hit Ratio</div>
-            <div class="stat-row">
-                <div class="stat-label">Main Battery</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Secondary Battery</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Torpedoes</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Aircraft</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Ramming</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Depth Charges</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <!-- Repeat stat-row for other stats in the second column -->
-        </div>
-
-        <!-- Third Column -->
-        <div class="stat-column">
-            <div class="column-title">Maximum Kills by Weapon Type</div>
-            <div class="stat-row">
-                <div class="stat-label">Main Battery</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Secondary Battery</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Torpedoes</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Aircraft</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Ramming</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <div class="stat-row">
-                <div class="stat-label">Depth Charges</div>
-                <div class="stat-value">{{ -1 }}</div>
-            </div>
-            <!-- Repeat stat-row for other stats in the third column -->
-        </div>
-    </div>
-
-    </div>
-
-
-
-    
 
     <br></br>
 
@@ -716,7 +537,7 @@
         // -------------------------------- dropdown menu ----------------------------------
         // ---------------------------------------------------------------------------------
 
-        function showTable(tableId) {
+        function showTable(currentMode) {
             // Hide all tables
             var tables = document.getElementsByClassName('table-container');
             for (var i = 0; i < tables.length; i++) {
@@ -724,7 +545,10 @@
             }
 
             // Show the selected table
-            var selectedTable = document.getElementById(tableId);
+            if (currentMode != 'oper'){
+                currentMode = 'non_oper'
+            }
+            var selectedTable = document.getElementById(currentMode);
             if (selectedTable) {
                 selectedTable.style.display = 'block';
             }
@@ -809,6 +633,8 @@
             // Empty pre existing table if any
             const container = document.querySelector('.account-stats-location');
             container.innerHTML = '';
+
+            if (currentGameMode == 'oper') return;
 
             // Create the container for the stats
             const statsContainer = document.createElement('div');
