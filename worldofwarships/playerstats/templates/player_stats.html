@@ -451,7 +451,7 @@
         // -------------------------------- dropdown menu ----------------------------------
         // ---------------------------------------------------------------------------------
 
-        function showTable(currentMode) {
+        function showStatsTable() {
             // Hide all tables
             var tables = document.getElementsByClassName('table-container');
             for (var i = 0; i < tables.length; i++) {
@@ -459,10 +459,12 @@
             }
 
             // Show the selected table
-            if (currentMode != 'oper'){
-                currentMode = 'non_oper'
+            var selectedTable = document.getElementById(currentGameMode);
+            if (currentGameMode != 'oper'){
+                selectedTable = document.getElementById('non_oper');
+                buildAccountStatsTable();
+                buildWeaponStatsTable();
             }
-            var selectedTable = document.getElementById(currentMode);
             if (selectedTable) {
                 selectedTable.style.display = 'block';
             }
@@ -483,10 +485,9 @@
 
             var gameModeText = element.textContent.trim();
             currentGameMode = gameModeMapping[gameModeText];
-            showTable(currentGameMode);
+
+            showStatsTable();
             populateShipList();
-            buildAccountStatsTable();
-            buildWeaponStatsTable();
         }
 
 
@@ -518,7 +519,7 @@
                 ],
                 'Total Score': [
                     { label: 'Damage', key: 'damage_dealt' },
-                    { label: 'XP', key: 'xp' },
+                    { label: 'Base XP', key: 'xp' },
                     { label: 'Warships Destroyed', key: 'frags' },
                     { label: 'Aircraft Destroyed', key: 'planes_killed' },
                     { label: 'Potential Damage', key: '' },
@@ -529,7 +530,7 @@
                 ],
                 'Average Score per Battle': [
                     { label: 'Damage', key: '' },
-                    { label: 'XP', key: '' },
+                    { label: 'Base XP', key: '' },
                     { label: 'Warships Destroyed', key: '' },
                     { label: 'Aircraft Destroyed', key: '' },
                     { label: 'Potential Damage', key: '' },
@@ -540,7 +541,7 @@
                 ],
                 'Most per Battle': [
                     { label: 'Damage', key: 'max_damage_dealt' },
-                    { label: 'XP', key: 'max_xp' },
+                    { label: 'Base XP', key: 'max_xp' },
                     { label: 'Warships Destroyed', key: 'max_frags_battle' },
                     { label: 'Aircraft Destroyed', key: 'max_planes_killed' },
                     { label: 'Potential Damage', key: 'max_total_agro' },
@@ -829,6 +830,56 @@
                 }
             }
         }
+
+
+        // function sortTable(columnIndex) {
+        //     var table = document.getElementById("shipTable");
+        //     var rowsArray = Array.from(table.getElementsByTagName("TR"));
+        //     var header = rowsArray.shift(); // Remove the header from sorting
+
+        //     // Determine the data type for sorting
+        //     var isNumeric = !isNaN(parseFloat(rowsArray[0].getElementsByTagName("TD")[columnIndex].innerHTML)) && isFinite(rowsArray[0].getElementsByTagName("TD")[columnIndex].innerHTML);
+
+        //     // Sort the rows
+        //     rowsArray.sort(function(rowA, rowB) {
+        //         var cellA = rowA.getElementsByTagName("TD")[columnIndex].innerHTML;
+        //         var cellB = rowB.getElementsByTagName("TD")[columnIndex].innerHTML;
+
+        //         // Parse to number if the column is numeric
+        //         if (isNumeric) {
+        //             cellA = parseFloat(cellA);
+        //             cellB = parseFloat(cellB);
+        //         } else {
+        //             cellA = cellA.toLowerCase();
+        //             cellB = cellB.toLowerCase();
+        //         }
+
+        //         // Toggle between ascending and descending
+        //         if (window["sortDir" + columnIndex] === "asc") {
+        //             return cellA > cellB ? 1 : cellA < cellB ? -1 : 0;
+        //         } else {
+        //             return cellA < cellB ? 1 : cellA > cellB ? -1 : 0;
+        //         }
+        //     });
+
+        //     // Remember the sorting direction
+        //     window["sortDir" + columnIndex] = window["sortDir" + columnIndex] === "asc" ? "desc" : "asc";
+
+        //     // Rebuild the table with sorted rows
+        //     for (var i = 0; i < rowsArray.length; i++) {
+        //         table.appendChild(rowsArray[i]);
+        //     }
+
+        //     // Reattach the header
+        //     table.prepend(header);
+        // }
+
+        // // Initialize sort directions
+        // window.sortDir0 = "desc";
+        // window.sortDir1 = "desc";
+        // window.sortDir2 = "desc";
+        // window.sortDir3 = "desc";
+        // window.sortDir4 = "desc";
 
 
         // On page load
