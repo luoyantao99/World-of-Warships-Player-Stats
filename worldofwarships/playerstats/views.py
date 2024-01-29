@@ -27,6 +27,9 @@ def get_player_data(request):
     for ship in ship_data:
         fill_oper_wins_by_tasks(ship)
         combine_oper_stats(ship)
+
+    # calculate hit ratio
+    calculate_hit_ratio(account_data['statistics'])
         
     
     context = {
@@ -55,3 +58,12 @@ def fill_oper_wins_by_tasks(json):
             json['oper_div']['wins_by_tasks'][f'{i}'] = 0
         if f'{i}' not in json['oper_solo']['wins_by_tasks']:
             json['oper_solo']['wins_by_tasks'][f'{i}'] = 0
+
+
+def calculate_hit_ratio(json):
+    game_modes = ['pvp','pve','rank_solo']
+    weapon_types = ['main_battery','second_battery','torpedoes']
+    for mode in game_modes:
+        for weapon in weapon_types:
+            weapon_stats = json[mode][weapon]
+            weapon_stats['hit_ratio'] = '{:.2%}'.format(weapon_stats['hits'] / weapon_stats['shots'])
