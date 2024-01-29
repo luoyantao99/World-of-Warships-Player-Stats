@@ -217,101 +217,7 @@
         <div class="account-stats-table"></div>
         <br></br>
         <div class="weapon-stats-table"></div>
-
-        <div class="stats-container">
-            <!-- First Column -->
-            <div class="stat-column">
-                <div class="column-title">Warships Destroyed by Weapon Type</div>
-                <div class="stat-row">
-                    <div class="stat-label">Main Battery</div>
-                    <div class="stat-value">{{ account_data.statistics.pvp.main_battery.frags|intcomma }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Secondary Battery</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Torpedoes</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Aircraft</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Ramming</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Depth Charges</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <!-- Repeat stat-row for other stats in the first column -->
-            </div>
-    
-            <!-- Second Column -->
-            <div class="stat-column">
-                <div class="column-title">Hit Ratio</div>
-                <div class="stat-row">
-                    <div class="stat-label">Main Battery</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Secondary Battery</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Torpedoes</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Aircraft</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Ramming</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Depth Charges</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <!-- Repeat stat-row for other stats in the second column -->
-            </div>
-    
-            <!-- Third Column -->
-            <div class="stat-column">
-                <div class="column-title">Maximum Kills by Weapon Type</div>
-                <div class="stat-row">
-                    <div class="stat-label">Main Battery</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Secondary Battery</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Torpedoes</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Aircraft</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Ramming</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label">Depth Charges</div>
-                    <div class="stat-value">{{ -1 }}</div>
-                </div>
-                <!-- Repeat stat-row for other stats in the third column -->
-            </div>
-        </div>
-
     </div>
-
 
 
 
@@ -708,64 +614,50 @@
         // ---------------------------------------------------------------------------------
 
         function buildWeaponStatsTable() {
-            return;
             // Define the table titles
             const stats_table_titles = [
-                'Battle Statistics',
-                'Total Score',
-                'Average Score per Battle',
-                'Most per Battle'
+                { label: 'Main Battery', key: 'main_battery' },
+                { label: 'Secondary Battery', key: 'second_battery' },
+                { label: 'Torpedoes', key: 'torpedoes' },
+                { label: 'Aircraft', key: 'aircraft' },
+                { label: 'Ramming', key: 'ramming' }
             ];
 
             // Define the stats to display for each column
             const stats_table_columns = {
-                'Battle Statistics': [
-                    { label: 'Battles Played', key: 'battles' },
-                    { label: 'Victories', key: 'wins' },
-                    { label: 'Defeats', key: 'losses' },
-                    { label: 'Draws', key: 'draws' },
-                    { label: 'Battles Survived', key: 'survived_battles' },
-                    { label: 'br', key: '' },
-                    { label: 'br', key: '' },
-                    { label: 'Main Battery Guns Hit Ratio', key: '' },
-                    { label: 'Torpedoes Hit Ratio', key: '' },
-                    { label: 'br', key: '' },
-                    { label: 'br', key: '' },
-                    { label: 'Contribution to Capture', key: '' },
-                    { label: 'Contribution to Defense', key: '' }
+                'Main Battery': [
+                    { label: 'Total Frags', key: 'frags' },
+                    { label: 'Max Frags', key: 'max_frags_battle' },
+                    { label: 'Ship ID', key: 'max_frags_ship_id' },
+                    { label: 'Shots Fired', key: 'shots' },
+                    { label: 'Hits', key: 'hits' },
+                    { label: 'Hit Rate', key: '' }
                 ],
-                'Total Score': [
-                    { label: 'Damage', key: 'damage_dealt' },
-                    { label: 'XP', key: 'xp' },
-                    { label: 'Warships Destroyed', key: 'frags' },
-                    { label: 'Aircraft Destroyed', key: 'planes_killed' },
-                    { label: 'Potential Damage', key: '' },
-                    { label: 'br', key: '' },
-                    { label: 'br', key: '' },
-                    { label: 'Ships Spotted', key: 'ships_spotted' },
-                    { label: 'Spotting Damage', key: 'damage_scouting' }
+                'Secondary Battery': [
+                    { label: 'Total Frags', key: 'frags' },
+                    { label: 'Max Frags', key: 'max_frags_battle' },
+                    { label: 'Ship ID', key: 'max_frags_ship_id' },
+                    { label: 'Shots Fired', key: 'shots' },
+                    { label: 'Hits', key: 'hits' },
+                    { label: 'Hit Rate', key: '' }
                 ],
-                'Average Score per Battle': [
-                    { label: 'Damage', key: '' },
-                    { label: 'XP', key: '' },
-                    { label: 'Warships Destroyed', key: '' },
-                    { label: 'Aircraft Destroyed', key: '' },
-                    { label: 'Potential Damage', key: '' },
-                    { label: 'br', key: '' },
-                    { label: 'br', key: '' },
-                    { label: 'Ships Spotted', key: '' },
-                    { label: 'Spotting Damage', key: '' }
+                'Torpedoes': [
+                    { label: 'Total Frags', key: 'frags' },
+                    { label: 'Max Frags', key: 'max_frags_battle' },
+                    { label: 'Ship ID', key: 'max_frags_ship_id' },
+                    { label: 'Shots Fired', key: 'shots' },
+                    { label: 'Hits', key: 'hits' },
+                    { label: 'Hit Rate', key: '' }
                 ],
-                'Most per Battle': [
-                    { label: 'Damage', key: 'max_damage_dealt' },
-                    { label: 'XP', key: 'max_xp' },
-                    { label: 'Warships Destroyed', key: 'max_frags_battle' },
-                    { label: 'Aircraft Destroyed', key: 'max_planes_killed' },
-                    { label: 'Potential Damage', key: 'max_total_agro' },
-                    { label: 'br', key: '' },
-                    { label: 'br', key: '' },
-                    { label: 'Ships Spotted', key: 'max_ships_spotted' },
-                    { label: 'Spotting Damage', key: 'max_damage_scouting' }
+                'Aircraft': [
+                    { label: 'Total Frags', key: 'frags' },
+                    { label: 'Max Frags', key: 'max_frags_battle' },
+                    { label: 'Ship ID', key: 'max_frags_ship_id' },
+                ],
+                'Ramming': [
+                    { label: 'Total Frags', key: 'frags' },
+                    { label: 'Max Frags', key: 'max_frags_battle' },
+                    { label: 'Ship ID', key: 'max_frags_ship_id' },
                 ]
             };
 
@@ -786,11 +678,11 @@
 
                 const columnTitle = document.createElement('div');
                 columnTitle.className = 'column-title';
-                columnTitle.textContent = title;
+                columnTitle.textContent = title.label;
                 column.appendChild(columnTitle);
 
                 // Loop through the stats for the current game mode
-                stats_table_columns[title].forEach(stat => {
+                stats_table_columns[title.label].forEach(stat => {
                     if (stat.label != 'br') {
                         const statRow = document.createElement('div');
                         statRow.className = 'stat-row';
@@ -803,7 +695,7 @@
                         const statValue = document.createElement('div');
                         statValue.className = 'stat-value';
                         // Use currentGameMode to access the correct value
-                        statValue.textContent = accountData.statistics[currentGameMode][stat.key];
+                        statValue.textContent = accountData.statistics[currentGameMode][title.key][stat.key];
                         statRow.appendChild(statValue);
 
                         column.appendChild(statRow);
