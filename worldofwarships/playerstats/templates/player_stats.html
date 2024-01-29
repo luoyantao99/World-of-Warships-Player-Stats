@@ -497,7 +497,7 @@
 
         function buildAccountStatsTable() {
             // Define the table titles
-            const stats_table_titles = [
+            const table_titles = [
                 { label: 'Battle Statistics' },
                 { label: 'Total Score' },
                 { label: 'Average Score per Battle' },
@@ -505,7 +505,7 @@
             ];
 
             // Define the stats to display for each column
-            const stats_table_columns = {
+            const table_columns = {
                 'Battle Statistics': [
                     { label: 'Battles Played', key: 'battles' },
                     { label: 'Victories', key: 'wins' },
@@ -563,7 +563,7 @@
             statsContainer.className = 'stats-container';
 
             // Loop through each table column
-            stats_table_titles.forEach(title => {
+            table_titles.forEach(title => {
                 const column = document.createElement('div');
                 column.className = 'stat-column';
 
@@ -573,7 +573,7 @@
                 column.appendChild(columnTitle);
 
                 // Loop through the stats for the current game mode
-                stats_table_columns[title.label].forEach(stat => {
+                table_columns[title.label].forEach(stat => {
                     if (stat.label != 'br') {
                         const statRow = document.createElement('div');
                         statRow.className = 'stat-row';
@@ -612,7 +612,7 @@
 
         function buildWeaponStatsTable() {
             // Define the table titles
-            const stats_table_titles = [
+            const table_titles = [
                 { label: 'Main Battery', key: 'main_battery' },
                 { label: 'Secondary Battery', key: 'second_battery' },
                 { label: 'Torpedoes', key: 'torpedoes' },
@@ -621,7 +621,7 @@
             ];
 
             // Define the stats to display for each column
-            const stats_table_columns = {
+            const table_columns = {
                 'Main Battery': [
                     { label: 'Total Frags', key: 'frags' },
                     { label: 'Max Frags', key: 'max_frags_battle' },
@@ -673,7 +673,7 @@
             statsContainer.className = 'stats-container';
 
             // Loop through each table column
-            stats_table_titles.forEach(title => {
+            table_titles.forEach(title => {
                 const column = document.createElement('div');
                 column.className = 'stat-column';
 
@@ -683,7 +683,7 @@
                 column.appendChild(columnTitle);
 
                 // Loop through the stats for the current game mode
-                stats_table_columns[title.label].forEach(stat => {
+                table_columns[title.label].forEach(stat => {
                     if (stat.label != 'br') {
                         const statRow = document.createElement('div');
                         statRow.className = 'stat-row';
