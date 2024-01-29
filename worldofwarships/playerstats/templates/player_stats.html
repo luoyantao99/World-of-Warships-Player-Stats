@@ -193,13 +193,13 @@
             </td>
             <td>
                 <div class="dropdown">
-                    <button class="dropbtn" id="dropdownMenuButton">Operations</button>
+                    <button class="dropbtn" id="dropdownMenuButton">Random Battles</button>
                     <div class="dropdown-content">
                         <a href="#" onclick="selectDropdownOption(this)">Random Battles</a>
-                        <a href="#" onclick="selectDropdownOption(this)">Co-op Battles</a>
-                        <a href="#" onclick="selectDropdownOption(this)">Operations</a>
                         <a href="#" onclick="selectDropdownOption(this)">Ranked Battles</a>
                         <!-- <a href="#" onclick="selectDropdownOption(this)">Ranked Battles (Legacy)</a> -->
+                        <a href="#" onclick="selectDropdownOption(this)">Co-op Battles</a>
+                        <a href="#" onclick="selectDropdownOption(this)">Operations</a>
                     </div>
                 </div>
             </td>
@@ -212,11 +212,11 @@
     <!--  --------------------------------------- Account Stats --------------------------------------- -->
     <!--  --------------------------------------------------------------------------------------------- -->
 
-    <div id="non_oper" class="table-container hidden">
+    <div id="non_oper" class="table-container">
         <!-- Table structure for non Operation Battles -->
         <div class="account-stats-table"></div>
-
         <br></br>
+        <div class="weapon-stats-table"></div>
 
         <div class="stats-container">
             <!-- First Column -->
@@ -319,7 +319,7 @@
     <!--  --------------------------------------- Operations --------------------------------------- -->
     <!--  ------------------------------------------------------------------------------------------ -->
 
-    <div id="oper" class="table-container">
+    <div id="oper" class="table-container hidden">
         <!-- Table structure for Operations -->
         <div class="stats-container">
             <!-- First Column -->
@@ -528,7 +528,7 @@
     {{ account_data|json_script:"account-data" }}
 
     <script>
-        var currentGameMode = 'oper'; // Default game mode
+        var currentGameMode = 'pvp'; // Default game mode onload
         var gameModeMapping = {
             "Random Battles": "pvp",
             "Co-op Battles": "pve",
@@ -579,7 +579,8 @@
             currentGameMode = gameModeMapping[gameModeText];
             showTable(currentGameMode);
             populateShipList();
-            buildStatsTable(accountData);
+            buildAccountStatsTable();
+            buildWeaponStatsTable();
         }
 
 
@@ -587,7 +588,127 @@
         // -------------------------------- account stats ----------------------------------
         // ---------------------------------------------------------------------------------
 
-        function buildStatsTable(accountData) {
+        function buildAccountStatsTable() {
+            // Define the table titles
+            const stats_table_titles = [
+                { label: 'Battle Statistics' },
+                { label: 'Total Score' },
+                { label: 'Average Score per Battle' },
+                { label: 'Most per Battle' }
+            ];
+
+            // Define the stats to display for each column
+            const stats_table_columns = {
+                'Battle Statistics': [
+                    { label: 'Battles Played', key: 'battles' },
+                    { label: 'Victories', key: 'wins' },
+                    { label: 'Defeats', key: 'losses' },
+                    { label: 'Draws', key: 'draws' },
+                    { label: 'Battles Survived', key: 'survived_battles' },
+                    { label: 'br', key: '' },
+                    { label: 'br', key: '' },
+                    { label: 'Main Battery Guns Hit Ratio', key: '' },
+                    { label: 'Torpedoes Hit Ratio', key: '' },
+                    { label: 'br', key: '' },
+                    { label: 'br', key: '' },
+                    { label: 'Contribution to Capture', key: '' },
+                    { label: 'Contribution to Defense', key: '' }
+                ],
+                'Total Score': [
+                    { label: 'Damage', key: 'damage_dealt' },
+                    { label: 'XP', key: 'xp' },
+                    { label: 'Warships Destroyed', key: 'frags' },
+                    { label: 'Aircraft Destroyed', key: 'planes_killed' },
+                    { label: 'Potential Damage', key: '' },
+                    { label: 'br', key: '' },
+                    { label: 'br', key: '' },
+                    { label: 'Ships Spotted', key: 'ships_spotted' },
+                    { label: 'Spotting Damage', key: 'damage_scouting' }
+                ],
+                'Average Score per Battle': [
+                    { label: 'Damage', key: '' },
+                    { label: 'XP', key: '' },
+                    { label: 'Warships Destroyed', key: '' },
+                    { label: 'Aircraft Destroyed', key: '' },
+                    { label: 'Potential Damage', key: '' },
+                    { label: 'br', key: '' },
+                    { label: 'br', key: '' },
+                    { label: 'Ships Spotted', key: '' },
+                    { label: 'Spotting Damage', key: '' }
+                ],
+                'Most per Battle': [
+                    { label: 'Damage', key: 'max_damage_dealt' },
+                    { label: 'XP', key: 'max_xp' },
+                    { label: 'Warships Destroyed', key: 'max_frags_battle' },
+                    { label: 'Aircraft Destroyed', key: 'max_planes_killed' },
+                    { label: 'Potential Damage', key: 'max_total_agro' },
+                    { label: 'br', key: '' },
+                    { label: 'br', key: '' },
+                    { label: 'Ships Spotted', key: 'max_ships_spotted' },
+                    { label: 'Spotting Damage', key: 'max_damage_scouting' }
+                ]
+            };
+
+            // Empty pre existing table if any
+            const container = document.querySelector('.account-stats-table');
+            container.innerHTML = '';
+
+            if (currentGameMode == 'oper') return;
+
+            // Create the container for the stats
+            const statsContainer = document.createElement('div');
+            statsContainer.className = 'stats-container';
+
+            // Loop through each table column
+            stats_table_titles.forEach(title => {
+                const column = document.createElement('div');
+                column.className = 'stat-column';
+
+                const columnTitle = document.createElement('div');
+                columnTitle.className = 'column-title';
+                columnTitle.textContent = title.label;
+                column.appendChild(columnTitle);
+
+                // Loop through the stats for the current game mode
+                stats_table_columns[title.label].forEach(stat => {
+                    if (stat.label != 'br') {
+                        const statRow = document.createElement('div');
+                        statRow.className = 'stat-row';
+
+                        const statLabel = document.createElement('div');
+                        statLabel.className = 'stat-label';
+                        statLabel.textContent = stat.label;
+                        statRow.appendChild(statLabel);
+
+                        const statValue = document.createElement('div');
+                        statValue.className = 'stat-value';
+                        // Use currentGameMode to access the correct value
+                        statValue.textContent = accountData.statistics[currentGameMode][stat.key];
+                        statRow.appendChild(statValue);
+
+                        column.appendChild(statRow);
+                    }
+                    else {
+                        // Add a break for visual separation
+                        column.appendChild(document.createElement('br'));
+                    }
+                });
+
+                // Append the complete column to the stats container
+                statsContainer.appendChild(column);
+            });
+
+            // Append the stats container to the desired location in the DOM
+            document.querySelector('.account-stats-table').appendChild(statsContainer);
+        }
+
+
+        // ---------------------------------------------------------------------------------
+        // --------------------------------- weapon stats ----------------------------------
+        // ---------------------------------------------------------------------------------
+
+        function buildWeaponStatsTable() {
+            return;
             // Define the table titles
             const stats_table_titles = [
                 'Battle Statistics',
@@ -605,49 +726,51 @@
                     { label: 'Draws', key: 'draws' },
                     { label: 'Battles Survived', key: 'survived_battles' },
                     { label: 'br', key: '' },
+                    { label: 'br', key: '' },
                     { label: 'Main Battery Guns Hit Ratio', key: '' },
                     { label: 'Torpedoes Hit Ratio', key: '' },
+                    { label: 'br', key: '' },
                     { label: 'br', key: '' },
                     { label: 'Contribution to Capture', key: '' },
                     { label: 'Contribution to Defense', key: '' }
                 ],
                 'Total Score': [
-                    { label: 'Warships Destroyed', key: 'frags' },
-                    { label: 'Aircraft Destroyed', key: 'planes_killed' },
-                    { label: 'br', key: '' },
                     { label: 'Damage', key: 'damage_dealt' },
                     { label: 'XP', key: 'xp' },
+                    { label: 'Warships Destroyed', key: 'frags' },
+                    { label: 'Aircraft Destroyed', key: 'planes_killed' },
+                    { label: 'Potential Damage', key: '' },
+                    { label: 'br', key: '' },
                     { label: 'br', key: '' },
                     { label: 'Ships Spotted', key: 'ships_spotted' },
-                    { label: 'Spotting Damage', key: 'damage_scouting' },
-                    { label: 'Potential Damage', key: '' }
+                    { label: 'Spotting Damage', key: 'damage_scouting' }
                 ],
                 'Average Score per Battle': [
-                    { label: 'Warships Destroyed', key: '' },
-                    { label: 'Aircraft Destroyed', key: '' },
-                    { label: 'br', key: '' },
                     { label: 'Damage', key: '' },
                     { label: 'XP', key: '' },
+                    { label: 'Warships Destroyed', key: '' },
+                    { label: 'Aircraft Destroyed', key: '' },
+                    { label: 'Potential Damage', key: '' },
+                    { label: 'br', key: '' },
                     { label: 'br', key: '' },
                     { label: 'Ships Spotted', key: '' },
-                    { label: 'Spotting Damage', key: '' },
-                    { label: 'Potential Damage', key: '' }
+                    { label: 'Spotting Damage', key: '' }
                 ],
                 'Most per Battle': [
-                    { label: 'Warships Destroyed', key: 'max_frags_battle' },
-                    { label: 'Aircraft Destroyed', key: 'max_planes_killed' },
-                    { label: 'br', key: '' },
                     { label: 'Damage', key: 'max_damage_dealt' },
                     { label: 'XP', key: 'max_xp' },
+                    { label: 'Warships Destroyed', key: 'max_frags_battle' },
+                    { label: 'Aircraft Destroyed', key: 'max_planes_killed' },
+                    { label: 'Potential Damage', key: 'max_total_agro' },
+                    { label: 'br', key: '' },
                     { label: 'br', key: '' },
                     { label: 'Ships Spotted', key: 'max_ships_spotted' },
-                    { label: 'Spotting Damage', key: 'max_damage_scouting' },
-                    { label: 'Potential Damage', key: 'max_total_agro' }
+                    { label: 'Spotting Damage', key: 'max_damage_scouting' }
                 ]
             };
 
             // Empty pre existing table if any
-            const container = document.querySelector('.account-stats-table');
+            const container = document.querySelector('.weapon-stats-table');
             container.innerHTML = '';
 
             if (currentGameMode == 'oper') return;
@@ -696,7 +819,7 @@
             });
 
             // Append the stats container to the desired location in the DOM
-            document.querySelector('.account-stats-table').appendChild(statsContainer);
+            document.querySelector('.weapon-stats-table').appendChild(statsContainer);
         }
 
 
@@ -819,7 +942,8 @@
         // On page load
         window.onload = function() {
             populateShipList();
-            buildStatsTable(accountData);
+            buildAccountStatsTable();
+            buildWeaponStatsTable();
         };
     </script>
 
