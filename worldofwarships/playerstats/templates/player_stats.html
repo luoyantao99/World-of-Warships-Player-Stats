@@ -561,7 +561,7 @@
 
 
         // ---------------------------------------------------------------------------------
-        // -------------------------------- dropdown menu ----------------------------------
+        // -------------------------------- Dropdown Menu ----------------------------------
         // ---------------------------------------------------------------------------------
 
         function selectDropdownOption(element) {
@@ -605,13 +605,15 @@
         }
 
 
+        // ---------------------------------------------------------------------------------
+        // ------------------------------- Build Stats Table -------------------------------
+        // ---------------------------------------------------------------------------------
+
         function buildStatsTable(table_titles, table_columns, table_type) {
             var tableClass = '.' + table_type + '-stats-table'
             // Empty pre existing table if any
             const container = document.querySelector(tableClass);
             container.innerHTML = '';
-
-            if (currentGameMode == 'oper') return;
 
             // Create the container for the stats
             const statsContainer = document.createElement('div');
@@ -735,100 +737,34 @@
 
 
         function sortTable(n) {
-            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            table = document.getElementById("shipTable");
-            switching = true;
-            dir = "desc";
-            
-            while (switching) {
-                switching = false;
-                rows = table.getElementsByTagName("TR");
-                
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
-                    x = rows[i].getElementsByTagName("TD")[n];
-                    y = rows[i + 1].getElementsByTagName("TD")[n];
+            var table = document.getElementById("shipTable");
+            var tbody = table.getElementsByTagName("tbody")[0];
+            var rows = Array.from(tbody.getElementsByTagName("TR"));
 
-                    // Check if the columns contain numbers and compare as numbers
-                    var xVal = isNaN(parseInt(x.innerHTML)) ? x.innerHTML.toLowerCase() : parseInt(x.innerHTML);
-                    var yVal = isNaN(parseInt(y.innerHTML)) ? y.innerHTML.toLowerCase() : parseInt(y.innerHTML);
+            // Determine the sort direction
+            var isAscending = table.getAttribute('data-sort-dir') === 'asc';
+            table.setAttribute('data-sort-dir', isAscending ? 'desc' : 'asc');
 
-                    if (dir == "asc") {
-                        if (xVal > yVal) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } 
-                    else if (dir == "desc") {
-                        if (xVal < yVal) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
-                }
-                
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    switchcount++;
+            // Sort the rows
+            rows.sort(function(rowA, rowB) {
+                var cellA = rowA.getElementsByTagName("TD")[n];
+                var cellB = rowB.getElementsByTagName("TD")[n];
+
+                var valueA = isNaN(parseFloat(cellA.innerHTML)) ? cellA.innerHTML.toLowerCase() : parseFloat(cellA.innerHTML);
+                var valueB = isNaN(parseFloat(cellB.innerHTML)) ? cellB.innerHTML.toLowerCase() : parseFloat(cellB.innerHTML);
+
+                if (isAscending) {
+                    return valueA > valueB ? 1 : -1;
                 } else {
-                    if (switchcount == 0 && dir == "desc") {
-                        dir = "asc";
-                        switching = true;
-                    }
+                    return valueA < valueB ? 1 : -1;
                 }
-            }
+            });
+
+            // Re-append rows to the tbody in the new order
+            rows.forEach(function(row) {
+                tbody.appendChild(row);
+            });
         }
-
-
-        // function sortTable(columnIndex) {
-        //     var table = document.getElementById("shipTable");
-        //     var rowsArray = Array.from(table.getElementsByTagName("TR"));
-        //     var header = rowsArray.shift(); // Remove the header from sorting
-
-        //     // Determine the data type for sorting
-        //     var isNumeric = !isNaN(parseFloat(rowsArray[0].getElementsByTagName("TD")[columnIndex].innerHTML)) && isFinite(rowsArray[0].getElementsByTagName("TD")[columnIndex].innerHTML);
-
-        //     // Sort the rows
-        //     rowsArray.sort(function(rowA, rowB) {
-        //         var cellA = rowA.getElementsByTagName("TD")[columnIndex].innerHTML;
-        //         var cellB = rowB.getElementsByTagName("TD")[columnIndex].innerHTML;
-
-        //         // Parse to number if the column is numeric
-        //         if (isNumeric) {
-        //             cellA = parseFloat(cellA);
-        //             cellB = parseFloat(cellB);
-        //         } else {
-        //             cellA = cellA.toLowerCase();
-        //             cellB = cellB.toLowerCase();
-        //         }
-
-        //         // Toggle between ascending and descending
-        //         if (window["sortDir" + columnIndex] === "asc") {
-        //             return cellA > cellB ? 1 : cellA < cellB ? -1 : 0;
-        //         } else {
-        //             return cellA < cellB ? 1 : cellA > cellB ? -1 : 0;
-        //         }
-        //     });
-
-        //     // Remember the sorting direction
-        //     window["sortDir" + columnIndex] = window["sortDir" + columnIndex] === "asc" ? "desc" : "asc";
-
-        //     // Rebuild the table with sorted rows
-        //     for (var i = 0; i < rowsArray.length; i++) {
-        //         table.appendChild(rowsArray[i]);
-        //     }
-
-        //     // Reattach the header
-        //     table.prepend(header);
-        // }
-
-        // // Initialize sort directions
-        // window.sortDir0 = "desc";
-        // window.sortDir1 = "desc";
-        // window.sortDir2 = "desc";
-        // window.sortDir3 = "desc";
-        // window.sortDir4 = "desc";
 
 
         // On page load
