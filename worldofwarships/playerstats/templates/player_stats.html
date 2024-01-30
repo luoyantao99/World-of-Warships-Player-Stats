@@ -742,9 +742,10 @@
             var rows = Array.from(tbody.getElementsByTagName("TR"));
 
             // Determine the sort direction
-            var isAscending = table.getAttribute('data-sort-dir') === 'asc';
+            var isAscending = false;
+            // var isAscending = table.getAttribute('data-sort-dir') === 'asc';
             table.setAttribute('data-sort-dir', isAscending ? 'desc' : 'asc');
-
+            
             // Sort the rows
             rows.sort(function(rowA, rowB) {
                 var cellA = rowA.getElementsByTagName("TD")[n];
@@ -769,9 +770,8 @@
 
         // On page load
         window.onload = function() {
+            showStatsTable();
             populateShipList();
-            buildStatsTable(account_table_titles, account_table_columns, 'account');
-            buildStatsTable(weapons_table_titles, weapons_table_columns, 'weapon');
         };
     </script>
 
