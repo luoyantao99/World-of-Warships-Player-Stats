@@ -30,6 +30,9 @@ def get_player_data(request):
 
     # calculate hit ratio
     calculate_hit_ratio(account_data['statistics'])
+
+    # calculate total agro
+    calculate_total_agro(account_data['statistics'])
         
     
     context = {
@@ -67,3 +70,9 @@ def calculate_hit_ratio(json):
         for weapon in weapon_types:
             weapon_stats = json[mode][weapon]
             weapon_stats['hit_ratio'] = '{:.2%}'.format(weapon_stats['hits'] / weapon_stats['shots'])
+
+
+def calculate_total_agro(json):
+    game_modes = ['pvp','pve','rank_solo']
+    for mode in game_modes:
+        json[mode]['total_agro'] = json[mode]['art_agro'] + json[mode]['torpedo_agro']
