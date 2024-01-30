@@ -521,8 +521,10 @@
         const weapons_table_columns = {
             'Main Battery': [
                 { label: 'Total Frags', key: 'frags' },
+                { label: 'br', key: '' },
                 { label: 'Max Frags', key: 'max_frags_battle' },
                 { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'br', key: '' },
                 { label: 'br', key: '' },
                 { label: 'Hit Ratio', key: 'hit_ratio' },
                 { label: 'Shots Fired', key: 'shots' },
@@ -530,8 +532,10 @@
             ],
             'Secondary Battery': [
                 { label: 'Total Frags', key: 'frags' },
+                { label: 'br', key: '' },
                 { label: 'Max Frags', key: 'max_frags_battle' },
                 { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'br', key: '' },
                 { label: 'br', key: '' },
                 { label: 'Hit Ratio', key: 'hit_ratio' },
                 { label: 'Shots Fired', key: 'shots' },
@@ -540,8 +544,10 @@
             ],
             'Torpedoes': [
                 { label: 'Total Frags', key: 'frags' },
+                { label: 'br', key: '' },
                 { label: 'Max Frags', key: 'max_frags_battle' },
                 { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'br', key: '' },
                 { label: 'br', key: '' },
                 { label: 'Hit Ratio', key: 'hit_ratio' },
                 { label: 'Shots Fired', key: 'shots' },
@@ -549,11 +555,13 @@
             ],
             'Aircraft': [
                 { label: 'Total Frags', key: 'frags' },
+                { label: 'br', key: '' },
                 { label: 'Max Frags', key: 'max_frags_battle' },
                 { label: 'Ship ID', key: 'max_frags_ship_id' },
             ],
             'Ramming': [
                 { label: 'Total Frags', key: 'frags' },
+                { label: 'br', key: '' },
                 { label: 'Max Frags', key: 'max_frags_battle' },
                 { label: 'Ship ID', key: 'max_frags_ship_id' },
             ]
@@ -584,6 +592,10 @@
             populateShipList();
         }
 
+
+        // ---------------------------------------------------------------------------------
+        // ------------------------------- Show Stats Table --------------------------------
+        // ---------------------------------------------------------------------------------
 
         function showStatsTable() {
             // Hide all tables
