@@ -708,10 +708,10 @@
                 if (shipStats.battles > 0) {
                     var row = shipList.insertRow();
                     row.insertCell(0).textContent = ship.ship_id;
-                    row.insertCell(1).textContent = shipStats.battles;
-                    row.insertCell(2).textContent = shipStats.wins;
+                    row.insertCell(1).textContent = nf.format(shipStats.battles);
+                    row.insertCell(2).textContent = nf.format(shipStats.wins);
                     row.insertCell(3).textContent = ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%';
-                    row.insertCell(4).textContent = shipStats.xp;
+                    row.insertCell(4).textContent = nf.format(shipStats.xp);
                     row.className = 'ship-item';
                     row.onclick = function() {
                         showShipStats(ship.ship_id, row); // Pass the clicked row to the function
