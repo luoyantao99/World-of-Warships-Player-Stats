@@ -704,14 +704,14 @@
             var shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
             shipList.innerHTML = ''; // Clear existing rows
             shipData.forEach(function(ship) {
-                var modeData = ship[currentGameMode]; // Access the correct game mode data
-                if (modeData.battles > 0) {
+                var shipStats = ship[currentGameMode]; // Access the current game mode data
+                if (shipStats.battles > 0) {
                     var row = shipList.insertRow();
                     row.insertCell(0).textContent = ship.ship_id;
-                    row.insertCell(1).textContent = modeData.battles;
-                    row.insertCell(2).textContent = modeData.wins;
-                    row.insertCell(3).textContent = ((modeData.wins/modeData.battles)*100).toFixed(2) + '%';
-                    row.insertCell(4).textContent = modeData.xp;
+                    row.insertCell(1).textContent = shipStats.battles;
+                    row.insertCell(2).textContent = shipStats.wins;
+                    row.insertCell(3).textContent = ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%';
+                    row.insertCell(4).textContent = shipStats.xp;
                     row.className = 'ship-item';
                     row.onclick = function() {
                         showShipStats(ship.ship_id, row); // Pass the clicked row to the function
