@@ -436,7 +436,7 @@
     <script>
         const nf = new Intl.NumberFormat('en-US');
         var currentGameMode = 'pvp'; // Default game mode onload
-        var gameModeMapping = {
+        const gameModeMapping = {
             "Random Battles": "pvp",
             "Co-op Battles": "pve",
             "Operations": "oper",
@@ -724,6 +724,10 @@
 
 
         function showShipStats(shipId, clickedRow) {
+            // Find the ship by shipId
+            var ship = shipData.find(ship => ship.ship_id === shipId);
+            if (!ship) return;
+            
             // Check if this row already has a details row displayed
             var nextRow = clickedRow.nextElementSibling;
             var isDetailsShown = nextRow && nextRow.classList.contains('details-row');
@@ -745,20 +749,50 @@
             var detailsCell = detailsRow.insertCell(0);
             detailsCell.colSpan = clickedRow.cells.length; // Span across all columns
 
-            // Find the ship by shipId and populate the detailsCell with its stats
-            var ship = shipData.find(ship => ship.ship_id === shipId);
-            if (ship) {
-                var table = document.createElement('table');
-                for (var statKey in ship[currentGameMode]) {
-                    var row = table.insertRow();
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
-                    cell1.textContent = statKey;
-                    cell2.textContent = ship[currentGameMode][statKey];
-                }
-                detailsCell.appendChild(table);
-            }
+            // Create the stats container within the details cell
+            var statsContainer = document.createElement('div');
+            statsContainer.className = 'stats-container';
 
+            // Populate the stats container
+            account_table_titles.forEach(title => {
+                const column = document.createElement('div');
+                column.className = 'stat-column';
+
+                const columnTitle = document.createElement('div');
+                columnTitle.className = 'column-title';
+                columnTitle.textContent = title.label;
+                column.appendChild(columnTitle);
+
+                // Loop through the stats for the current game mode
+                account_table_columns[title.label].forEach(stat => {
+                    if (stat.label != 'br') {
+                        const statRow = document.createElement('div');
+                        statRow.className = 'stat-row';
+
+                        const statLabel = document.createElement('div');
+                        statLabel.className = 'stat-label';
+                        statLabel.textContent = stat.label;
+                        statRow.appendChild(statLabel);
+
+                        const statValue = document.createElement('div');
+                        statValue.className = 'stat-value';
+                        // Use currentGameMode to access the correct value
+                        statValue.textContent = ship[currentGameMode][stat.key];
+                        statRow.appendChild(statValue);
+                        column.appendChild(statRow);
+                    }
+                    else {
+                        // Add a break for visual separation
+                        column.appendChild(document.createElement('br'));
+                    }
+                });
+
+                // Append the complete column to the stats container
+                statsContainer.appendChild(column);
+            });
+
+            detailsCell.appendChild(statsContainer);
+            
             // Insert the new details row below the clicked ship row
             clickedRow.parentNode.insertBefore(detailsRow, clickedRow.nextSibling);
         }
