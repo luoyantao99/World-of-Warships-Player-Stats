@@ -25,20 +25,29 @@ def get_player_data(request):
     # combine operations data
     fill_oper_wins_by_tasks(account_data['statistics'])
     combine_oper_stats(account_data['statistics'])
-    for ship in ship_data:
-        fill_oper_wins_by_tasks(ship)
-        combine_oper_stats(ship)
-
-    # calculate hit ratio
-    calculate_hit_ratio(account_data['statistics'], game_modes)
 
     # calculate total agro
     calculate_total_agro(account_data['statistics'], game_modes)
 
+    # calculate kd ratio
+    calculate_kd(account_data['statistics'], game_modes)
+
     # calculate avg stats
     calculate_avg_stats(account_data['statistics'], game_modes)
-        
-    
+
+    # calculate hit ratio
+    calculate_hit_ratio(account_data['statistics'], game_modes)
+
+    # process data for individual ships
+    for ship in ship_data:
+        fill_oper_wins_by_tasks(ship)
+        combine_oper_stats(ship)
+        calculate_total_agro(ship, game_modes)
+        calculate_kd(ship, game_modes)
+        calculate_avg_stats(ship, game_modes)
+        # calculate_hit_ratio(ship, game_modes)
+
+
     context = {
         'account_data': account_data, 
         'ship_data': ship_data
@@ -80,9 +89,19 @@ def calculate_total_agro(json, game_modes):
         json[mode]['total_agro'] = json[mode]['art_agro'] + json[mode]['torpedo_agro']
 
 
+def calculate_kd(json, game_modes):
+    for mode in game_modes:
+        death = json[mode]['battles'] - json[mode]['survived_battles']
+        if death == 0:
+            death = 1
+        json[mode]['kd'] = '{:.2f}'.format(json[mode]['frags'] / death)
+
+
 def calculate_avg_stats(json, game_modes):
     for mode in game_modes:
         battles = json[mode]['battles']
+        if battles == 0:
+            continue
         json[mode]['avg_damage_dealt'] = '{:.1f}'.format(json[mode]['damage_dealt'] / battles)
         json[mode]['avg_xp'] = '{:.1f}'.format(json[mode]['xp'] / battles)
         json[mode]['avg_frags'] = '{:.1f}'.format(json[mode]['frags'] / battles)

@@ -137,23 +137,10 @@
             text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
         }
 
-        .ship-stats-table {
-            max-width: 1700px;
-            margin: auto;
-            background: rgba(0, 0, 0, 0.3); /* Match the opacity of the stats container */
-            color: white;
-            padding: 50px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            font-family: Arial, sans-serif;
-            text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
-        }
-
         .ship-item {
             /* Your styles for the ship rows */
             cursor: pointer;
         }
-
 
         #shipTable {
             width: 100%;
@@ -467,11 +454,11 @@
                 { label: 'Draws', key: 'draws' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
+                { label: 'K/D Ratio', key: 'kd' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
                 { label: 'Battles Survived', key: 'survived_battles' },
-                { label: 'br', key: '' },
-                { label: 'br', key: '' },
-                { label: 'Contribution to Capture', key: '' },
-                { label: 'Contribution to Defense', key: '' }
+                { label: 'Wins Survived', key: 'survived_wins' }
             ],
             'Total Score': [
                 { label: 'Damage', key: 'damage_dealt' },
@@ -777,7 +764,7 @@
                         const statValue = document.createElement('div');
                         statValue.className = 'stat-value';
                         // Use currentGameMode to access the correct value
-                        statValue.textContent = ship[currentGameMode][stat.key];
+                        statValue.textContent = nf.format(ship[currentGameMode][stat.key]);
                         statRow.appendChild(statValue);
                         column.appendChild(statRow);
                     }
