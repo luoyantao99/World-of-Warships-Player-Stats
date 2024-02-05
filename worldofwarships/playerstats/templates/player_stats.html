@@ -434,6 +434,7 @@
     {{ account_data|json_script:"account-data" }}
 
     <script>
+        const nf = new Intl.NumberFormat('en-US');
         var currentGameMode = 'pvp'; // Default game mode onload
         var gameModeMapping = {
             "Random Battles": "pvp",
@@ -464,6 +465,8 @@
                 { label: 'Victories', key: 'wins' },
                 { label: 'Defeats', key: 'losses' },
                 { label: 'Draws', key: 'draws' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
                 { label: 'Battles Survived', key: 'survived_battles' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
@@ -475,6 +478,8 @@
                 { label: 'Base XP', key: 'xp' },
                 { label: 'Warships Destroyed', key: 'frags' },
                 { label: 'Aircraft Destroyed', key: 'planes_killed' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
                 { label: 'Potential Damage', key: 'total_agro' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
@@ -486,6 +491,8 @@
                 { label: 'Base XP', key: '' },
                 { label: 'Warships Destroyed', key: '' },
                 { label: 'Aircraft Destroyed', key: '' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
                 { label: 'Potential Damage', key: '' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
@@ -497,6 +504,8 @@
                 { label: 'Base XP', key: 'max_xp' },
                 { label: 'Warships Destroyed', key: 'max_frags_battle' },
                 { label: 'Aircraft Destroyed', key: 'max_planes_killed' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
                 { label: 'Potential Damage', key: 'max_total_agro' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
@@ -656,10 +665,17 @@
                         statValue.className = 'stat-value';
                         // Use currentGameMode to access the correct value
                         if (title.key) {
-                            statValue.textContent = accountData.statistics[currentGameMode][title.key][stat.key];
+                            // weapon stats table
+                            if (stat.label === 'Hit Ratio') {
+                                statValue.textContent = accountData.statistics[currentGameMode][title.key][stat.key];
+                            }
+                            else {
+                                statValue.textContent = nf.format(accountData.statistics[currentGameMode][title.key][stat.key]);
+                            }
                         }
                         else {
-                            statValue.textContent = accountData.statistics[currentGameMode][stat.key];
+                            // account stats table
+                            statValue.textContent = nf.format(accountData.statistics[currentGameMode][stat.key]);
                         }
                         statRow.appendChild(statValue);
                         column.appendChild(statRow);
