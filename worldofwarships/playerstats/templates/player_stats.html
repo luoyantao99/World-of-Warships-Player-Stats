@@ -213,12 +213,17 @@
         #shipTable th.win-rate,
         #shipTable td.win-rate,
         #shipTable th.damage,
-        #shipTable td.damage,
+        #shipTable td.damage {
+            width: 12%;
+            text-align: right;
+            padding-right: 2%;
+        }
+
         #shipTable th.frags,
         #shipTable td.frags,
         #shipTable th.kd,
         #shipTable td.kd {
-            width: 12%;
+            width: 10%;
             text-align: right;
             padding-right: 2%;
         }
@@ -491,6 +496,8 @@
 
     <script>
         const nf = new Intl.NumberFormat('en-US');
+        const nf2d = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2,});
+
         var currentGameMode = 'pvp'; // Default game mode onload
         const gameModeMapping = {
             "Random Battles": "pvp",
@@ -731,7 +738,12 @@
                         }
                         else {
                             // account stats table
-                            statValue.textContent = nf.format(accountData.statistics[currentGameMode][stat.key]);
+                            if (title.label.includes("Average")) {
+                                statValue.textContent = nf2d.format(accountData.statistics[currentGameMode][stat.key]);
+                            }
+                            else {
+                                statValue.textContent = nf.format(accountData.statistics[currentGameMode][stat.key]);
+                            }
                         }
                         statRow.appendChild(statValue);
                         column.appendChild(statRow);
@@ -864,8 +876,12 @@
 
                         const statValue = document.createElement('div');
                         statValue.className = 'stat-value';
-                        // Use currentGameMode to access the correct value
-                        statValue.textContent = nf.format(ship[currentGameMode][stat.key]);
+                        if (title.label.includes("Average")) {
+                            statValue.textContent = nf2d.format(ship[currentGameMode][stat.key]);
+                        }
+                        else {
+                            statValue.textContent = nf.format(ship[currentGameMode][stat.key]);
+                        }
                         statRow.appendChild(statValue);
                         column.appendChild(statRow);
                     }
