@@ -19,6 +19,21 @@
             text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
             justify-content: space-between; /* Space out the columns */
         }
+
+        .ship-stats-container {
+            max-width: 1700px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0); /* Adjust the opacity as needed */
+            color: white;
+            padding: 50px;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap; /* Wrap the children if the container is too narrow */
+            gap: 50px; /* Add some space between the columns */
+            text-shadow: 0.7px 0.7px 0.7px #000; /* Text shadow for better readability */
+            justify-content: space-between; /* Space out the columns */
+        }
         
         .column-title {
             font-size: 20px;
@@ -145,17 +160,67 @@
         #shipTable {
             width: 100%;
             table-layout: fixed; /* This enables even column spacing */
-            border-collapse: collapse; /* Optional, for styling */
+            border-collapse: collapse;
+            color: white; /* Set text color */
         }
 
         #shipTable th, #shipTable td {
             text-align: left;
-            border: 1px solid #ddd; /* Optional, for styling */
-            padding: 8px; /* Optional, for styling */
+            padding: 12px 8px; /* Adjust padding for spacing */
+            border-bottom: 1px solid #666; /* Subtle border color */
         }
 
         #shipTable th {
-            background-color: rgba(0, 0, 0, 0.2); /* Optional, for styling */
+            background-color: rgba(0, 0, 0, 0.5); /* Header background */
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #shipTable tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05); /* Zebra striping for rows */
+        }
+
+        #shipTable tr:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Hover effect for rows */
+        }
+
+        #shipTable th.nation,
+        #shipTable td.nation {
+            width: 5%;
+            text-align: center;
+        }
+
+        #shipTable th.ship-type,
+        #shipTable td.ship-type {
+            width: 5%;
+            text-align: center;
+        }
+
+        #shipTable th.tier,
+        #shipTable td.tier {
+            width: 5%;
+            text-align: center;
+        }
+
+        #shipTable th.ship-id,
+        #shipTable td.ship-id {
+            text-align: center;
+            padding-right: 5%;
+        }
+
+        #shipTable th.battles,
+        #shipTable td.battles,
+        #shipTable th.win-rate,
+        #shipTable td.win-rate,
+        #shipTable th.damage,
+        #shipTable td.damage,
+        #shipTable th.frags,
+        #shipTable td.frags,
+        #shipTable th.kd,
+        #shipTable td.kd {
+            width: 12%;
+            text-align: right;
+            padding-right: 2%;
         }
 
     </style>
@@ -403,11 +468,15 @@
         <table id="shipTable">
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)" style="cursor: pointer;">Ship ID</th>
-                    <th onclick="sortTable(1)" style="cursor: pointer;">Battles</th>
-                    <th onclick="sortTable(2)" style="cursor: pointer;">Victories</th>
-                    <th onclick="sortTable(3)" style="cursor: pointer;">Win Rate</th>
-                    <th onclick="sortTable(4)" style="cursor: pointer;">XP</th>
+                    <th class="nation" onclick="sortTable(0)" style="cursor: pointer;">Nation</th>
+                    <th class="ship-type" onclick="sortTable(1)" style="cursor: pointer;">Type</th>
+                    <th class="tier" onclick="sortTable(2)" style="cursor: pointer;">Tier</th>
+                    <th class="ship-id" onclick="sortTable(3)" style="cursor: pointer;">Ship ID</th>
+                    <th class="battles" onclick="sortTable(4)" style="cursor: pointer;">Battles</th>
+                    <th class="win-rate" onclick="sortTable(5)" style="cursor: pointer;">Win Rate</th>
+                    <th class="damage" onclick="sortTable(6)" style="cursor: pointer;">Avg Damage</th>
+                    <th class="frags" onclick="sortTable(7)" style="cursor: pointer;">Avg Frags</th>
+                    <th class="kd" onclick="sortTable(8)" style="cursor: pointer;">K/D Ratio</th>
                 </tr>
             </thead>
             <tbody>
@@ -694,11 +763,43 @@
                 var shipStats = ship[currentGameMode]; // Access the current game mode data
                 if (shipStats.battles > 0) {
                     var row = shipList.insertRow();
-                    row.insertCell(0).textContent = ship.ship_id;
-                    row.insertCell(1).textContent = nf.format(shipStats.battles);
-                    row.insertCell(2).textContent = nf.format(shipStats.wins);
-                    row.insertCell(3).textContent = ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%';
-                    row.insertCell(4).textContent = nf.format(shipStats.xp);
+
+                    var nationCell = row.insertCell(0);
+                    nationCell.textContent = 'WIP';
+                    nationCell.className = 'nation';
+
+                    var shiptypeCell = row.insertCell(1);
+                    shiptypeCell.textContent = 'WIP';
+                    shiptypeCell.className = 'ship-type';
+
+                    var tierCell = row.insertCell(2);
+                    tierCell.textContent = 'WIP';
+                    tierCell.className = 'tier';
+
+                    var shipidCell = row.insertCell(3);
+                    shipidCell.textContent = ship.ship_id;
+                    shipidCell.className = 'ship-id';
+
+                    var battlesCell = row.insertCell(4);
+                    battlesCell.textContent = nf.format(shipStats.battles);
+                    battlesCell.className = 'battles';
+
+                    var winrateCell = row.insertCell(5);
+                    winrateCell.textContent = ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%';
+                    winrateCell.className = 'win-rate';
+
+                    var damageRatioCell = row.insertCell(6);
+                    damageRatioCell.textContent = nf.format(parseInt(shipStats.avg_damage_dealt));
+                    damageRatioCell.className = 'damage';
+
+                    var fragsCell = row.insertCell(7);
+                    fragsCell.textContent = (Math.round(shipStats.avg_frags * 100) / 100).toFixed(2);
+                    fragsCell.className = 'frags';
+
+                    var kdRatioCell = row.insertCell(8);
+                    kdRatioCell.textContent = (Math.round(shipStats.kd * 100) / 100).toFixed(2);
+                    kdRatioCell.className = 'kd';
+                    
                     row.className = 'ship-item';
                     row.onclick = function() {
                         showShipStats(ship.ship_id, row); // Pass the clicked row to the function
@@ -706,7 +807,7 @@
                 }
             });
             // Sort the table by the "Battles" column (index 1) in descending order after populating
-            sortTable(1);
+            sortTable(4);
         }
 
 
@@ -738,7 +839,7 @@
 
             // Create the stats container within the details cell
             var statsContainer = document.createElement('div');
-            statsContainer.className = 'stats-container';
+            statsContainer.className = 'ship-stats-container';
 
             // Populate the stats container
             account_table_titles.forEach(title => {

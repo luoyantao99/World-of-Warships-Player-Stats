@@ -102,13 +102,13 @@ def calculate_avg_stats(json, game_modes):
         battles = json[mode]['battles']
         if battles == 0:
             continue
-        json[mode]['avg_damage_dealt'] = '{:.1f}'.format(json[mode]['damage_dealt'] / battles)
-        json[mode]['avg_xp'] = '{:.1f}'.format(json[mode]['xp'] / battles)
-        json[mode]['avg_frags'] = '{:.1f}'.format(json[mode]['frags'] / battles)
-        json[mode]['avg_planes_killed'] = '{:.1f}'.format(json[mode]['planes_killed'] / battles)
+        json[mode]['avg_damage_dealt'] = '{:.2f}'.format(json[mode]['damage_dealt'] / battles)
+        json[mode]['avg_xp'] = '{:.2f}'.format(json[mode]['xp'] / battles)
+        json[mode]['avg_frags'] = '{:.2f}'.format(json[mode]['frags'] / battles)
+        json[mode]['avg_planes_killed'] = '{:.2f}'.format(json[mode]['planes_killed'] / battles)
 
-        json[mode]['avg_agro'] = '{:.1f}'.format(json[mode]['total_agro'] / battles)
+        json[mode]['avg_agro'] = '{:.2f}'.format(json[mode]['total_agro'] / battles)
         
-        json[mode]['avg_ships_spotted'] = '{:.1f}'.format(json[mode]['ships_spotted'] / battles)
-        json[mode]['avg_damage_scouting'] = '{:.1f}'.format(json[mode]['damage_scouting'] / battles)
+        json[mode]['avg_ships_spotted'] = '{:.2f}'.format(json[mode]['ships_spotted'] / battles)
+        json[mode]['avg_damage_scouting'] = '{:.2f}'.format(json[mode]['damage_scouting'] / battles)
 
