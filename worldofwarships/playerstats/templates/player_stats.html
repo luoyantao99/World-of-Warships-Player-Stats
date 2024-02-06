@@ -738,7 +738,7 @@
                         }
                         else {
                             // account stats table
-                            if (title.label.includes("Average")) {
+                            if (title.label.includes("Average") || stat.label === 'K/D Ratio') {
                                 statValue.textContent = nf2d.format(accountData.statistics[currentGameMode][stat.key]);
                             }
                             else {
@@ -805,11 +805,11 @@
                     damageRatioCell.className = 'damage';
 
                     var fragsCell = row.insertCell(7);
-                    fragsCell.textContent = (Math.round(shipStats.avg_frags * 100) / 100).toFixed(2);
+                    fragsCell.textContent = nf2d.format(shipStats.avg_frags);
                     fragsCell.className = 'frags';
 
                     var kdRatioCell = row.insertCell(8);
-                    kdRatioCell.textContent = (Math.round(shipStats.kd * 100) / 100).toFixed(2);
+                    kdRatioCell.textContent = nf2d.format(shipStats.kd);
                     kdRatioCell.className = 'kd';
                     
                     row.className = 'ship-item';
@@ -876,7 +876,7 @@
 
                         const statValue = document.createElement('div');
                         statValue.className = 'stat-value';
-                        if (title.label.includes("Average")) {
+                        if (title.label.includes("Average") || stat.label === 'K/D Ratio') {
                             statValue.textContent = nf2d.format(ship[currentGameMode][stat.key]);
                         }
                         else {
