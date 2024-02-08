@@ -641,6 +641,50 @@
 
 
         // ---------------------------------------------------------------------------------
+        // ------------------------- Operation Table Structure --------------------------
+        // ---------------------------------------------------------------------------------
+
+        const oper_table_titles = [
+            { label: 'Operations', key: 'oper' },
+            { label: 'Operations (Solo)', key: 'oper_solo' },
+            { label: 'Operations (Division)', key: 'oper_div' }
+        ];
+
+        const oper_table_columns = {
+            'Operations': [
+                { label: 'Battles Played', key: 'battles' },
+                { label: 'Victories', key: 'wins' },
+                { label: 'Defeats', key: 'losses' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
+                { label: 'Battles Survived', key: 'survived_battles' },
+                { label: 'Wins Survived', key: 'survived_wins' },
+                { label: 'Base XP', key: 'xp' }
+            ],
+            'Operations (Solo)': [
+                { label: 'Battles Played', key: 'battles' },
+                { label: 'Victories', key: 'wins' },
+                { label: 'Defeats', key: 'losses' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
+                { label: 'Battles Survived', key: 'survived_battles' },
+                { label: 'Wins Survived', key: 'survived_wins' },
+                { label: 'Base XP', key: 'xp' }
+            ],
+            'Operations (Division)': [
+                { label: 'Battles Played', key: 'battles' },
+                { label: 'Victories', key: 'wins' },
+                { label: 'Defeats', key: 'losses' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
+                { label: 'Battles Survived', key: 'survived_battles' },
+                { label: 'Wins Survived', key: 'survived_wins' },
+                { label: 'Base XP', key: 'xp' }
+            ]
+        };
+        
+
+        // ---------------------------------------------------------------------------------
         // -------------------------------- Dropdown Menu ----------------------------------
         // ---------------------------------------------------------------------------------
 
@@ -853,8 +897,15 @@
             var statsContainer = document.createElement('div');
             statsContainer.className = 'ship-stats-container';
 
+            var table_titles = account_table_titles;
+            var table_columns = account_table_columns;
+            if (currentGameMode === 'oper') {
+                table_titles = oper_table_titles;
+                table_columns = oper_table_columns;
+            }
+
             // Populate the stats container
-            account_table_titles.forEach(title => {
+            table_titles.forEach(title => {
                 const column = document.createElement('div');
                 column.className = 'stat-column';
 
@@ -864,7 +915,7 @@
                 column.appendChild(columnTitle);
 
                 // Loop through the stats for the current game mode
-                account_table_columns[title.label].forEach(stat => {
+                table_columns[title.label].forEach(stat => {
                     if (stat.label != 'br') {
                         const statRow = document.createElement('div');
                         statRow.className = 'stat-row';
@@ -876,11 +927,16 @@
 
                         const statValue = document.createElement('div');
                         statValue.className = 'stat-value';
-                        if (title.label.includes("Average") || stat.label === 'K/D Ratio') {
-                            statValue.textContent = nf2d.format(ship[currentGameMode][stat.key]);
+                        if (currentGameMode === 'oper') {
+                            statValue.textContent = nf.format(ship[title.key][stat.key]);
                         }
                         else {
-                            statValue.textContent = nf.format(ship[currentGameMode][stat.key]);
+                            if (title.label.includes("Average") || stat.label === 'K/D Ratio') {
+                                statValue.textContent = nf2d.format(ship[currentGameMode][stat.key]);
+                            }
+                            else {
+                                statValue.textContent = nf.format(ship[currentGameMode][stat.key]);
+                            }
                         }
                         statRow.appendChild(statValue);
                         column.appendChild(statRow);
