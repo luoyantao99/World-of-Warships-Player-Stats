@@ -284,6 +284,8 @@
 
     <div id="oper" class="table-container hidden">
         <!-- Table structure for Operations -->
+        <div class="oper-stats-table"></div>
+        <br></br>
         <div class="stats-container">
             <!-- First Column -->
             <div class="stat-column">
@@ -507,7 +509,7 @@
             "Ranked Battles (Legacy)": "rank_old"
         };
 
-        var accountData = JSON.parse(document.getElementById('account-data').textContent);
+        var accountStats = JSON.parse(document.getElementById('account-data').textContent).statistics;
         var shipData = JSON.parse(document.getElementById('ship-stats').textContent);
 
 
@@ -646,7 +648,7 @@
 
         const oper_table_titles = [
             { label: 'Operations', key: 'oper' },
-            { label: 'Operations (Solo)', key: 'oper_solo' },
+            { label: 'Operations (Random)', key: 'oper_solo' },
             { label: 'Operations (Division)', key: 'oper_div' }
         ];
 
@@ -657,18 +659,30 @@
                 { label: 'Defeats', key: 'losses' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
-                { label: 'Battles Survived', key: 'survived_battles' },
-                { label: 'Wins Survived', key: 'survived_wins' },
+                { label: 'Wins (0 Star)', key: '0' },
+                { label: 'Wins (1 Star)', key: '1' },
+                { label: 'Wins (2 Stars)', key: '2' },
+                { label: 'Wins (3 Stars)', key: '3' },
+                { label: 'Wins (4 Stars)', key: '4' },
+                { label: 'Wins (5 Stars)', key: '5' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
                 { label: 'Base XP', key: 'xp' }
             ],
-            'Operations (Solo)': [
+            'Operations (Random)': [
                 { label: 'Battles Played', key: 'battles' },
                 { label: 'Victories', key: 'wins' },
                 { label: 'Defeats', key: 'losses' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
-                { label: 'Battles Survived', key: 'survived_battles' },
-                { label: 'Wins Survived', key: 'survived_wins' },
+                { label: 'Wins (0 Star)', key: '0' },
+                { label: 'Wins (1 Star)', key: '1' },
+                { label: 'Wins (2 Stars)', key: '2' },
+                { label: 'Wins (3 Stars)', key: '3' },
+                { label: 'Wins (4 Stars)', key: '4' },
+                { label: 'Wins (5 Stars)', key: '5' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
                 { label: 'Base XP', key: 'xp' }
             ],
             'Operations (Division)': [
@@ -677,8 +691,14 @@
                 { label: 'Defeats', key: 'losses' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
-                { label: 'Battles Survived', key: 'survived_battles' },
-                { label: 'Wins Survived', key: 'survived_wins' },
+                { label: 'Wins (0 Star)', key: '0' },
+                { label: 'Wins (1 Star)', key: '1' },
+                { label: 'Wins (2 Stars)', key: '2' },
+                { label: 'Wins (3 Stars)', key: '3' },
+                { label: 'Wins (4 Stars)', key: '4' },
+                { label: 'Wins (5 Stars)', key: '5' },
+                { label: 'br', key: '' },
+                { label: 'br', key: '' },
                 { label: 'Base XP', key: 'xp' }
             ]
         };
@@ -727,6 +747,9 @@
                 buildStatsTable(account_table_titles, account_table_columns, 'account');
                 buildStatsTable(weapons_table_titles, weapons_table_columns, 'weapon');
             }
+            else {
+                buildStatsTable(oper_table_titles, oper_table_columns, 'oper');
+            }
             if (selectedTable) {
                 selectedTable.style.display = 'block';
             }
@@ -771,22 +794,32 @@
                         const statValue = document.createElement('div');
                         statValue.className = 'stat-value';
                         // Use currentGameMode to access the correct value
-                        if (title.key) {
-                            // weapon stats table
-                            if (stat.label === 'Hit Ratio') {
-                                statValue.textContent = accountData.statistics[currentGameMode][title.key][stat.key];
+                        if (currentGameMode === 'oper') {
+                            if (stat.label.includes("Star")) {
+                                statValue.textContent = nf.format(accountStats[title.key]['wins_by_tasks'][stat.key]);
                             }
                             else {
-                                statValue.textContent = nf.format(accountData.statistics[currentGameMode][title.key][stat.key]);
+                                statValue.textContent = nf.format(accountStats[title.key][stat.key]);
                             }
                         }
                         else {
-                            // account stats table
-                            if (title.label.includes("Average") || stat.label === 'K/D Ratio') {
-                                statValue.textContent = nf2d.format(accountData.statistics[currentGameMode][stat.key]);
+                            if (title.key) {
+                                // weapon stats table
+                                if (stat.label === 'Hit Ratio') {
+                                    statValue.textContent = accountStats[currentGameMode][title.key][stat.key];
+                                }
+                                else {
+                                    statValue.textContent = nf.format(accountStats[currentGameMode][title.key][stat.key]);
+                                }
                             }
                             else {
-                                statValue.textContent = nf.format(accountData.statistics[currentGameMode][stat.key]);
+                                // account stats table
+                                if (title.label.includes("Average") || stat.label === 'K/D Ratio') {
+                                    statValue.textContent = nf2d.format(accountStats[currentGameMode][stat.key]);
+                                }
+                                else {
+                                    statValue.textContent = nf.format(accountStats[currentGameMode][stat.key]);
+                                }
                             }
                         }
                         statRow.appendChild(statValue);
@@ -808,7 +841,7 @@
 
 
         // ---------------------------------------------------------------------------------
-        // ---------------------------- individual ship stats ------------------------------
+        // ------------------------------ Ship List and Stats ------------------------------
         // ---------------------------------------------------------------------------------
 
         // Modify the row click event in populateShipList to pass the clicked row element
@@ -862,7 +895,7 @@
                     };
                 }
             });
-            // Sort the table by the "Battles" column (index 1) in descending order after populating
+            // Sort the table by "Battles" after populating
             sortTable(4);
         }
 
@@ -928,7 +961,12 @@
                         const statValue = document.createElement('div');
                         statValue.className = 'stat-value';
                         if (currentGameMode === 'oper') {
-                            statValue.textContent = nf.format(ship[title.key][stat.key]);
+                            if (stat.label.includes("Star")) {
+                                statValue.textContent = nf.format(ship[title.key]['wins_by_tasks'][stat.key]);
+                            }
+                            else {
+                                statValue.textContent = nf.format(ship[title.key][stat.key]);
+                            }
                         }
                         else {
                             if (title.label.includes("Average") || stat.label === 'K/D Ratio') {
