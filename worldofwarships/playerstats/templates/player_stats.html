@@ -164,16 +164,18 @@
             color: white; /* Set text color */
         }
 
-        #shipTable th, #shipTable td {
-            text-align: left;
-            padding: 12px 8px; /* Adjust padding for spacing */
+        #shipTable th {
+            background-color: rgba(0, 0, 0, 0.5); /* Header background */
+            padding: 12px 8px;
+            font-weight: bold;
+            text-align: center;
             border-bottom: 1px solid #666; /* Subtle border color */
         }
 
-        #shipTable th {
-            background-color: rgba(0, 0, 0, 0.5); /* Header background */
-            font-weight: bold;
-            text-align: center;
+        #shipTable td {
+            height: 50px; /* Define a fixed height for the cells */
+            vertical-align: middle; /* Align the content in the middle vertically */
+            border-bottom: 1px solid #666; /* Subtle border color */
         }
 
         #shipTable tr:nth-child(even) {
@@ -190,14 +192,27 @@
         #shipTable td.ship-type,
         #shipTable th.tier,
         #shipTable td.tier {
-            width: 5%;
+            width: 6%;
             text-align: center;
+        }
+
+        #shipTable th.ship-icon,
+        #shipTable td.ship-icon {
+            width: 8%;
+            text-align: right;
+        }
+
+        #shipTable td img {
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            display: inline-block;
         }
 
         #shipTable th.ship-name,
         #shipTable td.ship-name {
             text-align: left;
-            padding-left: 5%;
+            padding-left: 2%;
         }
 
         #shipTable th.battles,
@@ -205,12 +220,7 @@
         #shipTable th.win-rate,
         #shipTable td.win-rate,
         #shipTable th.damage,
-        #shipTable td.damage {
-            width: 12%;
-            text-align: right;
-            padding-right: 2%;
-        }
-
+        #shipTable td.damage,
         #shipTable th.frags,
         #shipTable td.frags,
         #shipTable th.kd,
@@ -293,12 +303,13 @@
                     <th class="nation" onclick="sort_ship_list(0)" style="cursor: pointer;">Nation</th>
                     <th class="ship-type" onclick="sort_ship_list(1)" style="cursor: pointer;">Type</th>
                     <th class="tier" onclick="sort_ship_list(2)" style="cursor: pointer;">Tier</th>
-                    <th class="ship-name" onclick="sort_ship_list(3)" style="cursor: pointer;">Warship Name</th>
-                    <th class="battles" onclick="sort_ship_list(4)" style="cursor: pointer;">Battles</th>
-                    <th class="win-rate" onclick="sort_ship_list(5)" style="cursor: pointer;">Win Rate</th>
-                    <th class="damage" onclick="sort_ship_list(6)" style="cursor: pointer;">Avg Damage</th>
-                    <th class="frags" onclick="sort_ship_list(7)" style="cursor: pointer;">Avg Frags</th>
-                    <th class="kd" onclick="sort_ship_list(8)" style="cursor: pointer;">K/D Ratio</th>
+                    <th class="ship-icon" onclick="sort_ship_list(3)" style="cursor: pointer;"></th>
+                    <th class="ship-name" onclick="sort_ship_list(4)" style="cursor: pointer;">Warship Name</th>
+                    <th class="battles" onclick="sort_ship_list(5)" style="cursor: pointer;">Battles</th>
+                    <th class="win-rate" onclick="sort_ship_list(6)" style="cursor: pointer;">Win Rate</th>
+                    <th class="damage" onclick="sort_ship_list(7)" style="cursor: pointer;">Avg Damage</th>
+                    <th class="frags" onclick="sort_ship_list(8)" style="cursor: pointer;">Avg Frags</th>
+                    <th class="kd" onclick="sort_ship_list(9)" style="cursor: pointer;">K/D Ratio</th>
                 </tr>
             </thead>
             <tbody>
@@ -671,7 +682,35 @@
         // ------------------------------ Populate Ship List -------------------------------
         // ---------------------------------------------------------------------------------
 
-        // Modify the row click event in populate_ship_list to pass the clicked row element
+        // Helper function to create a table cell with text or an image and append it to a row
+        function createCell(row, content, className, isImage = false) {
+            var cell = row.insertCell();
+            cell.className = className;
+
+            if (isImage && content !== "N/A") {
+                var img = document.createElement('img');
+                img.src = content;
+                img.alt = 'Image'; // You might want to use a more descriptive alt text
+                img.className = 'cell-image'; // Add a class for styling if needed
+                cell.appendChild(img);
+            } else {
+                cell.textContent = content;
+            }
+            
+            return cell; // In case you need to do more with the cell
+        }
+
+        // Helper function to safely get ship encyclopedia data
+        function getShipEncyData(shipId, key, defaultValue = 'N/A') {
+            try {
+                return shipEncy[shipId][key];
+            }
+            catch {
+                return defaultValue;
+            }
+        }
+
+        // Main function to populate the ship list
         function populate_ship_list() {
             var shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
             shipList.innerHTML = ''; // Clear existing rows
@@ -679,71 +718,26 @@
                 var shipStats = ship[currentGameMode]; // Access the current game mode data
                 if (shipStats.battles > 0) {
                     var row = shipList.insertRow();
+                    createCell(row, getShipEncyData(ship.ship_id, 'nation'), 'nation');
+                    createCell(row, getShipEncyData(ship.ship_id, 'type'), 'ship-type');
+                    createCell(row, getShipEncyData(ship.ship_id, 'tier'), 'tier');
 
-                    var nationCell = row.insertCell(0);
-                    try {
-                        nationCell.textContent = shipEncy[ship.ship_id]['nation'];
-                    }
-                    catch {
-                        nationCell.textContent = "N/A";
-                    }
-                    nationCell.className = 'nation';
+                    var shipIcon = getShipEncyData(ship.ship_id, 'images', {}).small;
+                    createCell(row, shipIcon, 'ship-icon', true);
 
-                    var shiptypeCell = row.insertCell(1);
-                    try {
-                        shiptypeCell.textContent = shipEncy[ship.ship_id]['type'];
-                    }
-                    catch {
-                        shiptypeCell.textContent = "N/A";
-                    }
-                    shiptypeCell.className = 'ship-type';
+                    createCell(row, getShipEncyData(ship.ship_id, 'name', ship.ship_id), 'ship-name');
+                    createCell(row, nf.format(shipStats.battles), 'battles');
+                    createCell(row, ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%', 'win-rate');
+                    createCell(row, nf.format(parseInt(shipStats.avg_damage_dealt)), 'damage');
+                    createCell(row, nf2d.format(shipStats.avg_frags), 'frags');
+                    createCell(row, nf2d.format(shipStats.kd), 'kd');
 
-                    var tierCell = row.insertCell(2);
-                    try {
-                        tierCell.textContent = shipEncy[ship.ship_id]['tier'];
-                    }
-                    catch {
-                        tierCell.textContent = "N/A";
-                    }
-                    tierCell.className = 'tier';
-
-                    var shipNameCell = row.insertCell(3);
-                    try {
-                        shipNameCell.textContent = shipEncy[ship.ship_id]['name'];
-                    }
-                    catch {
-                        shipNameCell.textContent = ship.ship_id;
-                    }
-                    shipNameCell.className = 'ship-name';
-
-                    var battlesCell = row.insertCell(4);
-                    battlesCell.textContent = nf.format(shipStats.battles);
-                    battlesCell.className = 'battles';
-
-                    var winrateCell = row.insertCell(5);
-                    winrateCell.textContent = ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%';
-                    winrateCell.className = 'win-rate';
-
-                    var damageRatioCell = row.insertCell(6);
-                    damageRatioCell.textContent = nf.format(parseInt(shipStats.avg_damage_dealt));
-                    damageRatioCell.className = 'damage';
-
-                    var fragsCell = row.insertCell(7);
-                    fragsCell.textContent = nf2d.format(shipStats.avg_frags);
-                    fragsCell.className = 'frags';
-
-                    var kdRatioCell = row.insertCell(8);
-                    kdRatioCell.textContent = nf2d.format(shipStats.kd);
-                    kdRatioCell.className = 'kd';
-                    
                     row.className = 'ship-item';
-                    row.onclick = function() {
-                        show_ship_stats(ship.ship_id, row); // Pass the clicked row to the function
-                    };
+                    row.onclick = function() { show_ship_stats(ship.ship_id, row); };
                 }
             });
             // Sort the table by "Battles" after populating
-            sort_ship_list(4);
+            sort_ship_list(5);
         }
 
         
