@@ -542,16 +542,16 @@
             var gameModeText = element.textContent.trim();
             currentGameMode = gameModeMapping[gameModeText];
 
-            showStatsTable();
-            populateShipList();
+            show_player_stats();
+            populate_ship_list();
         }
 
 
         // ---------------------------------------------------------------------------------
-        // ------------------------------- Show Stats Table --------------------------------
+        // ------------------------------- Show Player Stats -------------------------------
         // ---------------------------------------------------------------------------------
 
-        function showStatsTable() {
+        function show_player_stats() {
             // Hide all tables
             var tables = document.getElementsByClassName('table-container');
             for (var i = 0; i < tables.length; i++) {
@@ -562,11 +562,11 @@
             var selectedTable = document.getElementById(currentGameMode);
             if (currentGameMode != 'oper'){
                 selectedTable = document.getElementById('non_oper');
-                buildStatsTable(account_table_titles, account_table_columns, 'account');
-                buildStatsTable(weapons_table_titles, weapons_table_columns, 'weapon');
+                build_player_stats(account_table_titles, account_table_columns, 'account');
+                build_player_stats(weapons_table_titles, weapons_table_columns, 'weapon');
             }
             else {
-                buildStatsTable(oper_table_titles, oper_table_columns, 'oper');
+                build_player_stats(oper_table_titles, oper_table_columns, 'oper');
             }
             if (selectedTable) {
                 selectedTable.style.display = 'block';
@@ -575,20 +575,32 @@
 
 
         // ---------------------------------------------------------------------------------
-        // ------------------------------- Build Stats Table -------------------------------
+        // ------------------------------ Build Player Stats -------------------------------
         // ---------------------------------------------------------------------------------
 
-        function buildStatsTable(table_titles, table_columns, table_type) {
+        function build_player_stats(table_titles, table_columns, table_type) {
             var tableClass = '.' + table_type + '-stats-table'
             // Empty pre existing table if any
             const container = document.querySelector(tableClass);
             container.innerHTML = '';
 
             // Create the container for the stats
-            const statsContainer = document.createElement('div');
-            statsContainer.className = 'stats-container';
+            const stats_container = document.createElement('div');
+            stats_container.className = 'stats-container';
 
-            // Loop through each table column
+            // Build stats table
+            build_stats_table(table_titles, table_columns, stats_container, accountStats)
+
+            // Append the stats container to the desired location in the DOM
+            document.querySelector(tableClass).appendChild(stats_container);
+        }
+
+        
+        // ---------------------------------------------------------------------------------
+        // ------------------------------ Build Stats Table -------------------------------
+        // ---------------------------------------------------------------------------------
+
+        function build_stats_table(table_titles, table_columns, stats_container, jsonData) {
             table_titles.forEach(title => {
                 const column = document.createElement('div');
                 column.className = 'stat-column';
@@ -598,7 +610,6 @@
                 columnTitle.textContent = title.label;
                 column.appendChild(columnTitle);
 
-                // Loop through the stats for the current game mode
                 table_columns[title.label].forEach(stat => {
                     if (stat.label != 'br') {
                         const statRow = document.createElement('div');
@@ -611,32 +622,33 @@
 
                         const statValue = document.createElement('div');
                         statValue.className = 'stat-value';
-                        // Use currentGameMode to access the correct value
+                        // operation battles
                         if (currentGameMode === 'oper') {
                             if (stat.label.includes("Star")) {
-                                statValue.textContent = nf.format(accountStats[title.key]['wins_by_tasks'][stat.key]);
+                                statValue.textContent = nf.format(jsonData[title.key]['wins_by_tasks'][stat.key]);
                             }
                             else {
-                                statValue.textContent = nf.format(accountStats[title.key][stat.key]);
+                                statValue.textContent = nf.format(jsonData[title.key][stat.key]);
                             }
                         }
+                        // non operation game mode
                         else {
                             if (title.key) {
                                 // weapon stats table
                                 if (stat.label === 'Hit Ratio') {
-                                    statValue.textContent = accountStats[currentGameMode][title.key][stat.key];
+                                    statValue.textContent = jsonData[currentGameMode][title.key][stat.key];
                                 }
                                 else {
-                                    statValue.textContent = nf.format(accountStats[currentGameMode][title.key][stat.key]);
+                                    statValue.textContent = nf.format(jsonData[currentGameMode][title.key][stat.key]);
                                 }
                             }
                             else {
                                 // account stats table
                                 if (title.label.includes("Average") || stat.label === 'K/D Ratio') {
-                                    statValue.textContent = nf2d.format(accountStats[currentGameMode][stat.key]);
+                                    statValue.textContent = nf2d.format(jsonData[currentGameMode][stat.key]);
                                 }
                                 else {
-                                    statValue.textContent = nf.format(accountStats[currentGameMode][stat.key]);
+                                    statValue.textContent = nf.format(jsonData[currentGameMode][stat.key]);
                                 }
                             }
                         }
@@ -650,20 +662,17 @@
                 });
 
                 // Append the complete column to the stats container
-                statsContainer.appendChild(column);
+                stats_container.appendChild(column);
             });
-
-            // Append the stats container to the desired location in the DOM
-            document.querySelector(tableClass).appendChild(statsContainer);
         }
 
 
         // ---------------------------------------------------------------------------------
-        // ------------------------------ Ship List and Stats ------------------------------
+        // ------------------------------ Populate Ship List -------------------------------
         // ---------------------------------------------------------------------------------
 
-        // Modify the row click event in populateShipList to pass the clicked row element
-        function populateShipList() {
+        // Modify the row click event in populate_ship_list to pass the clicked row element
+        function populate_ship_list() {
             var shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
             shipList.innerHTML = ''; // Clear existing rows
             shipData.forEach(function(ship) {
@@ -709,7 +718,7 @@
                     
                     row.className = 'ship-item';
                     row.onclick = function() {
-                        showShipStats(ship.ship_id, row); // Pass the clicked row to the function
+                        show_ship_stats(ship.ship_id, row); // Pass the clicked row to the function
                     };
                 }
             });
@@ -717,8 +726,12 @@
             sortTable(4);
         }
 
+        
+        // ---------------------------------------------------------------------------------
+        // ------------------------------- Build Ship Stats --------------------------------
+        // ---------------------------------------------------------------------------------
 
-        function showShipStats(shipId, clickedRow) {
+        function show_ship_stats(shipId, clickedRow) {
             // Find the ship by shipId
             var ship = shipData.find(ship => ship.ship_id === shipId);
             if (!ship) return;
@@ -745,69 +758,18 @@
             detailsCell.colSpan = clickedRow.cells.length; // Span across all columns
 
             // Create the stats container within the details cell
-            var statsContainer = document.createElement('div');
-            statsContainer.className = 'ship-stats-container';
+            var stats_container = document.createElement('div');
+            stats_container.className = 'ship-stats-container';
 
-            var table_titles = account_table_titles;
-            var table_columns = account_table_columns;
+            // Build stats table
             if (currentGameMode === 'oper') {
-                table_titles = oper_table_titles;
-                table_columns = oper_table_columns;
+                build_stats_table(oper_table_titles, oper_table_columns, stats_container, ship)
+            }
+            else {
+                build_stats_table(account_table_titles, account_table_columns, stats_container, ship)
             }
 
-            // Populate the stats container
-            table_titles.forEach(title => {
-                const column = document.createElement('div');
-                column.className = 'stat-column';
-
-                const columnTitle = document.createElement('div');
-                columnTitle.className = 'column-title';
-                columnTitle.textContent = title.label;
-                column.appendChild(columnTitle);
-
-                // Loop through the stats for the current game mode
-                table_columns[title.label].forEach(stat => {
-                    if (stat.label != 'br') {
-                        const statRow = document.createElement('div');
-                        statRow.className = 'stat-row';
-
-                        const statLabel = document.createElement('div');
-                        statLabel.className = 'stat-label';
-                        statLabel.textContent = stat.label;
-                        statRow.appendChild(statLabel);
-
-                        const statValue = document.createElement('div');
-                        statValue.className = 'stat-value';
-                        if (currentGameMode === 'oper') {
-                            if (stat.label.includes("Star")) {
-                                statValue.textContent = nf.format(ship[title.key]['wins_by_tasks'][stat.key]);
-                            }
-                            else {
-                                statValue.textContent = nf.format(ship[title.key][stat.key]);
-                            }
-                        }
-                        else {
-                            if (title.label.includes("Average") || stat.label === 'K/D Ratio') {
-                                statValue.textContent = nf2d.format(ship[currentGameMode][stat.key]);
-                            }
-                            else {
-                                statValue.textContent = nf.format(ship[currentGameMode][stat.key]);
-                            }
-                        }
-                        statRow.appendChild(statValue);
-                        column.appendChild(statRow);
-                    }
-                    else {
-                        // Add a break for visual separation
-                        column.appendChild(document.createElement('br'));
-                    }
-                });
-
-                // Append the complete column to the stats container
-                statsContainer.appendChild(column);
-            });
-
-            detailsCell.appendChild(statsContainer);
+            detailsCell.appendChild(stats_container);
             
             // Insert the new details row below the clicked ship row
             clickedRow.parentNode.insertBefore(detailsRow, clickedRow.nextSibling);
@@ -848,8 +810,8 @@
 
         // On page load
         window.onload = function() {
-            showStatsTable();
-            populateShipList();
+            show_player_stats();
+            populate_ship_list();
         };
     </script>
 
