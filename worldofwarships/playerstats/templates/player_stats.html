@@ -308,8 +308,9 @@
     </div>
 
 
-    {{ ship_data|json_script:"ship-stats" }}
-    {{ account_data|json_script:"account-data" }}
+    {{ account_data|json_script:"account_data" }}
+    {{ ship_data|json_script:"ship_data" }}
+    {{ ship_encyclopedia|json_script:"ship_encyclopedia" }}
 
     <script>
         const nf = new Intl.NumberFormat('en-US');
@@ -324,8 +325,9 @@
             "Ranked Battles (Legacy)": "rank_old"
         };
 
-        var accountStats = JSON.parse(document.getElementById('account-data').textContent).statistics;
-        var shipData = JSON.parse(document.getElementById('ship-stats').textContent);
+        var accountStats = JSON.parse(document.getElementById('account_data').textContent).statistics;
+        var shipData = JSON.parse(document.getElementById('ship_data').textContent);
+        var shipEncy = JSON.parse(document.getElementById('ship_encyclopedia').textContent);
 
 
         // ---------------------------------------------------------------------------------
@@ -691,7 +693,12 @@
                     tierCell.className = 'tier';
 
                     var shipidCell = row.insertCell(3);
-                    shipidCell.textContent = ship.ship_id;
+                    try {
+                        shipidCell.textContent = shipEncy[ship.ship_id]['name'];
+                    }
+                    catch {
+                        shipidCell.textContent = ship.ship_id;
+                    }
                     shipidCell.className = 'ship-id';
 
                     var battlesCell = row.insertCell(4);

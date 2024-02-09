@@ -8,7 +8,24 @@ import datetime
 def get_player_data(request):
     application_id = '586c12b8bcdeebae9fa17747f47d67ec'
     account_id = '1005419424'
-    game_modes = ['pvp','pve','rank_solo']
+    game_modes = ["pvp", "pve", "rank_solo"]
+    ship_types = ["AirCarrier", "Battleship", "Cruiser", "Destroyer", "Submarine"]
+    nations = ["japan", "usa", "ussr", "germany", "uk", "france", "italy", "pan_asia", "europe", "netherlands", 	"pan_america", "spain"]
+
+    ship_encyclopedia = {}
+    for nation in nations:
+        for ship_type in ship_types:
+            response = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/ships/', 
+                                    params={
+                                        'application_id': application_id, 
+                                        'nation': nation, 
+                                        'type': ship_type
+                                    })
+            if response.status_code == 200:
+                data = response.json()
+                ship_encyclopedia.update(data['data'])
+            else:
+                print(f"Failed to retrieve data for {nation} {ship_type}")
 
     account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=private.port%2Cstatistics.clan%2Cstatistics.oper_div%2Cstatistics.oper_solo%2Cstatistics.pve%2Cstatistics.rank_solo%2Cstatistics.rank_div2%2Cstatistics.rank_div3').json()
 
@@ -50,7 +67,8 @@ def get_player_data(request):
 
     context = {
         'account_data': account_data, 
-        'ship_data': ship_data
+        'ship_data': ship_data,
+        'ship_encyclopedia': ship_encyclopedia
     }
     template = loader.get_template('player_stats.html')
     return HttpResponse(template.render(context, request))
