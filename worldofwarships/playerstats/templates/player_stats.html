@@ -185,17 +185,9 @@
         }
 
         #shipTable th.nation,
-        #shipTable td.nation {
-            width: 5%;
-            text-align: center;
-        }
-
+        #shipTable td.nation,
         #shipTable th.ship-type,
-        #shipTable td.ship-type {
-            width: 5%;
-            text-align: center;
-        }
-
+        #shipTable td.ship-type,
         #shipTable th.tier,
         #shipTable td.tier {
             width: 5%;
@@ -265,9 +257,9 @@
 
 
 
-    <!--  --------------------------------------------------------------------------------------------- -->
-    <!--  --------------------------------------- Account Stats --------------------------------------- -->
-    <!--  --------------------------------------------------------------------------------------------- -->
+    <!--  ------------------------------------------------------------------------------------------ -->
+    <!--  -------------------------------------- PVP and PVE --------------------------------------- -->
+    <!--  ------------------------------------------------------------------------------------------ -->
 
     <div id="non_oper" class="table-container">
         <!-- Table structure for non Operation Battles -->
@@ -289,19 +281,24 @@
 
     <br></br>
 
+
+    <!--  ------------------------------------------------------------------------------------------ -->
+    <!--  --------------------------------------- Ship List ---------------------------------------- -->
+    <!--  ------------------------------------------------------------------------------------------ -->
+
     <div id="shipList" class="ship-list-container">
         <table id="shipTable">
             <thead>
                 <tr>
-                    <th class="nation" onclick="sortTable(0)" style="cursor: pointer;">Nation</th>
-                    <th class="ship-type" onclick="sortTable(1)" style="cursor: pointer;">Type</th>
-                    <th class="tier" onclick="sortTable(2)" style="cursor: pointer;">Tier</th>
-                    <th class="ship-id" onclick="sortTable(3)" style="cursor: pointer;">Ship ID</th>
-                    <th class="battles" onclick="sortTable(4)" style="cursor: pointer;">Battles</th>
-                    <th class="win-rate" onclick="sortTable(5)" style="cursor: pointer;">Win Rate</th>
-                    <th class="damage" onclick="sortTable(6)" style="cursor: pointer;">Avg Damage</th>
-                    <th class="frags" onclick="sortTable(7)" style="cursor: pointer;">Avg Frags</th>
-                    <th class="kd" onclick="sortTable(8)" style="cursor: pointer;">K/D Ratio</th>
+                    <th class="nation" onclick="sort_ship_list(0)" style="cursor: pointer;">Nation</th>
+                    <th class="ship-type" onclick="sort_ship_list(1)" style="cursor: pointer;">Type</th>
+                    <th class="tier" onclick="sort_ship_list(2)" style="cursor: pointer;">Tier</th>
+                    <th class="ship-id" onclick="sort_ship_list(3)" style="cursor: pointer;">Ship ID</th>
+                    <th class="battles" onclick="sort_ship_list(4)" style="cursor: pointer;">Battles</th>
+                    <th class="win-rate" onclick="sort_ship_list(5)" style="cursor: pointer;">Win Rate</th>
+                    <th class="damage" onclick="sort_ship_list(6)" style="cursor: pointer;">Avg Damage</th>
+                    <th class="frags" onclick="sort_ship_list(7)" style="cursor: pointer;">Avg Frags</th>
+                    <th class="kd" onclick="sort_ship_list(8)" style="cursor: pointer;">K/D Ratio</th>
                 </tr>
             </thead>
             <tbody>
@@ -597,7 +594,8 @@
 
         
         // ---------------------------------------------------------------------------------
-        // ------------------------------ Build Stats Table -------------------------------
+        // ------------------------------- Build Stats Table -------------------------------
+        // --------------------- (Used by Player Stats and Ship Stats) ---------------------
         // ---------------------------------------------------------------------------------
 
         function build_stats_table(table_titles, table_columns, stats_container, jsonData) {
@@ -723,7 +721,7 @@
                 }
             });
             // Sort the table by "Battles" after populating
-            sortTable(4);
+            sort_ship_list(4);
         }
 
         
@@ -776,7 +774,11 @@
         }
 
 
-        function sortTable(n) {
+        // ---------------------------------------------------------------------------------
+        // -------------------------------- Sort Ship List ---------------------------------
+        // ---------------------------------------------------------------------------------
+
+        function sort_ship_list(n) {
             var table = document.getElementById("shipTable");
             var tbody = table.getElementsByTagName("tbody")[0];
             var rows = Array.from(tbody.getElementsByTagName("TR"));
