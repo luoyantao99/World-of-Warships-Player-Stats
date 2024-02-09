@@ -167,6 +167,7 @@
             background-color: rgba(0, 0, 0, 0.5); /* Header background */
             padding: 12px 8px;
             font-weight: bold;
+            vertical-align: middle;
             text-align: center;
             border-bottom: 1px solid #666; /* Subtle border color */
         }
@@ -191,17 +192,21 @@
         #shipTable td.ship-type,
         #shipTable th.tier,
         #shipTable td.tier {
-            width: 5%;
+            width: 4%;
             text-align: center;
+        }
+
+        #shipTable td.nation img {
+            max-height: 70%;
         }
 
         #shipTable th.ship-icon,
         #shipTable td.ship-icon {
-            width: 8%;
+            width: 10%;
             text-align: right;
         }
 
-        #shipTable td img {
+        #shipTable td.ship-icon img {
             max-height: 100%;
             max-width: 100%;
             width: auto;
@@ -241,6 +246,7 @@
 
 
 <body>
+    {% load static %}
     {% load humanize %}
 
     <table style="white-space:nowrap;">
@@ -345,11 +351,17 @@
             "Ranked Battles (Legacy)": "rank_old"
         };
 
+        const tier = {
+            1: "I", 2: "II", 3: "III", 4: "IV", 5: "V",
+            6: "VI", 7: "VII", 8: "VIII", 9: "IX", 10: "X", 11: "★", "N/A": "N/A"
+        };
+
         var accountStats = JSON.parse(document.getElementById('account_data').textContent).statistics;
         var shipData = JSON.parse(document.getElementById('ship_data').textContent);
         var encyInfo = JSON.parse(document.getElementById('encyclopedia_info').textContent);
         var shipEncy = JSON.parse(document.getElementById('ship_encyclopedia').textContent);
 
+        var staticUrl = "{% get_static_prefix %}";
 
         // ---------------------------------------------------------------------------------
         // ------------------------- Account Stats Table Structure -------------------------
@@ -737,7 +749,10 @@
                 var shipStats = ship[currentGameMode]; // Access the current game mode data
                 if (shipStats.battles > 0) {
                     var row = shipList.insertRow();
-                    createCell(row, getShipEncyData(ship.ship_id, 'nation'), 'nation');
+
+                    var nation = getShipEncyData(ship.ship_id, 'nation');
+                    var imagePath = staticUrl + 'images/nation_flags/' + nation + '.png';
+                    createCell(row, imagePath, 'nation', true);
 
                     var shipType = getShipEncyData(ship.ship_id, 'type')
                     if(shipType === 'N/A') {
@@ -753,7 +768,7 @@
                             createCell(row, imageUrls['image'], 'ship-type', true);
                     }
 
-                    createCell(row, getShipEncyData(ship.ship_id, 'tier'), 'tier');
+                    createCell(row, tier[getShipEncyData(ship.ship_id, 'tier')], 'tier');
 
                     var shipIcon = getShipEncyData(ship.ship_id, 'images', {}).small;
                     createCell(row, shipIcon, 'ship-icon', true);
