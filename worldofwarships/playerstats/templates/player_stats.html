@@ -194,10 +194,10 @@
             text-align: center;
         }
 
-        #shipTable th.ship-id,
-        #shipTable td.ship-id {
-            text-align: center;
-            padding-right: 5%;
+        #shipTable th.ship-name,
+        #shipTable td.ship-name {
+            text-align: left;
+            padding-left: 5%;
         }
 
         #shipTable th.battles,
@@ -293,7 +293,7 @@
                     <th class="nation" onclick="sort_ship_list(0)" style="cursor: pointer;">Nation</th>
                     <th class="ship-type" onclick="sort_ship_list(1)" style="cursor: pointer;">Type</th>
                     <th class="tier" onclick="sort_ship_list(2)" style="cursor: pointer;">Tier</th>
-                    <th class="ship-id" onclick="sort_ship_list(3)" style="cursor: pointer;">Ship ID</th>
+                    <th class="ship-name" onclick="sort_ship_list(3)" style="cursor: pointer;">Warship Name</th>
                     <th class="battles" onclick="sort_ship_list(4)" style="cursor: pointer;">Battles</th>
                     <th class="win-rate" onclick="sort_ship_list(5)" style="cursor: pointer;">Win Rate</th>
                     <th class="damage" onclick="sort_ship_list(6)" style="cursor: pointer;">Avg Damage</th>
@@ -681,25 +681,40 @@
                     var row = shipList.insertRow();
 
                     var nationCell = row.insertCell(0);
-                    nationCell.textContent = 'WIP';
+                    try {
+                        nationCell.textContent = shipEncy[ship.ship_id]['nation'];
+                    }
+                    catch {
+                        nationCell.textContent = "N/A";
+                    }
                     nationCell.className = 'nation';
 
                     var shiptypeCell = row.insertCell(1);
-                    shiptypeCell.textContent = 'WIP';
+                    try {
+                        shiptypeCell.textContent = shipEncy[ship.ship_id]['type'];
+                    }
+                    catch {
+                        shiptypeCell.textContent = "N/A";
+                    }
                     shiptypeCell.className = 'ship-type';
 
                     var tierCell = row.insertCell(2);
-                    tierCell.textContent = 'WIP';
-                    tierCell.className = 'tier';
-
-                    var shipidCell = row.insertCell(3);
                     try {
-                        shipidCell.textContent = shipEncy[ship.ship_id]['name'];
+                        tierCell.textContent = shipEncy[ship.ship_id]['tier'];
                     }
                     catch {
-                        shipidCell.textContent = ship.ship_id;
+                        tierCell.textContent = "N/A";
                     }
-                    shipidCell.className = 'ship-id';
+                    tierCell.className = 'tier';
+
+                    var shipNameCell = row.insertCell(3);
+                    try {
+                        shipNameCell.textContent = shipEncy[ship.ship_id]['name'];
+                    }
+                    catch {
+                        shipNameCell.textContent = ship.ship_id;
+                    }
+                    shipNameCell.className = 'ship-name';
 
                     var battlesCell = row.insertCell(4);
                     battlesCell.textContent = nf.format(shipStats.battles);
