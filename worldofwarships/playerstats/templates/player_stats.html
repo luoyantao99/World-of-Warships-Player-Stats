@@ -177,7 +177,7 @@
             vertical-align: middle; /* Align the content in the middle vertically */
             border-bottom: 1px solid #666; /* Subtle border color */
         }
-
+        
         #shipTable tr:nth-child(even) {
             background-color: rgba(255, 255, 255, 0.05); /* Zebra striping for rows */
         }
@@ -729,13 +729,16 @@
                 if (isPremium) {
                     cell.style.color = '#ffcc66';
                 }
+                if (className.includes('tier')) {
+                    cell.style.fontWeight = 'bold';
+                }
             }
             
             return cell; // In case you need to do more with the cell
         }
 
         // Helper function to safely get ship encyclopedia data
-        function getShipEncyData(shipId, key, defaultValue = 'N/A') {
+        function getShipEncyData(shipId, key, defaultValue = '') {
             try {
                 return shipEncy[shipId][key];
             }
@@ -754,16 +757,14 @@
                     var row = shipList.insertRow();
 
                     var isPremium = getShipEncyData(ship.ship_id, 'is_premium');
-                    if (isPremium === 'N/A') isPremium = false;
                     var isSpecial = getShipEncyData(ship.ship_id, 'is_special');
-                    if (isSpecial === 'N/A') isSpecial = false;
                     
                     var nation = getShipEncyData(ship.ship_id, 'nation');
                     var imagePath = staticUrl + 'images/nation_flags/' + nation + '.png';
                     createCell(row, imagePath, 'nation', isPremium, true);
-
+                    
                     var shipType = getShipEncyData(ship.ship_id, 'type')
-                    if (shipType === 'N/A') {
+                    if (!shipType) {
                         createCell(row, shipType, 'ship-type', isPremium);
                     }
                     else {
