@@ -76,6 +76,9 @@ def get_player_data(request):
         calculate_total_agro(ship, game_modes)
         calculate_kd(ship, game_modes)
         calculate_avg_stats(ship, game_modes)
+        oper_battles = ship['oper']['battles']
+        if oper_battles != 0:
+            ship['oper']['avg_xp'] = '{:.2f}'.format(ship['oper']['xp'] / oper_battles)
         # calculate_hit_ratio(ship, game_modes)
 
 
