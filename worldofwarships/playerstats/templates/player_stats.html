@@ -714,7 +714,7 @@
         // ---------------------------------------------------------------------------------
 
         // Helper function to create a table cell with text or an image and append it to a row
-        function createCell(row, content, className, isImage = false) {
+        function createCell(row, content, className, isPremium, isImage = false) {
             var cell = row.insertCell();
             cell.className = className;
 
@@ -726,6 +726,9 @@
                 cell.appendChild(img);
             } else {
                 cell.textContent = content;
+                if (isPremium) {
+                    cell.style.color = '#ffcc66';
+                }
             }
             
             return cell; // In case you need to do more with the cell
@@ -750,36 +753,41 @@
                 if (shipStats.battles > 0) {
                     var row = shipList.insertRow();
 
+                    var isPremium = getShipEncyData(ship.ship_id, 'is_premium');
+                    if (isPremium === 'N/A') isPremium = false;
+                    var isSpecial = getShipEncyData(ship.ship_id, 'is_special');
+                    if (isSpecial === 'N/A') isSpecial = false;
+                    
                     var nation = getShipEncyData(ship.ship_id, 'nation');
                     var imagePath = staticUrl + 'images/nation_flags/' + nation + '.png';
-                    createCell(row, imagePath, 'nation', true);
+                    createCell(row, imagePath, 'nation', isPremium, true);
 
                     var shipType = getShipEncyData(ship.ship_id, 'type')
-                    if(shipType === 'N/A') {
-                        createCell(row, shipType, 'ship-type');
+                    if (shipType === 'N/A') {
+                        createCell(row, shipType, 'ship-type', isPremium);
                     }
                     else {
                         var imageUrls = encyInfo['ship_type_images'][shipType]
-                        if(getShipEncyData(ship.ship_id, 'is_premium'))
-                            createCell(row, imageUrls['image_premium'], 'ship-type', true);
-                        else if(getShipEncyData(ship.ship_id, 'is_special'))
-                            createCell(row, imageUrls['image_elite'], 'ship-type', true);
+                        if (isPremium)
+                            createCell(row, imageUrls['image_premium'], 'ship-type', isPremium, true);
+                        else if (isSpecial)
+                            createCell(row, imageUrls['image_elite'], 'ship-type', isPremium, true);
                         else
-                            createCell(row, imageUrls['image'], 'ship-type', true);
+                            createCell(row, imageUrls['image'], 'ship-type', isPremium, true);
                     }
 
-                    createCell(row, tier[getShipEncyData(ship.ship_id, 'tier')], 'tier');
+                    createCell(row, tier[getShipEncyData(ship.ship_id, 'tier')], 'tier', isPremium);
 
                     var shipIcon = getShipEncyData(ship.ship_id, 'images', {}).small;
-                    createCell(row, shipIcon, 'ship-icon', true);
+                    createCell(row, shipIcon, 'ship-icon', isPremium, true);
 
-                    createCell(row, getShipEncyData(ship.ship_id, 'name', ship.ship_id), 'ship-name');
-                    createCell(row, nf.format(shipStats.battles), 'battles');
-                    createCell(row, ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%', 'win-rate');
-                    createCell(row, nf.format(parseInt(shipStats.avg_damage_dealt)), 'damage');
-                    createCell(row, nf2d.format(shipStats.avg_frags), 'frags');
-                    createCell(row, nf0d.format(shipStats.avg_xp), 'xp');
-                    createCell(row, nf2d.format(shipStats.kd), 'kd');
+                    createCell(row, getShipEncyData(ship.ship_id, 'name', ship.ship_id), 'ship-name', isPremium);
+                    createCell(row, nf.format(shipStats.battles), 'battles', isPremium);
+                    createCell(row, ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%', 'win-rate', isPremium);
+                    createCell(row, nf.format(parseInt(shipStats.avg_damage_dealt)), 'damage', isPremium);
+                    createCell(row, nf2d.format(shipStats.avg_frags), 'frags', isPremium);
+                    createCell(row, nf0d.format(shipStats.avg_xp), 'xp', isPremium);
+                    createCell(row, nf2d.format(shipStats.kd), 'kd', isPremium);
 
                     row.className = 'ship-item';
                     row.onclick = function() { show_ship_stats(ship.ship_id, row); };
