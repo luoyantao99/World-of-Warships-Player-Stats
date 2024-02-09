@@ -41,6 +41,13 @@ def get_player_data(request):
         with open(ship_ency_file_path, 'w') as file:
             json.dump(ship_encyclopedia, file)
 
+    encyclopedia_info = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/info/',
+                                        params={
+                                            'application_id': application_id
+                                        }).json()
+    
+    account_extra = ["private.port", "statistics.clan", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.rank_solo", "statistics.rank_div2", "statistics.rank_div3"]
+    
     account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=private.port%2Cstatistics.clan%2Cstatistics.oper_div%2Cstatistics.oper_solo%2Cstatistics.pve%2Cstatistics.rank_solo%2Cstatistics.rank_div2%2Cstatistics.rank_div3').json()
 
     ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={application_id}&account_id={account_id}&extra=oper_div%2Coper_solo%2Cpve%2Crank_solo').json()
@@ -85,10 +92,15 @@ def get_player_data(request):
     context = {
         'account_data': account_data, 
         'ship_data': ship_data,
+        'encyclopedia_info': encyclopedia_info['data'],
         'ship_encyclopedia': ship_encyclopedia
     }
     template = loader.get_template('player_stats.html')
     return HttpResponse(template.render(context, request))
+
+
+
+
 
 
 def combine_oper_stats(json):

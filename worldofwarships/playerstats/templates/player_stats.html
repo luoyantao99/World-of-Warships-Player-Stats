@@ -191,7 +191,7 @@
         #shipTable td.ship-type,
         #shipTable th.tier,
         #shipTable td.tier {
-            width: 6%;
+            width: 5%;
             text-align: center;
         }
 
@@ -328,6 +328,7 @@
 
     {{ account_data|json_script:"account_data" }}
     {{ ship_data|json_script:"ship_data" }}
+    {{ encyclopedia_info|json_script:"encyclopedia_info" }}
     {{ ship_encyclopedia|json_script:"ship_encyclopedia" }}
 
     <script>
@@ -346,6 +347,7 @@
 
         var accountStats = JSON.parse(document.getElementById('account_data').textContent).statistics;
         var shipData = JSON.parse(document.getElementById('ship_data').textContent);
+        var encyInfo = JSON.parse(document.getElementById('encyclopedia_info').textContent);
         var shipEncy = JSON.parse(document.getElementById('ship_encyclopedia').textContent);
 
 
@@ -736,7 +738,21 @@
                 if (shipStats.battles > 0) {
                     var row = shipList.insertRow();
                     createCell(row, getShipEncyData(ship.ship_id, 'nation'), 'nation');
-                    createCell(row, getShipEncyData(ship.ship_id, 'type'), 'ship-type');
+
+                    var shipType = getShipEncyData(ship.ship_id, 'type')
+                    if(shipType === 'N/A') {
+                        createCell(row, shipType, 'ship-type');
+                    }
+                    else {
+                        var imageUrls = encyInfo['ship_type_images'][shipType]
+                        if(getShipEncyData(ship.ship_id, 'is_premium'))
+                            createCell(row, imageUrls['image_premium'], 'ship-type', true);
+                        else if(getShipEncyData(ship.ship_id, 'is_special'))
+                            createCell(row, imageUrls['image_elite'], 'ship-type', true);
+                        else
+                            createCell(row, imageUrls['image'], 'ship-type', true);
+                    }
+
                     createCell(row, getShipEncyData(ship.ship_id, 'tier'), 'tier');
 
                     var shipIcon = getShipEncyData(ship.ship_id, 'images', {}).small;
