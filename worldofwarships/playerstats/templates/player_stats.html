@@ -718,13 +718,14 @@
             var cell = row.insertCell();
             cell.className = className;
 
-            if (isImage && content !== "N/A") {
+            if (isImage) {
                 var img = document.createElement('img');
                 img.src = content;
                 img.alt = 'Image'; // You might want to use a more descriptive alt text
                 img.className = 'cell-image'; // Add a class for styling if needed
                 cell.appendChild(img);
-            } else {
+            }
+            else {
                 cell.textContent = content;
                 if (isPremium) {
                     cell.style.color = '#ffcc66';
@@ -760,35 +761,28 @@
                     var isSpecial = getShipEncyData(ship.ship_id, 'is_special');
                     
                     var nation = getShipEncyData(ship.ship_id, 'nation');
-                    var imagePath = staticUrl + 'images/nation_flags/' + nation + '.png';
-                    createCell(row, imagePath, 'nation', isPremium, true);
+                    var nation_image_path = staticUrl + 'images/nation_flags/' + nation + '.png';
+                    createCell(row, nation_image_path, 'nation', isPremium || isSpecial, true);
                     
                     var shipType = getShipEncyData(ship.ship_id, 'type')
-                    if (!shipType) {
-                        createCell(row, shipType, 'ship-type', isPremium);
-                    }
-                    else {
-                        var imageUrls = encyInfo['ship_type_images'][shipType]
-                        if (isPremium)
-                            createCell(row, imageUrls['image_premium'], 'ship-type', isPremium, true);
-                        else if (isSpecial)
-                            createCell(row, imageUrls['image_elite'], 'ship-type', isPremium, true);
-                        else
-                            createCell(row, imageUrls['image'], 'ship-type', isPremium, true);
-                    }
+                    var type_image_path = staticUrl + 'images/ship_types/' + shipType;
+                    if (isPremium) type_image_path += '_premium.png';
+                    else if (isSpecial) type_image_path += '_special.png';
+                    else type_image_path += '_standard.png';
+                    createCell(row, type_image_path, 'ship-type', isPremium || isSpecial, true);
 
-                    createCell(row, tier[getShipEncyData(ship.ship_id, 'tier')], 'tier', isPremium);
+                    createCell(row, tier[getShipEncyData(ship.ship_id, 'tier')], 'tier', isPremium || isSpecial);
 
                     var shipIcon = getShipEncyData(ship.ship_id, 'images', {}).small;
-                    createCell(row, shipIcon, 'ship-icon', isPremium, true);
+                    createCell(row, shipIcon, 'ship-icon', isPremium || isSpecial, true);
 
-                    createCell(row, getShipEncyData(ship.ship_id, 'name', ship.ship_id), 'ship-name', isPremium);
-                    createCell(row, nf.format(shipStats.battles), 'battles', isPremium);
-                    createCell(row, ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%', 'win-rate', isPremium);
-                    createCell(row, nf.format(parseInt(shipStats.avg_damage_dealt)), 'damage', isPremium);
-                    createCell(row, nf2d.format(shipStats.avg_frags), 'frags', isPremium);
-                    createCell(row, nf0d.format(shipStats.avg_xp), 'xp', isPremium);
-                    createCell(row, nf2d.format(shipStats.kd), 'kd', isPremium);
+                    createCell(row, getShipEncyData(ship.ship_id, 'name', ship.ship_id), 'ship-name', isPremium || isSpecial);
+                    createCell(row, nf.format(shipStats.battles), 'battles', isPremium || isSpecial);
+                    createCell(row, ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%', 'win-rate', isPremium || isSpecial);
+                    createCell(row, nf.format(parseInt(shipStats.avg_damage_dealt)), 'damage', isPremium || isSpecial);
+                    createCell(row, nf2d.format(shipStats.avg_frags), 'frags', isPremium || isSpecial);
+                    createCell(row, nf0d.format(shipStats.avg_xp), 'xp', isPremium || isSpecial);
+                    createCell(row, nf2d.format(shipStats.kd), 'kd', isPremium || isSpecial);
 
                     row.className = 'ship-item';
                     row.onclick = function() { show_ship_stats(ship.ship_id, row); };
