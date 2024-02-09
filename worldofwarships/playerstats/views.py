@@ -23,7 +23,7 @@ def get_player_data(request):
         # If the file does not exist, fetch the data and save it to a file
         ship_encyclopedia = {}
         ship_types = ["AirCarrier", "Battleship", "Cruiser", "Destroyer", "Submarine"]
-        nations = ["japan", "usa", "ussr", "germany", "uk", "france", "italy", "pan_asia", "europe", "netherlands", "pan_america", "spain"]
+        nations = ["japan", "usa", "ussr", "germany", "uk", "france", "italy", "pan_asia", "europe", "netherlands", "pan_america", "spain", "commonwealth"]
         for nation in nations:
             for ship_type in ship_types:
                 response = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/ships/',
