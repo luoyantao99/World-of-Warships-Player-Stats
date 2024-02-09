@@ -1,7 +1,10 @@
+import json
+import os
 import requests
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.conf import settings
 import datetime
 
 
@@ -9,23 +12,34 @@ def get_player_data(request):
     application_id = '586c12b8bcdeebae9fa17747f47d67ec'
     account_id = '1005419424'
     game_modes = ["pvp", "pve", "rank_solo"]
-    ship_types = ["AirCarrier", "Battleship", "Cruiser", "Destroyer", "Submarine"]
-    nations = ["japan", "usa", "ussr", "germany", "uk", "france", "italy", "pan_asia", "europe", "netherlands", 	"pan_america", "spain"]
 
-    ship_encyclopedia = {}
-    for nation in nations:
-        for ship_type in ship_types:
-            response = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/ships/', 
-                                    params={
-                                        'application_id': application_id, 
-                                        'nation': nation, 
-                                        'type': ship_type
-                                    })
-            if response.status_code == 200:
-                data = response.json()
-                ship_encyclopedia.update(data['data'])
-            else:
-                print(f"Failed to retrieve data for {nation} {ship_type}")
+    ship_ency_file_path = os.path.join(settings.BASE_DIR, 'data', 'ship_encyclopedia.json')
+
+    # Try to load the ship encyclopedia from a file if it exists
+    if os.path.exists(ship_ency_file_path):
+        with open(ship_ency_file_path, 'r') as file:
+            ship_encyclopedia = json.load(file)
+    else:
+        # If the file does not exist, fetch the data and save it to a file
+        ship_encyclopedia = {}
+        ship_types = ["AirCarrier", "Battleship", "Cruiser", "Destroyer", "Submarine"]
+        nations = ["japan", "usa", "ussr", "germany", "uk", "france", "italy", "pan_asia", "europe", "netherlands", "pan_america", "spain"]
+        for nation in nations:
+            for ship_type in ship_types:
+                response = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/ships/',
+                                        params={
+                                            'application_id': application_id,
+                                            'nation': nation,
+                                            'type': ship_type
+                                        })
+                if response.status_code == 200:
+                    data = response.json()
+                    ship_encyclopedia.update(data['data'])
+                else:
+                    print(f"Failed to retrieve data for {nation} {ship_type}")
+        # Save the fetched data to a file
+        with open(ship_ency_file_path, 'w') as file:
+            json.dump(ship_encyclopedia, file)
 
     account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=private.port%2Cstatistics.clan%2Cstatistics.oper_div%2Cstatistics.oper_solo%2Cstatistics.pve%2Cstatistics.rank_solo%2Cstatistics.rank_div2%2Cstatistics.rank_div3').json()
 
