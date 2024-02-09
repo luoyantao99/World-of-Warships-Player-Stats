@@ -61,7 +61,6 @@
 
         .stat-value {
             text-align: right;
-            flex: 0; /* Do not grow, just enough space to fit content */
         }
 
 
@@ -173,7 +172,7 @@
         }
 
         #shipTable td {
-            height: 50px; /* Define a fixed height for the cells */
+            height: 45px; /* Define a fixed height for the cells */
             vertical-align: middle; /* Align the content in the middle vertically */
             border-bottom: 1px solid #666; /* Subtle border color */
         }
@@ -198,7 +197,6 @@
 
         #shipTable th.ship-icon,
         #shipTable td.ship-icon {
-            width: 8%;
             text-align: right;
         }
 
@@ -220,12 +218,19 @@
         #shipTable th.win-rate,
         #shipTable td.win-rate,
         #shipTable th.damage,
-        #shipTable td.damage,
+        #shipTable td.damage {
+            width: 10%;
+            text-align: right;
+            padding-right: 2%;
+        }
+        
         #shipTable th.frags,
         #shipTable td.frags,
+        #shipTable th.xp,
+        #shipTable td.xp,
         #shipTable th.kd,
         #shipTable td.kd {
-            width: 10%;
+            width: 8%;
             text-align: right;
             padding-right: 2%;
         }
@@ -304,12 +309,13 @@
                     <th class="ship-type" onclick="sort_ship_list(1)" style="cursor: pointer;">Type</th>
                     <th class="tier" onclick="sort_ship_list(2)" style="cursor: pointer;">Tier</th>
                     <th class="ship-icon" onclick="sort_ship_list(3)" style="cursor: pointer;"></th>
-                    <th class="ship-name" onclick="sort_ship_list(4)" style="cursor: pointer;">Warship Name</th>
+                    <th class="ship-name" onclick="sort_ship_list(4)" style="cursor: pointer;">Warship</th>
                     <th class="battles" onclick="sort_ship_list(5)" style="cursor: pointer;">Battles</th>
                     <th class="win-rate" onclick="sort_ship_list(6)" style="cursor: pointer;">Win Rate</th>
                     <th class="damage" onclick="sort_ship_list(7)" style="cursor: pointer;">Avg Damage</th>
                     <th class="frags" onclick="sort_ship_list(8)" style="cursor: pointer;">Avg Frags</th>
-                    <th class="kd" onclick="sort_ship_list(9)" style="cursor: pointer;">K/D Ratio</th>
+                    <th class="xp" onclick="sort_ship_list(9)" style="cursor: pointer;">Avg XP</th>
+                    <th class="kd" onclick="sort_ship_list(10)" style="cursor: pointer;">K/D Ratio</th>
                 </tr>
             </thead>
             <tbody>
@@ -325,7 +331,8 @@
 
     <script>
         const nf = new Intl.NumberFormat('en-US');
-        const nf2d = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2,});
+        const nf0d = new Intl.NumberFormat('en-US', {maximumFractionDigits: 0});
+        const nf2d = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
         var currentGameMode = 'pvp'; // Default game mode onload
         const gameModeMapping = {
@@ -425,7 +432,7 @@
                 { label: 'Total Frags', key: 'frags' },
                 { label: 'br', key: '' },
                 { label: 'Max Frags', key: 'max_frags_battle' },
-                { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'Ship Name', key: 'max_frags_ship_id' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
                 { label: 'Hit Ratio', key: 'hit_ratio' },
@@ -436,7 +443,7 @@
                 { label: 'Total Frags', key: 'frags' },
                 { label: 'br', key: '' },
                 { label: 'Max Frags', key: 'max_frags_battle' },
-                { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'Ship Name', key: 'max_frags_ship_id' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
                 { label: 'Hit Ratio', key: 'hit_ratio' },
@@ -448,7 +455,7 @@
                 { label: 'Total Frags', key: 'frags' },
                 { label: 'br', key: '' },
                 { label: 'Max Frags', key: 'max_frags_battle' },
-                { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'Ship Name', key: 'max_frags_ship_id' },
                 { label: 'br', key: '' },
                 { label: 'br', key: '' },
                 { label: 'Hit Ratio', key: 'hit_ratio' },
@@ -459,13 +466,13 @@
                 { label: 'Total Frags', key: 'frags' },
                 { label: 'br', key: '' },
                 { label: 'Max Frags', key: 'max_frags_battle' },
-                { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'Ship Name', key: 'max_frags_ship_id' },
             ],
             'Ramming': [
                 { label: 'Total Frags', key: 'frags' },
                 { label: 'br', key: '' },
                 { label: 'Max Frags', key: 'max_frags_battle' },
-                { label: 'Ship ID', key: 'max_frags_ship_id' },
+                { label: 'Ship Name', key: 'max_frags_ship_id' },
             ]
         };
 
@@ -649,6 +656,15 @@
                                 if (stat.label === 'Hit Ratio') {
                                     statValue.textContent = jsonData[currentGameMode][title.key][stat.key];
                                 }
+                                else if (stat.label === 'Ship Name') {
+                                    var shipId = jsonData[currentGameMode][title.key][stat.key];
+                                    try {
+                                        shipId = shipEncy[shipId]['name'];
+                                    }
+                                    catch {
+                                    }
+                                    statValue.textContent = shipId;
+                                }
                                 else {
                                     statValue.textContent = nf.format(jsonData[currentGameMode][title.key][stat.key]);
                                 }
@@ -730,6 +746,7 @@
                     createCell(row, ((shipStats.wins/shipStats.battles)*100).toFixed(2) + '%', 'win-rate');
                     createCell(row, nf.format(parseInt(shipStats.avg_damage_dealt)), 'damage');
                     createCell(row, nf2d.format(shipStats.avg_frags), 'frags');
+                    createCell(row, nf0d.format(shipStats.avg_xp), 'xp');
                     createCell(row, nf2d.format(shipStats.kd), 'kd');
 
                     row.className = 'ship-item';
