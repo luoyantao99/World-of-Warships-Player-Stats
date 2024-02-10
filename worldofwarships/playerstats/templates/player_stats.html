@@ -241,27 +241,28 @@
             padding-right: 2%;
         }
 
-
-        /* Style the search box */
+        
         .search-box {
             position: relative;
             font-family: Arial, sans-serif;
+            width: 300px;
+            margin-left: auto; 
+            margin-right: 5%;
         }
 
-        /* Style the input field */
         .player-search {
             width: 100%;
             padding: 10px;
             font-size: 16px;
-            border: 2px solid #333;
-            border-radius: 5px;
+            border: 1px solid #333;
+            border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.6);
             color: #fff;
             outline: none;
+            backdrop-filter: blur(10px);
         }
 
-        /* Style the search results container */
         .search-results-container {
             position: absolute;
             top: 100%; /* Position it below the search input */
@@ -271,11 +272,10 @@
             overflow-y: auto;
             background: #333;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            border-radius: 0 0 5px 5px;
+            border-radius: 10px;
             z-index: 1000; /* Ensure it's above other content */
         }
 
-        /* Style each search result item */
         .search-result-item {
             padding: 10px;
             color: #fff;
@@ -283,7 +283,6 @@
             transition: background-color 0.2s;
         }
 
-        /* Change background on hover */
         .search-result-item:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
@@ -296,9 +295,9 @@
     {% load static %}
     {% load humanize %}
 
-    <table style="white-space:nowrap;">
+    <table style="white-space:nowrap; width: 100%;">
         <tr>
-            <td>
+            <td style="text-align: left; padding-left: 25px; width: 20%;">
                 <div class="normal-text">
                     Account Name: {{ account_data.nickname }}<br>
                     Battles Fought: {{ account_data.statistics.battles|intcomma }}<br>
@@ -306,10 +305,7 @@
                     Data Updated At: {{ account_data.updated_at }}<br><br>
                 </div>
             </td>
-            <td>
-                <h1>&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-            </td>
-            <td>
+            <td style="padding-left: 25px;">
                 <div class="dropdown">
                     <button class="dropbtn" id="dropdownMenuButton">Random Battles</button>
                     <div class="dropdown-content">
@@ -322,16 +318,10 @@
                 </div>
             </td>
             <td>
-                <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-            </td>
-            <td>
                 <div class="search-box">
                     <input type="text" class="player-search" id="player-search" placeholder="Search for a player...">
-                    <div class="search-results-container" id="search-results">
+                    <div class="search-results-container" id="search-results" style="text-align: left;">
                         <!-- Dynamically inserted search result items will go here -->
-                        <!-- Example item -->
-                        <div class="search-result-item">luoya</div>
-                        <!-- More items -->
                     </div>
                 </div>
             </td>
@@ -960,6 +950,7 @@
                             const playerElement = document.createElement('div');
                             playerElement.textContent = player.nickname;
                             playerElement.dataset.accountId = player.account_id;
+                            playerElement.classList.add('search-result-item');
                             resultsContainer.appendChild(playerElement);
 
                             // Add click event to each result to update the player stats
