@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     path('player_stats/', views.get_player_data, name='player_stats'),
-    # include other paths as needed
+    path('player_stats/<int:account_id>/', views.get_player_data, name='player_stats'),
+    path('search_players/', views.search_players, name='search_players'),
 ]

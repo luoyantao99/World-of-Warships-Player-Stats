@@ -241,6 +241,53 @@
             padding-right: 2%;
         }
 
+
+        /* Style the search box */
+        .search-box {
+            position: relative;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Style the input field */
+        .player-search {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            outline: none;
+        }
+
+        /* Style the search results container */
+        .search-results-container {
+            position: absolute;
+            top: 100%; /* Position it below the search input */
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            background: #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 0 0 5px 5px;
+            z-index: 1000; /* Ensure it's above other content */
+        }
+
+        /* Style each search result item */
+        .search-result-item {
+            padding: 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        /* Change background on hover */
+        .search-result-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
     </style>
 </head>
 
@@ -271,6 +318,20 @@
                         <!-- <a href="#" onclick="selectDropdownOption(this)">Ranked Battles (Legacy)</a> -->
                         <a href="#" onclick="selectDropdownOption(this)">Co-op Battles</a>
                         <a href="#" onclick="selectDropdownOption(this)">Operations</a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+            </td>
+            <td>
+                <div class="search-box">
+                    <input type="text" class="player-search" id="player-search" placeholder="Search for a player...">
+                    <div class="search-results-container" id="search-results">
+                        <!-- Dynamically inserted search result items will go here -->
+                        <!-- Example item -->
+                        <div class="search-result-item">luoya</div>
+                        <!-- More items -->
                     </div>
                 </div>
             </td>
@@ -876,6 +937,44 @@
             rows.forEach(function(row) {
                 tbody.appendChild(row);
             });
+        }
+
+
+        // ---------------------------------------------------------------------------------
+        // --------------------------------- Player Search ---------------------------------
+        // ---------------------------------------------------------------------------------
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('player-search'); // Your search input ID
+            const resultsContainer = document.getElementById('search-results'); // A container to hold the results
+
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value;
+                fetch(`/search_players/?search=${encodeURIComponent(searchTerm)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Clear previous results
+                        resultsContainer.innerHTML = '';
+                        // Add new results to resultsContainer
+                        data['data'].forEach(player => {
+                            const playerElement = document.createElement('div');
+                            playerElement.textContent = player.nickname;
+                            playerElement.dataset.accountId = player.account_id;
+                            resultsContainer.appendChild(playerElement);
+
+                            // Add click event to each result to update the player stats
+                            playerElement.addEventListener('click', () => {
+                                const accountID = playerElement.dataset.accountId;
+                                // Call a function to update stats using this accountID
+                                updatePlayerStats(accountID);
+                            });
+                        });
+                    });
+            });
+        });
+
+        function updatePlayerStats(accountID) {
+            window.location.href = `/player_stats/${accountID}`;
         }
 
 

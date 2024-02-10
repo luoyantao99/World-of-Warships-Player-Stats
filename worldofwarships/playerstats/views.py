@@ -2,15 +2,32 @@ import json
 import os
 import requests
 from django.shortcuts import render
+from django.http import JsonResponse
 from django.http import HttpResponse
 from django.template import loader
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 import datetime
 
 
-def get_player_data(request):
-    application_id = '586c12b8bcdeebae9fa17747f47d67ec'
-    account_id = '1005419424'
+APPLICATION_ID = '586c12b8bcdeebae9fa17747f47d67ec'
+
+@csrf_exempt
+def search_players(request):
+    if request.method == 'GET':
+        search_query = request.GET.get('search', '')
+        response = requests.get(
+            f'https://api.worldofwarships.com/wows/account/list/',
+            params={
+                'application_id': APPLICATION_ID,
+                'search': search_query
+            }
+        )
+        return JsonResponse(response.json())
+    
+
+def get_player_data(request, account_id='1005419424'):
+    account_id = f'{account_id}'
     game_modes = ["pvp", "pve", "rank_solo"]
 
     ship_ency_file_path = os.path.join(settings.BASE_DIR, 'data', 'ship_encyclopedia.json')
@@ -28,7 +45,7 @@ def get_player_data(request):
             for ship_type in ship_types:
                 response = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/ships/',
                                         params={
-                                            'application_id': application_id,
+                                            'application_id': APPLICATION_ID,
                                             'nation': nation,
                                             'type': ship_type
                                         })
@@ -43,14 +60,14 @@ def get_player_data(request):
 
     encyclopedia_info = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/info/',
                                         params={
-                                            'application_id': application_id
+                                            'application_id': APPLICATION_ID
                                         }).json()
     
     account_extra = ["private.port", "statistics.clan", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.rank_solo", "statistics.rank_div2", "statistics.rank_div3"]
     
-    account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={application_id}&account_id={account_id}&extra=private.port%2Cstatistics.clan%2Cstatistics.oper_div%2Cstatistics.oper_solo%2Cstatistics.pve%2Cstatistics.rank_solo%2Cstatistics.rank_div2%2Cstatistics.rank_div3').json()
+    account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={APPLICATION_ID}&account_id={account_id}&extra=private.port%2Cstatistics.clan%2Cstatistics.oper_div%2Cstatistics.oper_solo%2Cstatistics.pve%2Cstatistics.rank_solo%2Cstatistics.rank_div2%2Cstatistics.rank_div3').json()
 
-    ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={application_id}&account_id={account_id}&extra=oper_div%2Coper_solo%2Cpve%2Crank_solo').json()
+    ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={APPLICATION_ID}&account_id={account_id}&extra=oper_div%2Coper_solo%2Cpve%2Crank_solo').json()
 
     account_data = account_json['data'][account_id]
     ship_data = ship_json['data'][account_id]
@@ -101,8 +118,6 @@ def get_player_data(request):
 
 
 
-
-
 def combine_oper_stats(json):
     json['oper'] = {"wins":-1,"losses":-1,"battles":-1,"survived_wins":-1,"xp":-1,"wins_by_tasks":{"0":-1,"1":-1,"2":-1,"3":-1,"4":-1,"5":-1},"survived_battles":-1}
 
@@ -128,7 +143,10 @@ def calculate_hit_ratio(json, game_modes):
     for mode in game_modes:
         for weapon in weapon_types:
             weapon_stats = json[mode][weapon]
-            weapon_stats['hit_ratio'] = '{:.2%}'.format(weapon_stats['hits'] / weapon_stats['shots'])
+            shots = weapon_stats['shots']
+            if shots == 0:
+                shots = 1
+            weapon_stats['hit_ratio'] = '{:.2%}'.format(weapon_stats['hits'] / shots)
 
 
 def calculate_total_agro(json, game_modes):
