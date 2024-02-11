@@ -76,12 +76,19 @@
             color: white;
             font-size: 17px;
             text-shadow: 0.5px 0.5px 0.5px #000;
-            padding: 10px 16px;
-            min-width: 175px;
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            padding: 8px 12px;
+            min-width: 187px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 2px;
             cursor: pointer;
             transition: all 0.3s;
+        }
+
+        .dropbtn img {
+            max-width: 35px; /* Adjust as needed */
+            max-height: 35px; /* Adjust as needed */
+            vertical-align: middle;
+            margin-right: 1px; /* Space between image and text */
         }
 
         /* Dropdown content (hidden by default) */
@@ -90,7 +97,7 @@
             position: absolute;
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(20px);
-            min-width: 175px;
+            min-width: 187px;
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
             border-radius: 2px;
             overflow: hidden; /* Ensures the border radius applies to the children */
@@ -308,7 +315,10 @@
             </td>
             <td style="padding-left: 25px;">
                 <div class="dropdown">
-                    <button class="dropbtn" id="dropdownMenuButton">Random Battles</button>
+                    <button class="dropbtn" id="dropdownMenuButton">
+                        <img id="gameModeImage" src="{% static 'images/game_modes/pvp.png' %}" alt="Game Mode" />
+                        <span>Random Battles</span>
+                    </button>                                     
                     <div class="dropdown-content">
                         <a href="#" onclick="selectDropdownOption(this)">Random Battles</a>
                         <a href="#" onclick="selectDropdownOption(this)">Ranked Battles</a>
@@ -613,18 +623,20 @@
         function selectDropdownOption(element) {
             // Get the button by its ID
             var button = document.getElementById('dropdownMenuButton');
-            // Update the button text to match the selection
-            button.innerHTML = element.textContent;
+            // Get the image element by its ID
+            var gameModeImage = document.getElementById('gameModeImage');
+            // Get the text span (assuming you added it as per the instructions below)
+            var buttonText = button.querySelector('span');
 
-            // Optionally, you can highlight the active selection
-            var items = document.getElementsByClassName('dropdown-content')[0].getElementsByTagName('a');
-            for (var i = 0; i < items.length; i++) {
-                items[i].classList.remove('active');
-            }
-            element.classList.add('active');
+            // Update the button text to match the selection
+            buttonText.textContent = element.textContent;
 
             var gameModeText = element.textContent.trim();
             currentGameMode = gameModeMapping[gameModeText];
+
+            // Update the image based on the selected game mode
+            gameModeImage.src = staticUrl + 'images/game_modes/' + currentGameMode + '.png';
+            gameModeImage.alt = '{Icon}';
 
             show_player_stats();
             populate_ship_list();
