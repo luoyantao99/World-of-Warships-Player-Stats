@@ -1,1 +1,1 @@
-# Wargaming-Player-Stats
+#  World of Warships Player Stats
