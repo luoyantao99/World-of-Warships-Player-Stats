@@ -41,7 +41,7 @@ APPLICATION_ID = 'your_application_id_here'
 ``` bash
 python manage.py runserver
 ```
-You should see output indicating the server is running, usually on http://127.0.0.1:8000/player_stats/.
+> You should see output indicating the server is running, usually on http://127.0.0.1:8000/player_stats/.
 
 5. Access the application<br>
 > Open a web browser and go to http://127.0.0.1:8000/player_stats/ to view the application. You should see the main interface where you can start searching for players and viewing stats.
