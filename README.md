@@ -19,29 +19,29 @@ https://youtu.be/gcNY6zv0LZM
 
 ### Installation
 1. Clone the repository<br>
-First, clone this repository to your local machine using Git:
+> First, clone this repository to your local machine using Git:
 ``` bash
 git clone https://github.com/luoyantao99/World-of-Warships-Player-Stats.git
 ```
 
 2. Install dependencies<br>
-Install the required Python packages:
+> Install the required Python packages:
 ``` bash
 pip install -r requirements.txt
 ```
 
 3. Configure the application<br>
-Open the view.py file in the playerstats directory and replace APPLICATION_ID with your actual World of Warships application ID:
+> Open the view.py file in the playerstats directory and replace APPLICATION_ID with your actual World of Warships application ID:
 ``` bash
 APPLICATION_ID = 'your_application_id_here'
 ```
 
 4. Run the development server<br>
-Start the Django development server:
+> Start the Django development server:
 ``` bash
 python manage.py runserver
 ```
 You should see output indicating the server is running, usually on http://127.0.0.1:8000/player_stats/.
 
 5. Access the application<br>
-Open a web browser and go to http://127.0.0.1:8000/player_stats/ to view the application. You should see the main interface where you can start searching for players and viewing stats.
+> Open a web browser and go to http://127.0.0.1:8000/player_stats/ to view the application. You should see the main interface where you can start searching for players and viewing stats.
