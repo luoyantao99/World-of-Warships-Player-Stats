@@ -30,10 +30,10 @@ git clone https://github.com/luoyantao99/World-of-Warships-Player-Stats.git
 pip install -r requirements.txt
 ```
 
-3. Configure the application<br>
-> Open the view.py file in the playerstats directory and replace APPLICATION_ID with your actual World of Warships application ID:
+3. Set up environment variables<br>
+> In the same directory as ```settings.py```, create a file called ```.env```. Inside the ```.env``` file, add your Wargaming application ID like this:
 ``` bash
-APPLICATION_ID = 'your_application_id_here'
+APPLICATION_ID=your_application_id_here
 ```
 
 4. Run the development server<br>
