@@ -1,5 +1,5 @@
 #  World of Warships Player Stats
-This web application serves as a comprehensive platform for players of "World of Warships" to search and view detailed statistics about their accounts and individual ship performances. 
+This web application serves as a comprehensive platform for players of "World of Warships" to search and view detailed statistics about their accounts and individual ship performances. This application displays more information than the in-game player profile and shows the hidden statistics of the Operation game mode. 
 
 ## 🛠️ Features
 1. Player Search: Users can search for player accounts using a search query. This sends a request to the "World of Warships" API to retrieve a list of matching player accounts. When a specific player account is searched, it fetches detailed statistics about the player's performance, including battles played, victories, defeats, and other relevant data for different game modes (Random, Co-op, Ranked, and Operation). 
