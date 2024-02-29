@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% load static %}
+    {% load humanize %}
+
     <title>World of Warships Player Profile</title>
     <style>
 
@@ -124,7 +127,7 @@
 
 
         body {
-            background-image: url('https://ips4-wowslegends-global.gcdn.co/monthly_2023_01/Pommern.png.1e9d81637ac03d4bcf6491b5395eec8f.png');
+            background-image: url('{% static "images/Background_Pommern.png" %}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -300,9 +303,7 @@
 
 
 <body>
-    {% load static %}
-    {% load humanize %}
-
+    
     <table style="white-space:nowrap; width: 97%; margin: auto 1.5%;">
         <tr>
             <td style="text-align: left; padding-left: 25px; width: 20%;">
