@@ -31,7 +31,7 @@ pip install -r requirements.txt
 ```
 
 3. Set up environment variables<br>
-> In the same directory as ```settings.py```, create a file called ```.env```. Inside the ```.env``` file, add your Wargaming application ID like this:
+> In the same directory as ```settings.py```, create a file called ```.env```. Declare your environment variables in ```.env``` like this:
 ``` bash
 APPLICATION_ID=your_application_id_here
 ```
