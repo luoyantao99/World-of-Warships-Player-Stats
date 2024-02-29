@@ -8,7 +8,7 @@ This web application serves as a comprehensive platform for players of "World of
 
 The web app leverages Django's web development framework for the backend, utilizing views to handle API requests and responses effectively. It also integrates front-end technologies for dynamic content rendering, including HTML, CSS, and JavaScript, to provide an interactive and responsive user experience. 
 
-## 💻 Demo
+## 💻 Video Demo
 https://youtu.be/gcNY6zv0LZM
 
 
