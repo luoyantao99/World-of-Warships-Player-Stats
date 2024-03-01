@@ -13,7 +13,10 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.9]
+
+    env:
+      APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
 
     steps:
     - uses: actions/checkout@v3
