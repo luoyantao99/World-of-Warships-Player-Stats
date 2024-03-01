@@ -31,7 +31,7 @@ pip install -r requirements.txt
 ```
 
 **3. Set up environment variables**<br>
-> In the same directory as ```settings.py```, create a file called ```.env```. Declare your environment variables in ```.env``` like this:
+> You need to register an application on https://developers.wargaming.net/. Once registered, the application is assigned with an application_id. The application_id is used as a key to identify your application when calling the API. In the same directory as ```settings.py```, create a file called ```.env```. Declare your environment variables in ```.env``` like this:
 ``` bash
 APPLICATION_ID=your_application_id_here
 ```
