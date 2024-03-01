@@ -28,7 +28,12 @@ def get_player_data(request, account_id='1005419424'):
     account_id = f'{account_id}'
     game_modes = ["pvp", "pve", "rank_solo"]
 
+    # ---------------------------------------------------------------------------------
+    # -------------------------- Ship Encyclopedia API Call ---------------------------
+    # ---------------------------------------------------------------------------------
+    
     ship_ency_file_path = os.path.join(settings.BASE_DIR, 'data', 'ship_encyclopedia.json')
+    old_ships_file_path = os.path.join(settings.BASE_DIR, 'data', 'ship_encyclopedia_old_ships.json')
 
     # Try to load the ship encyclopedia from a file if it exists
     if os.path.exists(ship_ency_file_path):
@@ -55,17 +60,42 @@ def get_player_data(request, account_id='1005419424'):
         # Save the fetched data to a file
         with open(ship_ency_file_path, 'w') as file:
             json.dump(ship_encyclopedia, file)
+    
+    if os.path.exists(old_ships_file_path):
+        with open(old_ships_file_path, 'r') as file:
+            old_ship_data = json.load(file)
+        ship_encyclopedia.update(old_ship_data)
+
+    
+    # ---------------------------------------------------------------------------------
+    # -------------------------- Encyclopedia Info API Call ---------------------------
+    # ---------------------------------------------------------------------------------
 
     encyclopedia_info = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/info/',
                                         params={
                                             'application_id': settings.APPLICATION_ID
                                         }).json()
     
+
+    # ---------------------------------------------------------------------------------
+    # ---------------------------- Account Stats API Call -----------------------------
+    # ---------------------------------------------------------------------------------
+    
     account_extra = ["private.port", "statistics.clan", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.rank_solo", "statistics.rank_div2", "statistics.rank_div3"]
     
     account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/?application_id={settings.APPLICATION_ID}&account_id={account_id}&extra=private.port%2Cstatistics.clan%2Cstatistics.oper_div%2Cstatistics.oper_solo%2Cstatistics.pve%2Cstatistics.rank_solo%2Cstatistics.rank_div2%2Cstatistics.rank_div3').json()
 
+
+    # ---------------------------------------------------------------------------------
+    # ------------------------------ Ship Stats API Call ------------------------------
+    # ---------------------------------------------------------------------------------
+
     ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/?application_id={settings.APPLICATION_ID}&account_id={account_id}&extra=oper_div%2Coper_solo%2Cpve%2Crank_solo').json()
+
+
+    # ---------------------------------------------------------------------------------
+    # -------------------------------- Data Processing --------------------------------
+    # ---------------------------------------------------------------------------------
 
     account_data = account_json['data'][account_id]
     ship_data = ship_json['data'][account_id]

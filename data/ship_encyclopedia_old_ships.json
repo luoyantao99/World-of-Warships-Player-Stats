@@ -1,0 +1,79 @@
+{
+    "4287543280": {
+        "description": "With the onset of World War II, the restrictions imposed by treaties were no longer applicable, allowing for the development of cruisers without limitations. The new project, based on the Helena class, featured improved anti-aircraft armament while sacrificing one main battery turret. The ship's hull was widened to accommodate the increased weight and preserve stability. USS Cleveland participated in the landing of troops in North Africa, then was transferred to the Pacific Theater of Operations, where she took part in numerous battles. Over the course of World War II, the ship was awarded 13 battle stars.",
+        "price_gold": 0,
+        "ship_id_str": "PASC208",
+        "has_demo_profile": false,
+        "images": {
+            "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASC208_0e978db1d04d5995a49bdb2441aa19df9563cef3b24cf4dd40401d591eefa7ca.png",
+            "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASC208_5d0711aadc34c6bedc0703d69335c95a0e812aa604ebf4aca14f30a338dd0e5b.png",
+            "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASC208_0b03cc32abbc285258498507b191039ddec3c45ab7142a6ed883bd47cde555ad.png",
+            "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASC208_e0d09ab49633bb351f0ce80901071ad45926965d3fdf2cd610fa6a9872fddc2f.png"
+        },
+        "nation": "usa",
+        "is_premium": false,
+        "ship_id": 4287543280,
+        "tier": 6,
+        "type": "Cruiser",
+        "is_special": false,
+        "name": "Cleveland (Pre Update 0.7.5)"
+    },
+    "4282300400": {
+        "description": "The first cruisers of the U.S. Navy built in accordance with the guidelines outlined by the Washington Naval Treaty. To ensure sufficient firepower, ten 203 mm guns were distributed among four turrets. Due to the narrow hull, triple-gun turrets were mounted in an elevated position. During World War II, USS Pensacola played a significant role in the Battle of Midway as an escort for aircraft carriers Yorktown and Enterprise. She later participated in the campaign in the Solomon Islands, serving as an escort for aircraft carrier Hornet. During the course of the war, the ship was awarded 13 battle stars.",
+        "price_gold": 0,
+        "ship_id_str": "PASC106",
+        "has_demo_profile": false,
+        "images": {
+          "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASC106_01607f57ce654de73a1c2c496f1d093458f40f2506e142040e17cc68fe7b63e5.png",
+          "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASC106_972447d5ef2280ac04759d1bb48862dd9cac546a1424985f3a1c8f7b30c6b040.png",
+          "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASC106_edf06753742c085ef2b4a3c14038b278b90f48c93a10c59251411d44e4721265.png",
+          "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASC106_62224d7c390cf4514c51128e202847541188e2ecd53e8522f96551d70ae206bb.png"
+        },
+        "nation": "usa",
+        "is_premium": false,
+        "ship_id": 4282300400,
+        "tier": 7,
+        "type": "Cruiser",
+        "is_special": false,
+        "name": "Pensacola (Pre Update 0.7.5)"
+    },
+    "4280203248": {
+        "description": "Compared to her predecessor, the new cruiser had a shorter hull because of the linear arrangement of the power plant. This arrangement allowed for increased thickness of the armor belt at the waterline. USS New Orleans participated in the Battle of the Coral Sea, the Battle of Midway, then served in the campaign off the Solomon Islands. During the battle off Cape Tassafaronga, a torpedo hit caused an explosion that severed part of her bow. After repairs, the ship participated in the landings on Saipan, in the Battle of the Philippine Sea, the Battle of Leyte Gulf, and the invasion of Okinawa. Over the course of the war, the ship was awarded 17 battle stars.",
+        "price_gold": 0,
+        "ship_id_str": "PASC107",
+        "has_demo_profile": false,
+        "images": {
+          "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASC107_0313da8b996f2dcc654d6f4aa69d8a19c5ffc29b42a012bcb97768249f77697b.png",
+          "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASC107_49a9ec174fb3ef40d7d34b1a8dd97f2e1adee66795d55e2bb59fa2caa7337846.png",
+          "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASC107_53b22a5346ff44957b91ccdea1686eb630b0ad16ed2c87121f89f2f584423695.png",
+          "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASC107_2d04212adf83ab6bbc5bad6ad2854c65386e2fe1a768927354062b7597b35a3a.png"
+        },
+        "nation": "usa",
+        "is_premium": false,
+        "ship_id": 4280203248,
+        "tier": 8,
+        "type": "Cruiser",
+        "is_special": false,
+        "name": "New Orleans (Pre Update 0.7.5)"
+    },
+    "4277057520": {
+        "description": "With the beginning of World War II, restrictions on building heavy cruisers were lifted. A new ship was based on USS Wichita, but it was decided to go for a more substantial change in the design, strengthening the anti-aircraft armament. USS Baltimore took part in fire support and covering missions in support of such operations as the Kwajalein invasion, the raid on Truk, the Eniwetok seizure, and the Mariana and Palau Islands attacks. She fought in the Battle of the Philippine Sea and participated in the invasion of Okinawa and Iwo Jima.",
+        "price_gold": 0,
+        "ship_id_str": "PASC108",
+        "has_demo_profile": false,
+        "images": {
+          "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASC108_21ac1f822b53652ae435f58f86426f05265e4184ef9eba180ec95fd4c607586b.png",
+          "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASC108_149e764015d9af18b7671c2a949e4db1f8899a2b56c98dabb5ae7f564d37ef6a.png",
+          "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASC108_780b4f8e6ca2e009c388746889b2120683429932a4c486ef23598a302abcc7aa.png",
+          "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASC108_66a616c9955643c6949649a4c3bd2bd1aaa14695c2953e1cf2cf2244f3725c8b.png"
+        },
+        "nation": "usa",
+        "is_premium": false,
+        "ship_id": 4277057520,
+        "tier": 9,
+        "type": "Cruiser",
+        "is_special": false,
+        "name": "Baltimore (Pre Update 0.7.5)"
+    }
+
+}
