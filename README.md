@@ -1,4 +1,6 @@
 #  World of Warships Player Stats
+![Build Status](https://github.com/luoyantao99/World-of-Warships-Player-Stats/actions/workflows/django.yml/badge.svg)
+
 This web application serves as a comprehensive platform for players of "World of Warships" to search and view detailed statistics about their accounts and individual ship performances. Unique to this application is the inclusion of detailed statistics for the often overlooked Operation game mode, filling a gap left by the official player profile.  
 
 ## 🛠️ Features
