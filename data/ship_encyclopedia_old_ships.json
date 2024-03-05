@@ -74,5 +74,176 @@
     "type": "Cruiser",
     "is_special": false,
     "name": "Baltimore (Pre Update 0.7.5)"
+  },
+  "4290754544": {
+    "description": "The achievements of aircraft carriers in the British Royal Navy significantly affected the navies of other states, including the U.S. Navy. Coal transport Jupiter was converted into an aircraft carrier and named USS Langley. The carrier was used to refine technology and for training naval aviation pilots. The ship was later converted into an aircraft transportation vessel. In this new role, she actively participated in the war in the Pacific, transporting U.S. Air Force aircraft. On February 27, 1942, she was heavily damaged by Japanese aircraft and was later sunk by the ships of her own escort.",
+    "price_gold": 0,
+    "ship_id_str": "PASA104",
+    "has_demo_profile": false,
+    "images": {
+      "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASA104_cb705686614cf036e6947347c24e6145f96c400bb11a747e964bc44845af739a.png",
+      "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASA104_0b72d9423a07db3fec7b054ab26d14930a863f55708b67e3030e9143d721a5af.png",
+      "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASA104_dcf957bd0526a5dae0330f1d9b46f2dd73010b69186dd3a0ede208dd44d0c327.png",
+      "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASA104_cc4927c330da884049b67c12704484c4b3b864d38c4bffa6fe5e481b53644e2e.png"
+    },
+    "nation": "usa",
+    "is_premium": false,
+    "ship_id": 4290754544,
+    "tier": 4,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Langley (Pre Update 0.8.0)"
+  },
+  "4292851696": {
+    "description": "A low-speed escort aircraft carrier built from a transport ship. Due to her modest size, the ship carried a relatively small air group. Soon after being commissioned, the aircraft carrier was rearmed with dual-purpose artillery and received reinforced AA defenses.",
+    "price_gold": 0,
+    "ship_id_str": "PASA002",
+    "has_demo_profile": false,
+    "images": {
+      "small": "https://replayswows.com/dist//images/ships/PASA002.png",
+      "large": "https://replayswows.com/dist//images/ships/PASA002.png",
+      "medium": "https://replayswows.com/dist//images/ships/PASA002.png",
+      "contour": ""
+    },
+    "nation": "usa",
+    "is_premium": false,
+    "ship_id": 4292851696,
+    "tier": 5,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Bogue (Pre Update 0.8.0)"
+  },
+  "4288657392": {
+    "description": "A set of speedy light aircraft carriers, converted from several incomplete Cleveland-class cruisers, emerged as a result of the U.S. urgency to acquire new aircraft carriers swiftly amid the war. The primary advantage of Independence-class ships lay in their remarkable speed, allowing them to play an active role alongside strike aircraft carriers in all major U.S. Navy operations in the Pacific.",
+    "price_gold": 0,
+    "ship_id_str": "PASA026",
+    "has_demo_profile": false,
+    "images": {
+      "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASA026_70b28c3d214cb08c293d5247ac0acceb641207d386a03421dd5cdaf6356ec39f.png",
+      "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASA026_30a13e635fa3594d813aafe94c54dc24bfc3322ff7bb93ddc0abf6918e853323.png",
+      "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASA026_9d0ba5ee59688efa69a60624791d15332782da833e5c31442f79ec66c3d300f4.png",
+      "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASA026_6bb6dec0182092d443e9cae07d56770de915db8ca94a934d1e1d2db7acfc18ce.png"
+    },
+    "nation": "usa",
+    "is_premium": false,
+    "ship_id": 4288657392,
+    "tier": 6,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Independence (Pre Update 0.8.0)"
+  },
+  "4284463088": {
+    "description": "USS Ranger was the first American ship designed and built as an aircraft carrier. The technical specifications called for an aircraft carrier with a smooth deck (no superstructure was planned initially), a speed of 32 knots, and a displacement of no more than 18,000 tons. USS Ranger carried an air group that was only slightly inferior in number to the air groups of her larger predecessors. Ranger continued her service until the end of the war in the Atlantic. She escorted the first Arctic convoys from America to Iceland and was subsequently used as an aircraft transport, facilitating the deployment of army units landing in Africa.",
+    "price_gold": 0,
+    "ship_id_str": "PASA106",
+    "has_demo_profile": false,
+    "images": {
+      "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASA106_21c2ea782aafeeb3f5a75c83828862c7ed1d6137e3b1845460db64e8e0dd2808.png",
+      "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASA106_ff0114dd7a537331a970924e96d10aeca39e8325bd6cf8119af1610812f01e25.png",
+      "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASA106_82edea9ed69074dcbc4d26181983b86cbbc6bddc01d1807e229135be14aeaa9e.png",
+      "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASA106_2f1d8c5b55402b02ba78c799466e2aa1e926d0eb568e91e0b4d9eea65ee3fe1f.png"
+    },
+    "nation": "usa",
+    "is_premium": false,
+    "ship_id": 4284463088,
+    "tier": 7,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Ranger (Pre Update 0.8.0)"
+  },
+  "4282365936": {
+    "description": "Following the Washington Naval Conference, a decision was made to convert two Lexington-class battlecruisers into aircraft carriers. These ships exerted a substantial influence on future aircraft carrier design; the flight deck and outer sides of the hangar were integrated into the hull, providing longitudinal strength to the entire ship. Such a design allowed for a fully enclosed hangar space. At the time when the Japanese forces attacked Pearl Harbor, USS Lexington was in the process of transferring planes to Midway. During the Battle of the Coral Sea, USS Lexington sustained several bomb hits. Eventually, the decision was taken to scuttle the ship, and destroyer USS Phelps was tasked with sinking Lexington using torpedoes.",
+    "price_gold": 0,
+    "ship_id_str": "PASA108",
+    "has_demo_profile": false,
+    "images": {
+      "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASA108_386d630f0633afb7d8780c7cf00a0ba01965695be83953501f4da7aad4d60bb1.png",
+      "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASA108_dad8f6642b52fbcfb987e75a477dc9c38789b4b45055ab008d9aaabcb4b9f49d.png",
+      "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASA108_f7f418524847672a533278308d8c3d9e0fa85a00efb1f0ed6751b0f046776a3c.png",
+      "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASA108_d3cb08d4af8753a5af78883a01adbbad227f4b5600a7c7760c7aec5916ad099b.png"
+    },
+    "nation": "usa",
+    "is_premium": false,
+    "ship_id": 4282365936,
+    "tier": 8,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Lexington (Pre Update 0.8.0)"
+  },
+  "4281317360": {
+    "description": "The first Essex-class aircraft carriers were ordered as part of the Navy's expansion program of 1938. The decision to construct more ships in the series was made after the Pacific war had broken out. The Essex-class aircraft carriers were significant for several reasons. They were large and fast; had strong air defenses; could carry and launch a large air group rapidly; and, importantly, they were available in substantial numbers. Through a combination of these qualities, they played a pivotal role in the U.S. Navy's achievements in the Pacific during the final 2 years of World War II.",
+    "price_gold": 0,
+    "ship_id_str": "PASA020",
+    "has_demo_profile": false,
+    "images": {
+      "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASA020_5fd380fbfbfc2e6421c084befd6861e2fd8da020d4c086125fd59129dd0c3071.png",
+      "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASA020_ca723c7cb771e2eefb2591087b87e2d7fcd2269b254c52c485902f4599e4081f.png",
+      "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASA020_70a85b2c0652a33885bd4aee513a8201b91cf5cff33806ab7f91788431f8e372.png",
+      "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASA020_65df08a989f2fe66b444566f6aa3ed9232381fde27ac6f7776f0dec512e0e79e.png"
+    },
+    "nation": "usa",
+    "is_premium": false,
+    "ship_id": 4281317360,
+    "tier": 9,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Essex (Pre Update 0.8.0)"
+  },
+  "4279220208": {
+    "description": "Taking into consideration the lessons learned from the Pacific battles in 1942, the U.S. Navy started designing an aircraft carrier with a reinforced hangar and flight deck. The new aircraft carrier design aimed to offer protection against 203 mm shells and 610 mm torpedoes. USS Midway was commissioned eight days after the end of World War II. Midway held the status of being the largest ship in the world until 1955. In 2004, she found her final home in San Diego, where she was transformed into a museum ship.",
+    "price_gold": 0,
+    "ship_id_str": "PASA110",
+    "has_demo_profile": false,
+    "images": {
+      "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASA110_4d771eaae5b865a45b94b367db15a494aa27262a7d90c215fdc6bf447e6ee219.png",
+      "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASA110_e73ff99e39a5ea997518004c5c90290fbada40e27d87031e8473cdf93354fac1.png",
+      "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASA110_5ea144e17c74718fcd7570fb532c43a0a79946001cfee72490d6e7f397c9174a.png",
+      "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASA110_6771c3604de20bde7b949eebb4e62827499ade8bd0c71e145cec7c153e41c899.png"
+    },
+    "nation": "usa",
+    "is_premium": false,
+    "ship_id": 4279220208,
+    "tier": 10,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Midway (Pre Update 0.8.0)"
+  },
+  "3763320816": {
+    "description": "In 1943, Admiral King demanded that two light aircraft carriers be built per year to compensate for anticipated losses. The first two ships were to enter service in December 1945. The new ships were to be based on the hull of the Baltimore-class heavy cruiser. Only two ships were built—no new ones were ordered due to the war ending. Initially, USS Saipan, which was deemed too small to accommodate jets, was utilized for naval cadet training, training maneuvers, and patrol and diplomatic missions.",
+    "price_gold": 9500,
+    "ship_id_str": "PASA528",
+    "has_demo_profile": false,
+    "images": {
+      "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASA528_916e92731e2b592523a82077d1c8c7124e1f7edc4ac7114b6cbc3fa3d60fbad6.png",
+      "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASA528_647187d68c75c061853fb7819af66202df4aee4a0c153df3b2b41f9edca2cbb9.png",
+      "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASA528_1199324e29bfffe15a28aba1c3e3002272a764490bacbf5706013d8a9d986dcf.png",
+      "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASA528_e3579db2d9a130c1e255d658f546906c5943b156d9ff375e1e6e8b42a502fc00.png"
+    },
+    "nation": "usa",
+    "is_premium": true,
+    "ship_id": 3763320816,
+    "tier": 7,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Saipan (Pre Update 0.8.0)"
+  },
+  "3762272240": {
+    "description": "USS Enterprise, the second Yorktown-class carrier, played a role in raids on the Marshall Islands, in the Doolittle Raid, in the Battle of Midway, on the Santa Cruz Islands, and at Guadalcanal. After a major overhaul, the ship participated in virtually every campaign in the Pacific, with the exception of the Aleutian campaign. The aircraft carrier participated in the Battle of the Philippine Sea and the Battle of Leyte Gulf. She also provided air support during the landings on Iwo Jima and Okinawa. The ship earned an impressive 20 battle stars throughout her years of service, which positioned her as the most decorated U.S. Navy ship of the war.",
+    "price_gold": 14000,
+    "ship_id_str": "PASA518",
+    "has_demo_profile": false,
+    "images": {
+      "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PASA518_1d6166593fe612e7436a4cd708d938a973cee0a65c37c5c7479fd817644b8626.png",
+      "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PASA518_958bbd01b8a0863379822818a0b76125e464ae55eb2e8c02be531aa1b064108a.png",
+      "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PASA518_847da78e0eb9a4744282d2829d3ea36089bdd0f9071dae0281dbc2f00862f8c9.png",
+      "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PASA518_cb06508ebef3168d63ea53b723a0d0165f475898b56cf7840b2aa92cff79c720.png"
+    },
+    "nation": "usa",
+    "is_premium": true,
+    "ship_id": 3762272240,
+    "tier": 8,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Enterprise (Pre Update 0.8.0)"
   }
 }
