@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     {% load static %}
     {% load humanize %}
@@ -7,15 +8,16 @@
     <title>World of Warships Player Search</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+
 <body>
-    <td style="padding-right: 0px;">
+    <div class="blur-background">
         <div class="search-box-standalone">
             <input class="player-search" id="player-search" placeholder="Search for a player...">
             <div class="search-results-container" id="search-results"">
-                <!-- Dynamically inserted search result items will go here -->
+                    <!-- Dynamically inserted search result items will go here -->
             </div>
         </div>
-    </td>
+    </div>
 
     <script>
         // ---------------------------------------------------------------------------------

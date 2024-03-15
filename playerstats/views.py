@@ -66,8 +66,8 @@ def get_player_data(request, account_id):
                 else:
                     print(f"Failed to retrieve data for {nation} {ship_type}")
         # Save the fetched data to a file
-        with open(ship_ency_file_path, 'w') as file:
-            json.dump(ship_encyclopedia, file)
+        with open(ship_ency_file_path, 'w', encoding='utf-8') as file:
+            json.dump(ship_encyclopedia, file, indent=4, ensure_ascii=False)
     
     if os.path.exists(old_ships_file_path):
         with open(old_ships_file_path, 'r') as file:
