@@ -45,7 +45,7 @@ def get_player_data(request, account_id):
 
     # Try to load the ship encyclopedia from a file if it exists
     if os.path.exists(ship_ency_file_path):
-        with open(ship_ency_file_path, 'r') as file:
+        with open(ship_ency_file_path, 'r', encoding='utf-8') as file:
             ship_encyclopedia = json.load(file)
     else:
         # If the file does not exist, fetch the data and save it to a file
@@ -66,7 +66,7 @@ def get_player_data(request, account_id):
                 else:
                     print(f"Failed to retrieve data for {nation} {ship_type}")
         # Save the fetched data to a file
-        with open(ship_ency_file_path, 'w', encoding='utf-8') as file:
+        with open(ship_ency_file_path, 'w') as file:
             json.dump(ship_encyclopedia, file, indent=4, ensure_ascii=False)
     
     if os.path.exists(old_ships_file_path):
