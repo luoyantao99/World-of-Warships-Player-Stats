@@ -1,13 +1,21 @@
 import json
 import os
 import requests
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.template import loader
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 import datetime
+
+
+def player_search(request):
+    return render(request, 'player_search.html')
+
+
+def private_profile(request):
+    return render(request, 'private_profile.html')
 
 
 @csrf_exempt
@@ -24,7 +32,7 @@ def search_players(request):
         return JsonResponse(response.json())
     
 
-def get_player_data(request, account_id='1005419424'):
+def get_player_data(request, account_id):
     account_id = f'{account_id}'
     game_modes = ["pvp", "pve", "rank_solo"]
 
@@ -98,6 +106,14 @@ def get_player_data(request, account_id='1005419424'):
     # ---------------------------------------------------------------------------------
 
     account_data = account_json['data'][account_id]
+
+    is_empty_account = not account_data
+    is_private_account = account_data['hidden_profile']
+
+    if is_empty_account or is_private_account:
+        return redirect('private_profile')
+
+
     ship_data = ship_json['data'][account_id]
 
     # adjust time to human readable time

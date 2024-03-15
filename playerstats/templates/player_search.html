@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    {% load humanize %}
+
+    <title>World of Warships Player Search</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <td style="padding-right: 0px;">
+        <div class="search-box-standalone">
+            <input class="player-search" id="player-search" placeholder="Search for a player...">
+            <div class="search-results-container" id="search-results"">
+                <!-- Dynamically inserted search result items will go here -->
+            </div>
+        </div>
+    </td>
+
+    <script>
+        // ---------------------------------------------------------------------------------
+        // --------------------------------- Player Search ---------------------------------
+        // ---------------------------------------------------------------------------------
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('player-search'); // Your search input ID
+            const resultsContainer = document.getElementById('search-results'); // A container to hold the results
+
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value;
+                fetch(`/search_players/?search=${encodeURIComponent(searchTerm)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Clear previous results
+                        resultsContainer.innerHTML = '';
+                        // Add new results to resultsContainer
+                        data['data'].forEach(player => {
+                            const playerElement = document.createElement('div');
+                            playerElement.textContent = player.nickname;
+                            playerElement.dataset.accountId = player.account_id;
+                            playerElement.classList.add('search-result-item');
+                            resultsContainer.appendChild(playerElement);
+
+                            // Add click event to each result to update the player stats
+                            playerElement.addEventListener('click', () => {
+                                const accountID = playerElement.dataset.accountId;
+                                // Call a function to update stats using this accountID
+                                updatePlayerStats(accountID);
+                            });
+                        });
+                    });
+            });
+        });
+
+        function updatePlayerStats(accountID) {
+            window.location.href = `/player_stats/${accountID}`;
+        }
+    </script>
+</body>
+</html>
