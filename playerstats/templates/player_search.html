@@ -16,20 +16,16 @@
             <div class="search-box-standalone">
                 <input class="player-search" id="player-search" placeholder="Search for a player...">
                 <div class="search-results-container" id="search-results"">
-                        <!-- Dynamically inserted search result items will go here -->
+                    <!-- Dynamically inserted search result items will go here -->
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ---------------------------------------------------------------------------------
-        // --------------------------------- Player Search ---------------------------------
-        // ---------------------------------------------------------------------------------
-
         document.addEventListener('DOMContentLoaded', () => {
-            const searchInput = document.getElementById('player-search'); // Your search input ID
-            const resultsContainer = document.getElementById('search-results'); // A container to hold the results
+            const searchInput = document.getElementById('player-search');
+            const resultsContainer = document.getElementById('search-results');
 
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value;

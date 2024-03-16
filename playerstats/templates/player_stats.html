@@ -11,7 +11,7 @@
 
 
 <body>
-    
+
     <table style="white-space:nowrap; width: 97%; margin: auto 1.5%;">
         <tr>
             <td style="text-align: left; padding-left: 25px; width: 20%;">
@@ -51,7 +51,7 @@
 
 
     <!--  ------------------------------------------------------------------------------------------ -->
-    <!--  -------------------------------------- PVP and PVE --------------------------------------- -->
+    <!--  ------------------------------------- Overall Stats -------------------------------------- -->
     <!--  ------------------------------------------------------------------------------------------ -->
 
     <div id="non_oper" class="table-container">
@@ -60,12 +60,6 @@
         <br></br>
         <div class="weapon-stats-table"></div>
     </div>
-
-
-
-    <!--  ------------------------------------------------------------------------------------------ -->
-    <!--  --------------------------------------- Operations --------------------------------------- -->
-    <!--  ------------------------------------------------------------------------------------------ -->
 
     <div id="oper" class="table-container hidden">
         <!-- Table structure for Operations -->
@@ -113,7 +107,7 @@
         const nf0d = new Intl.NumberFormat('en-US', {maximumFractionDigits: 0});
         const nf2d = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
-        var currentGameMode = 'pvp'; // Default game mode onload
+        var currentGameMode = 'pvp'; // Default Mode
         const gameModeMapping = {
             "Random Battles": "pvp",
             "Co-op Battles": "pve",
@@ -521,8 +515,8 @@
             if (isImage) {
                 var img = document.createElement('img');
                 img.src = content;
-                img.alt = 'Image'; // You might want to use a more descriptive alt text
-                img.className = 'cell-image'; // Add a class for styling if needed
+                img.alt = 'Image';
+                img.className = 'cell-image';
                 cell.appendChild(img);
             }
             else {
@@ -620,9 +614,9 @@
 
             // Create a new row for the ship stats
             var detailsRow = document.createElement('tr');
-            detailsRow.className = 'details-row'; // Add a class for styling if needed
+            detailsRow.className = 'details-row';
             var detailsCell = detailsRow.insertCell(0);
-            detailsCell.colSpan = clickedRow.cells.length; // Span across all columns
+            detailsCell.colSpan = clickedRow.cells.length;
 
             // Create the stats container within the details cell
             var stats_container = document.createElement('div');
@@ -684,8 +678,8 @@
         // ---------------------------------------------------------------------------------
 
         document.addEventListener('DOMContentLoaded', () => {
-            const searchInput = document.getElementById('player-search'); // Your search input ID
-            const resultsContainer = document.getElementById('search-results'); // A container to hold the results
+            const searchInput = document.getElementById('player-search');
+            const resultsContainer = document.getElementById('search-results');
 
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value;
@@ -717,8 +711,7 @@
             window.location.href = `/player_stats/${accountID}`;
         }
 
-
-        // On page load
+        
         window.onload = function() {
             show_player_stats();
             populate_ship_list();
