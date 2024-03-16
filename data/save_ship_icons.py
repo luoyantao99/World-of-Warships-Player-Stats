@@ -3,7 +3,7 @@ import requests
 import os
 
 
-with open('ship_encyclopedia.json', 'r') as file:
+with open('ship_encyclopedia.json', 'r', encoding='utf-8') as file:
     ships_data = json.load(file)
 
 images_directory = 'ship_profiles'
