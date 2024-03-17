@@ -167,34 +167,27 @@ def get_player_data(request, account_id):
     account_data['updated_at'] = datetime.datetime.fromtimestamp(account_data['updated_at'])
     account_data['logout_at'] = datetime.datetime.fromtimestamp(account_data['logout_at'])
 
-    # combine operations data
-    fill_oper_wins_by_tasks(account_data['statistics'])
-    combine_oper_stats(account_data['statistics'])
+    
+    # process account wide stats
+    for mode in game_modes:
+        process_stats(account_data['statistics'], mode)
+    
+    # process account wide operations stats
+    process_oper_stats(account_data['statistics'])
 
-    # calculate total agro
-    calculate_total_agro(account_data['statistics'], game_modes)
 
-    # calculate kd ratio
-    calculate_kd(account_data['statistics'], game_modes)
-
-    # calculate avg stats
-    calculate_avg_stats(account_data['statistics'], game_modes)
-
-    # calculate hit ratio
-    calculate_hit_ratio(account_data['statistics'], game_modes)
-
-    # process data for individual ships
+    # process individual ship stats
     for ship in ship_data:
-        fill_oper_wins_by_tasks(ship)
-        combine_oper_stats(ship)
-        calculate_total_agro(ship, game_modes)
-        calculate_kd(ship, game_modes)
-        calculate_avg_stats(ship, game_modes)
+        for mode in game_modes:
+            process_stats(ship, mode)
+        
+        # operation stats
+        process_oper_stats(ship)
         oper_battles = ship['oper']['battles']
         if oper_battles != 0:
             ship['oper']['avg_xp'] = '{:.2f}'.format(ship['oper']['xp'] / oper_battles)
-        # calculate_hit_ratio(ship, game_modes)
-        
+    
+    
     # process clan battle stats
     cw_stats_processed = process_cw_stats(cw_seasons, cw_stats)
 
@@ -211,7 +204,48 @@ def get_player_data(request, account_id):
 
 
 
-def combine_oper_stats(json):
+def process_stats(json, mode):
+    # Calculate Total Potential Damage
+    json[mode]['total_agro'] = json[mode]['art_agro'] + json[mode]['torpedo_agro']
+
+    # Calculate KD Ratio
+    death = json[mode]['battles'] - json[mode]['survived_battles']
+    if death == 0:
+        death = 1
+    json[mode]['kd'] = '{:.2f}'.format(json[mode]['frags'] / death)
+
+    # Calculate AVG Stats
+    battles = json[mode]['battles']
+    if battles != 0:
+        json[mode]['avg_damage_dealt'] = '{:.2f}'.format(json[mode]['damage_dealt'] / battles)
+        json[mode]['avg_xp'] = '{:.2f}'.format(json[mode]['xp'] / battles)
+        json[mode]['avg_frags'] = '{:.2f}'.format(json[mode]['frags'] / battles)
+        json[mode]['avg_planes_killed'] = '{:.2f}'.format(json[mode]['planes_killed'] / battles)
+
+        json[mode]['avg_agro'] = '{:.2f}'.format(json[mode]['total_agro'] / battles)
+        
+        json[mode]['avg_ships_spotted'] = '{:.2f}'.format(json[mode]['ships_spotted'] / battles)
+        json[mode]['avg_damage_scouting'] = '{:.2f}'.format(json[mode]['damage_scouting'] / battles)
+    
+    # Calculate Hit Ratio
+    weapon_types = ['main_battery','second_battery','torpedoes']
+    for weapon in weapon_types:
+        weapon_stats = json[mode][weapon]
+        shots = weapon_stats['shots']
+        if shots == 0:
+            shots = 1
+        weapon_stats['hit_ratio'] = '{:.2%}'.format(weapon_stats['hits'] / shots)
+        
+
+def process_oper_stats(json):
+    # Fill in Missing wins_by_tasks Data
+    for i in range(6):
+        if f'{i}' not in json['oper_div']['wins_by_tasks']:
+            json['oper_div']['wins_by_tasks'][f'{i}'] = 0
+        if f'{i}' not in json['oper_solo']['wins_by_tasks']:
+            json['oper_solo']['wins_by_tasks'][f'{i}'] = 0
+    
+    # Calculate Overall Stats
     json['oper'] = {"wins":-1,"losses":-1,"battles":-1,"survived_wins":-1,"xp":-1,"wins_by_tasks":{"0":-1,"1":-1,"2":-1,"3":-1,"4":-1,"5":-1},"survived_battles":-1}
 
     items = ['battles', 'wins', 'losses', 'survived_battles', 'survived_wins', 'xp']
@@ -221,53 +255,6 @@ def combine_oper_stats(json):
     for i in range(6):
         json['oper']['wins_by_tasks'][f'{i}'] = json['oper_solo']['wins_by_tasks'][f'{i}'] + \
                                                 json['oper_div']['wins_by_tasks'][f'{i}']
-
-
-def fill_oper_wins_by_tasks(json):
-    for i in range(6):
-        if f'{i}' not in json['oper_div']['wins_by_tasks']:
-            json['oper_div']['wins_by_tasks'][f'{i}'] = 0
-        if f'{i}' not in json['oper_solo']['wins_by_tasks']:
-            json['oper_solo']['wins_by_tasks'][f'{i}'] = 0
-
-
-def calculate_hit_ratio(json, game_modes):
-    weapon_types = ['main_battery','second_battery','torpedoes']
-    for mode in game_modes:
-        for weapon in weapon_types:
-            weapon_stats = json[mode][weapon]
-            shots = weapon_stats['shots']
-            if shots == 0:
-                shots = 1
-            weapon_stats['hit_ratio'] = '{:.2%}'.format(weapon_stats['hits'] / shots)
-
-
-def calculate_total_agro(json, game_modes):
-    for mode in game_modes:
-        json[mode]['total_agro'] = json[mode]['art_agro'] + json[mode]['torpedo_agro']
-
-
-def calculate_kd(json, game_modes):
-    for mode in game_modes:
-        death = json[mode]['battles'] - json[mode]['survived_battles']
-        if death == 0:
-            death = 1
-        json[mode]['kd'] = '{:.2f}'.format(json[mode]['frags'] / death)
-
-
-def calculate_avg_stats(json, game_modes):
-    for mode in game_modes:
-        battles = json[mode]['battles']
-        if battles != 0:
-            json[mode]['avg_damage_dealt'] = '{:.2f}'.format(json[mode]['damage_dealt'] / battles)
-            json[mode]['avg_xp'] = '{:.2f}'.format(json[mode]['xp'] / battles)
-            json[mode]['avg_frags'] = '{:.2f}'.format(json[mode]['frags'] / battles)
-            json[mode]['avg_planes_killed'] = '{:.2f}'.format(json[mode]['planes_killed'] / battles)
-
-            json[mode]['avg_agro'] = '{:.2f}'.format(json[mode]['total_agro'] / battles)
-            
-            json[mode]['avg_ships_spotted'] = '{:.2f}'.format(json[mode]['ships_spotted'] / battles)
-            json[mode]['avg_damage_scouting'] = '{:.2f}'.format(json[mode]['damage_scouting'] / battles)
 
 
 def process_cw_stats(cw_seasons, cw_stats):
