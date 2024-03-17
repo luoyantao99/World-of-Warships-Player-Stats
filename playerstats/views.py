@@ -8,6 +8,7 @@ from django.template import loader
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 import datetime
+import copy
 
 
 def player_search(request):
@@ -35,9 +36,80 @@ def search_players(request):
 def get_player_data(request, account_id):
     account_id = f'{account_id}'
     game_modes = ["pvp", "pve", "rank_solo"]
+    
+    # ---------------------------------------------------------------------------------
+    # --------------------------- Get Account & Ship Stats ----------------------------
+    # ---------------------------------------------------------------------------------
+    
+    account_extras = ["private.port", "statistics.clan", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.rank_solo", "statistics.rank_div2", "statistics.rank_div3"]
+    
+    account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/',
+                                params={
+                                    'application_id': settings.APPLICATION_ID,
+                                    'account_id': account_id,
+                                    'extra': ','.join(account_extras)
+                                }).json()
+
+
+    ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/',
+                            params={
+                                'application_id': settings.APPLICATION_ID,
+                                'account_id': account_id,
+                                'extra': ','.join(["oper_div", "oper_solo", "pve", "rank_solo"])
+                            }).json()
+    
+    
+    # ---------------------------------------------------------------------------------
+    # ----------------------------- Get Clan Battle Stats -----------------------------
+    # ---------------------------------------------------------------------------------
+    
+    cw_seasons = {}
+    clan_battle_file_path = os.path.join(settings.BASE_DIR, 'data', 'cw_seasons.json')
+    
+    # Try to load the ship encyclopedia from a file if it exists
+    if os.path.exists(clan_battle_file_path):
+        with open(clan_battle_file_path, 'r', encoding='utf-8') as file:
+            cw_seasons = json.load(file)
+    else:
+        # If the file does not exist, fetch the data
+        response = requests.get(f'https://api.worldofwarships.com/wows/clans/season/',
+                                params={
+                                    'application_id': settings.APPLICATION_ID
+                                })
+        if response.status_code == 200:
+            cw_seasons = response.json()['data']
+        else:
+            print(f"Failed to retrieve data for Clan Battle Seasons")
+            
+        # Save the data to file
+        with open(clan_battle_file_path, 'w') as file:
+            json.dump(cw_seasons, file, indent=4, ensure_ascii=False)
+    
+    
+    cw_stats = {}
+    response = requests.get(f'https://api.worldofwarships.com/wows/clans/seasonstats/',
+                            params={
+                                'application_id': settings.APPLICATION_ID,
+                                'account_id': account_id
+                            })
+    if response.status_code == 200:
+        cw_stats = response.json()['data'][account_id]['seasons']
+    else:
+        print(f"Failed to retrieve data for Clan Battle Stats")
+    
+    
+    # ---------------------------------------------------------------------------------
+    # ----------------------------- Get Encyclopedia Info -----------------------------
+    # ---------------------------------------------------------------------------------
+    
+    encyclopedia_info = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/info/',
+                                        params={
+                                            'application_id': settings.APPLICATION_ID
+                                        }).json()
+
 
     # ---------------------------------------------------------------------------------
-    # -------------------------- Ship Encyclopedia API Call ---------------------------
+    # -------------------------- Get Ship Encyclopedia Data ---------------------------
     # ---------------------------------------------------------------------------------
     
     ship_ency_file_path = os.path.join(settings.BASE_DIR, 'data', 'ship_encyclopedia.json')
@@ -74,42 +146,6 @@ def get_player_data(request, account_id):
             old_ship_data = json.load(file)
         ship_encyclopedia.update(old_ship_data)
 
-    
-    # ---------------------------------------------------------------------------------
-    # -------------------------- Encyclopedia Info API Call ---------------------------
-    # ---------------------------------------------------------------------------------
-
-    encyclopedia_info = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/info/',
-                                        params={
-                                            'application_id': settings.APPLICATION_ID
-                                        }).json()
-    
-
-    # ---------------------------------------------------------------------------------
-    # ------------------------ Account & Ship Stats API Call --------------------------
-    # ---------------------------------------------------------------------------------
-    
-    account_extras = ["private.port", "statistics.clan", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.rank_solo", "statistics.rank_div2", "statistics.rank_div3"]
-    
-    account_json = requests.get(
-            f'https://api.worldofwarships.com/wows/account/info/',
-            params={
-                'application_id': settings.APPLICATION_ID,
-                'account_id': account_id,
-                'extra': ','.join(account_extras)
-            }
-        ).json()
-
-
-    ship_json = requests.get(
-            f'https://api.worldofwarships.com/wows/ships/stats/',
-            params={
-                'application_id': settings.APPLICATION_ID,
-                'account_id': account_id,
-                'extra': ','.join(["oper_div", "oper_solo", "pve", "rank_solo"])
-            }
-        ).json()
-    
 
     # ---------------------------------------------------------------------------------
     # -------------------------------- Data Processing --------------------------------
@@ -158,11 +194,14 @@ def get_player_data(request, account_id):
         if oper_battles != 0:
             ship['oper']['avg_xp'] = '{:.2f}'.format(ship['oper']['xp'] / oper_battles)
         # calculate_hit_ratio(ship, game_modes)
-
+        
+    # process clan battle stats
+    cw_stats_processed = process_cw_stats(cw_seasons, cw_stats)
 
     context = {
         'account_data': account_data, 
         'ship_data': ship_data,
+        'cw_data': cw_stats_processed,
         'encyclopedia_info': encyclopedia_info['data'],
         'ship_encyclopedia': ship_encyclopedia
     }
@@ -219,15 +258,37 @@ def calculate_kd(json, game_modes):
 def calculate_avg_stats(json, game_modes):
     for mode in game_modes:
         battles = json[mode]['battles']
-        if battles == 0:
-            continue
-        json[mode]['avg_damage_dealt'] = '{:.2f}'.format(json[mode]['damage_dealt'] / battles)
-        json[mode]['avg_xp'] = '{:.2f}'.format(json[mode]['xp'] / battles)
-        json[mode]['avg_frags'] = '{:.2f}'.format(json[mode]['frags'] / battles)
-        json[mode]['avg_planes_killed'] = '{:.2f}'.format(json[mode]['planes_killed'] / battles)
+        if battles != 0:
+            json[mode]['avg_damage_dealt'] = '{:.2f}'.format(json[mode]['damage_dealt'] / battles)
+            json[mode]['avg_xp'] = '{:.2f}'.format(json[mode]['xp'] / battles)
+            json[mode]['avg_frags'] = '{:.2f}'.format(json[mode]['frags'] / battles)
+            json[mode]['avg_planes_killed'] = '{:.2f}'.format(json[mode]['planes_killed'] / battles)
 
-        json[mode]['avg_agro'] = '{:.2f}'.format(json[mode]['total_agro'] / battles)
+            json[mode]['avg_agro'] = '{:.2f}'.format(json[mode]['total_agro'] / battles)
+            
+            json[mode]['avg_ships_spotted'] = '{:.2f}'.format(json[mode]['ships_spotted'] / battles)
+            json[mode]['avg_damage_scouting'] = '{:.2f}'.format(json[mode]['damage_scouting'] / battles)
+
+
+def process_cw_stats(cw_seasons, cw_stats):
+    processed = {}
+    for season in cw_seasons:
+        processed[season] = {}
+        processed[season]['season_id'] = cw_seasons[season]['season_id']
+        processed[season]['name'] = cw_seasons[season]['name']
         
-        json[mode]['avg_ships_spotted'] = '{:.2f}'.format(json[mode]['ships_spotted'] / battles)
-        json[mode]['avg_damage_scouting'] = '{:.2f}'.format(json[mode]['damage_scouting'] / battles)
-
+        max_tier = cw_seasons[season]['ship_tier_max']
+        min_tier = cw_seasons[season]['ship_tier_min']
+        if max_tier == min_tier:
+            processed[season]['tier'] = max_tier
+        else:
+            processed[season]['tier'] = f'{min_tier}-{max_tier}'
+            
+        processed[season]['start_time'] = datetime.datetime.fromtimestamp(cw_seasons[season]['start_time'])
+        processed[season]['finish_time'] = datetime.datetime.fromtimestamp(cw_seasons[season]['finish_time'])
+        
+    for entry in cw_stats:
+        seasonID = entry['season_id']
+        processed[f'{seasonID}']['stats'] = copy.deepcopy(entry)
+        
+    return processed

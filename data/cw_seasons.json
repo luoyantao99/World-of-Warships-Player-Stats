@@ -1,0 +1,1189 @@
+{
+    "1": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            }
+        ],
+        "name": "Hotspot",
+        "ship_tier_max": 10,
+        "finish_time": 1513659600,
+        "ship_tier_min": 10,
+        "start_time": 1508338800,
+        "division_points": 100,
+        "season_id": 1
+    },
+    "2": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Islands of Ice",
+        "ship_tier_max": 10,
+        "finish_time": 1523854800,
+        "ship_tier_min": 10,
+        "start_time": 1518307140,
+        "division_points": 100,
+        "season_id": 2
+    },
+    "3": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Sleeping Giant",
+        "ship_tier_max": 10,
+        "finish_time": 1534766400,
+        "ship_tier_min": 10,
+        "start_time": 1530370800,
+        "division_points": 100,
+        "season_id": 3
+    },
+    "4": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "North",
+        "ship_tier_max": 10,
+        "finish_time": 1548655200,
+        "ship_tier_min": 10,
+        "start_time": 1543406400,
+        "division_points": 100,
+        "season_id": 4
+    },
+    "5": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Land of Fire",
+        "ship_tier_max": 10,
+        "finish_time": 1559109600,
+        "ship_tier_min": 10,
+        "start_time": 1554274800,
+        "division_points": 100,
+        "season_id": 5
+    },
+    "6": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Neighbors",
+        "ship_tier_max": 8,
+        "finish_time": 1568613600,
+        "ship_tier_min": 8,
+        "start_time": 1564552800,
+        "division_points": 100,
+        "season_id": 6
+    },
+    "7": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Crash Zone Alpha",
+        "ship_tier_max": 10,
+        "finish_time": 1575871200,
+        "ship_tier_min": 10,
+        "start_time": 1571810400,
+        "division_points": 100,
+        "season_id": 7
+    },
+    "8": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Sea of Fortune",
+        "ship_tier_max": 10,
+        "finish_time": 1583733600,
+        "ship_tier_min": 10,
+        "start_time": 1579672800,
+        "division_points": 100,
+        "season_id": 8
+    },
+    "9": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Warrior's Path",
+        "ship_tier_max": 10,
+        "finish_time": 1591596000,
+        "ship_tier_min": 10,
+        "start_time": 1586930400,
+        "division_points": 100,
+        "season_id": 9
+    },
+    "10": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Loop",
+        "ship_tier_max": 6,
+        "finish_time": 1598853600,
+        "ship_tier_min": 6,
+        "start_time": 1594792800,
+        "division_points": 100,
+        "season_id": 10
+    },
+    "11": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Northern Waters",
+        "ship_tier_max": 10,
+        "finish_time": 1606111200,
+        "ship_tier_min": 10,
+        "start_time": 1601877600,
+        "division_points": 100,
+        "season_id": 11
+    },
+    "12": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Greece",
+        "ship_tier_max": 9,
+        "finish_time": 1618207200,
+        "ship_tier_min": 9,
+        "start_time": 1613973600,
+        "division_points": 100,
+        "season_id": 12
+    },
+    "13": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Tears of the Desert",
+        "ship_tier_max": 10,
+        "finish_time": 1626069600,
+        "ship_tier_min": 10,
+        "start_time": 1621836000,
+        "division_points": 100,
+        "season_id": 13
+    },
+    "14": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Piranha",
+        "ship_tier_max": 6,
+        "finish_time": 1633327200,
+        "ship_tier_min": 6,
+        "start_time": 1629093600,
+        "division_points": 100,
+        "season_id": 14
+    },
+    "15": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Narwhal",
+        "ship_tier_max": 10,
+        "finish_time": 1642399200,
+        "ship_tier_min": 10,
+        "start_time": 1636956000,
+        "division_points": 100,
+        "season_id": 15
+    },
+    "16": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Albatross",
+        "ship_tier_max": 10,
+        "finish_time": 1649656800,
+        "ship_tier_min": 10,
+        "start_time": 1645423200,
+        "division_points": 100,
+        "season_id": 16
+    },
+    "17": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Caiman",
+        "ship_tier_max": 11,
+        "finish_time": 1657519200,
+        "ship_tier_min": 10,
+        "start_time": 1653285600,
+        "division_points": 100,
+        "season_id": 17
+    },
+    "18": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Sirenidae",
+        "ship_tier_max": 8,
+        "finish_time": 1664776800,
+        "ship_tier_min": 8,
+        "start_time": 1660543200,
+        "division_points": 100,
+        "season_id": 18
+    },
+    "19": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Barracuda",
+        "ship_tier_max": 10,
+        "finish_time": 1673848800,
+        "ship_tier_min": 10,
+        "start_time": 1667800800,
+        "division_points": 100,
+        "season_id": 19
+    },
+    "20": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Salamander",
+        "ship_tier_max": 10,
+        "finish_time": 1681106400,
+        "ship_tier_min": 10,
+        "start_time": 1676872800,
+        "division_points": 100,
+        "season_id": 20
+    },
+    "21": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Cachalot",
+        "ship_tier_max": 9,
+        "finish_time": 1689573600,
+        "ship_tier_min": 8,
+        "start_time": 1685340000,
+        "division_points": 100,
+        "season_id": 21
+    },
+    "22": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Anaconda",
+        "ship_tier_max": 11,
+        "finish_time": 1696831200,
+        "ship_tier_min": 10,
+        "start_time": 1692597600,
+        "division_points": 100,
+        "season_id": 22
+    },
+    "23": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Triton",
+        "ship_tier_max": 10,
+        "finish_time": 1704693600,
+        "ship_tier_min": 10,
+        "start_time": 1699855200,
+        "division_points": 100,
+        "season_id": 23
+    },
+    "24": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Sea Dragon",
+        "ship_tier_max": 11,
+        "finish_time": 1712556000,
+        "ship_tier_min": 10,
+        "start_time": 1707717600,
+        "division_points": 100,
+        "season_id": 24
+    },
+    "301": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            }
+        ],
+        "name": "Northern Waters",
+        "ship_tier_max": 8,
+        "finish_time": 1606716000,
+        "ship_tier_min": 8,
+        "start_time": 1606456800,
+        "division_points": 100,
+        "season_id": 301
+    },
+    "201": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Land of Fire",
+        "ship_tier_max": 8,
+        "finish_time": 1562500800,
+        "ship_tier_min": 8,
+        "start_time": 1562396400,
+        "division_points": 100,
+        "season_id": 201
+    },
+    "202": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Land of Fire",
+        "ship_tier_max": 10,
+        "finish_time": 1563710400,
+        "ship_tier_min": 10,
+        "start_time": 1563606000,
+        "division_points": 100,
+        "season_id": 202
+    },
+    "203": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Neighbors",
+        "ship_tier_max": 7,
+        "finish_time": 1569153600,
+        "ship_tier_min": 7,
+        "start_time": 1569049200,
+        "division_points": 100,
+        "season_id": 203
+    },
+    "204": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Neighbors",
+        "ship_tier_max": 10,
+        "finish_time": 1570363200,
+        "ship_tier_min": 10,
+        "start_time": 1570258800,
+        "division_points": 100,
+        "season_id": 204
+    },
+    "205": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Crash Zone Alpha",
+        "ship_tier_max": 5,
+        "finish_time": 1577016000,
+        "ship_tier_min": 5,
+        "start_time": 1576911600,
+        "division_points": 100,
+        "season_id": 205
+    },
+    "206": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Crash Zone Alpha",
+        "ship_tier_max": 8,
+        "finish_time": 1577620800,
+        "ship_tier_min": 8,
+        "start_time": 1577516400,
+        "division_points": 100,
+        "season_id": 206
+    },
+    "207": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Crash Zone Alpha",
+        "ship_tier_max": 10,
+        "finish_time": 1578225600,
+        "ship_tier_min": 10,
+        "start_time": 1578121200,
+        "division_points": 100,
+        "season_id": 207
+    },
+    "208": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Sea of Fortune",
+        "ship_tier_max": 10,
+        "finish_time": 1585915200,
+        "ship_tier_min": 10,
+        "start_time": 1585724400,
+        "division_points": 100,
+        "season_id": 208
+    },
+    "209": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Sea of Fortune",
+        "ship_tier_max": 8,
+        "finish_time": 1586088000,
+        "ship_tier_min": 8,
+        "start_time": 1585983600,
+        "division_points": 100,
+        "season_id": 209
+    },
+    "210": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Warrior's Path",
+        "ship_tier_max": 10,
+        "finish_time": 1592740800,
+        "ship_tier_min": 10,
+        "start_time": 1592636400,
+        "division_points": 100,
+        "season_id": 210
+    },
+    "211": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Warrior's Path",
+        "ship_tier_max": 8,
+        "finish_time": 1593950400,
+        "ship_tier_min": 8,
+        "start_time": 1593846000,
+        "division_points": 100,
+        "season_id": 211
+    },
+    "212": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Northern Waters",
+        "ship_tier_max": 9,
+        "finish_time": 1607947200,
+        "ship_tier_min": 9,
+        "start_time": 1607410800,
+        "division_points": 100,
+        "season_id": 212
+    },
+    "213": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Northern Waters",
+        "ship_tier_max": 10,
+        "finish_time": 1608552000,
+        "ship_tier_min": 10,
+        "start_time": 1608015600,
+        "division_points": 100,
+        "season_id": 213
+    },
+    "214": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Northern Waters",
+        "ship_tier_max": 8,
+        "finish_time": 1612180800,
+        "ship_tier_min": 8,
+        "start_time": 1611558000,
+        "division_points": 100,
+        "season_id": 214
+    },
+    "215": {
+        "leagues": [
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Northern Waters",
+        "ship_tier_max": 10,
+        "finish_time": 1613390400,
+        "ship_tier_min": 10,
+        "start_time": 1612767600,
+        "division_points": 100,
+        "season_id": 215
+    },
+    "101": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "North",
+        "ship_tier_max": 6,
+        "finish_time": 1540792800,
+        "ship_tier_min": 6,
+        "start_time": 1540209600,
+        "division_points": 100,
+        "season_id": 101
+    },
+    "102": {
+        "leagues": [
+            {
+                "color": "#CC9966",
+                "name": "Squall League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_4_small_154e2148d23ee9757568a144e06c0e8b904d921cc166407e469ce228a7924836.png"
+            },
+            {
+                "color": "#CCE4E4",
+                "name": "Gale League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_3_small_d99914b661e711deaff0bdb61477d82a4d3d4b83b9750f5d1d4b887e6b1a6546.png"
+            },
+            {
+                "color": "#E3D6A0",
+                "name": "Storm League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_2_small_a2116019add2189c449af6497873ef87e85c2c3ada76120c27e7ec57d52de163.png"
+            },
+            {
+                "color": "#BEE7BD",
+                "name": "Typhoon League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_1_small_73d5594c7f6ae307721fe89a845b81196382c08940d9f32c9923f5f2b23e4437.png"
+            },
+            {
+                "color": "#CDA4FF",
+                "name": "Hurricane League",
+                "icon": "https://wows-gloss-icons.wgcdn.co/icons/clans/leagues/cvc_league_0_small_1ffb7bdd0346e4a10eaa1befbd53584dead5cd5972212742d015fdacb34160a1.png"
+            }
+        ],
+        "name": "Land of Fire",
+        "ship_tier_max": 10,
+        "finish_time": 1552888800,
+        "ship_tier_min": 10,
+        "start_time": 1552305600,
+        "division_points": 100,
+        "season_id": 102
+    }
+}
