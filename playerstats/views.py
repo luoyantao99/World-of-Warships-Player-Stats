@@ -41,7 +41,7 @@ def get_player_data(request, account_id):
     # --------------------------- Get Account & Ship Stats ----------------------------
     # ---------------------------------------------------------------------------------
     
-    account_extras = ["private.port", "statistics.clan", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.rank_solo", "statistics.rank_div2", "statistics.rank_div3"]
+    account_extras = ["private.port", "statistics.clan", "statistics.club", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.pve_div2", "statistics.pve_div3", "statistics.pve_solo", "statistics.pvp_div2", "statistics.pvp_div3", "statistics.pvp_solo", "statistics.rank_div2", "statistics.rank_div3", "statistics.rank_solo"]
     
     account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/',
                                 params={
@@ -171,8 +171,8 @@ def get_player_data(request, account_id):
     # process account wide stats
     for mode in game_modes:
         process_stats(account_data['statistics'], mode)
-    
-    # process account wide operations stats
+
+    process_stats(account_data['statistics'], 'clan')
     process_oper_stats(account_data['statistics'])
 
 
