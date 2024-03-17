@@ -221,11 +221,10 @@ def process_stats(json, mode):
         json[mode]['avg_xp'] = '{:.2f}'.format(json[mode]['xp'] / battles)
         json[mode]['avg_frags'] = '{:.2f}'.format(json[mode]['frags'] / battles)
         json[mode]['avg_planes_killed'] = '{:.2f}'.format(json[mode]['planes_killed'] / battles)
-
         json[mode]['avg_agro'] = '{:.2f}'.format(json[mode]['total_agro'] / battles)
-        
         json[mode]['avg_ships_spotted'] = '{:.2f}'.format(json[mode]['ships_spotted'] / battles)
         json[mode]['avg_damage_scouting'] = '{:.2f}'.format(json[mode]['damage_scouting'] / battles)
+        json[mode]['win_rate'] = '{:.2%}'.format(json[mode]['wins'] / battles)
     
     # Calculate Hit Ratio
     weapon_types = ['main_battery','second_battery','torpedoes']
