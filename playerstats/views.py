@@ -272,6 +272,11 @@ def process_oper_stats(json):
         json['oper']['wins_by_tasks'][f'{i}'] = json['oper_solo']['wins_by_tasks'][f'{i}'] + \
                                                 json['oper_div']['wins_by_tasks'][f'{i}']
 
+    # Calculate Win Rate
+    battles = json['oper']['battles']
+    if battles != 0:
+        json['oper']['win_rate'] = '{:.2%}'.format(json['oper']['wins'] / battles)
+    
 
 def process_cw_stats(cw_seasons, cw_stats):
     processed = {}
