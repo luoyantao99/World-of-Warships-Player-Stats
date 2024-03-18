@@ -58,6 +58,16 @@ def get_player_data(request, account_id):
                                 'extra': ','.join(["oper_div", "oper_solo", "pve", "rank_solo"])
                             }).json()
     
+    account_data = account_json['data'][account_id]
+    
+    # Handle private accounts
+    is_empty_account = not account_data
+    is_private_account = account_data['hidden_profile']
+
+    if is_empty_account or is_private_account:
+        return redirect('private_profile')
+    
+    ship_data = ship_json['data'][account_id]
     
     # ---------------------------------------------------------------------------------
     # ----------------------------- Get Clan Battle Stats -----------------------------
@@ -163,16 +173,7 @@ def get_player_data(request, account_id):
     # -------------------------------- Data Processing --------------------------------
     # ---------------------------------------------------------------------------------
 
-    account_data = account_json['data'][account_id]
-
-    is_empty_account = not account_data
-    is_private_account = account_data['hidden_profile']
-
-    if is_empty_account or is_private_account:
-        return redirect('private_profile')
-
-
-    ship_data = ship_json['data'][account_id]
+    
 
     # adjust time to human readable time
     account_data['last_battle_time'] = datetime.datetime.fromtimestamp(account_data['last_battle_time'])
