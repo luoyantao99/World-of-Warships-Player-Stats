@@ -363,11 +363,9 @@
             }
         });
 
-        // Add event listener for when an option is selected
+        // Hide the selection when an option is selected
         document.querySelectorAll('.dropdown-content a').forEach(item => {
             item.addEventListener('click', function() {
-                // Code to handle the selection
-                // Hide dropdown after selection
                 document.querySelector('.dropdown-content').style.display = 'none';
             });
         });
@@ -702,17 +700,13 @@
                             // Add click event to each result to update the player stats
                             playerElement.addEventListener('click', () => {
                                 const accountID = playerElement.dataset.accountId;
-                                // Call a function to update stats using this accountID
-                                updatePlayerStats(accountID);
+                                // Redirect to the new player stats page
+                                window.location.href = `/player_stats/${accountID}`;
                             });
                         });
                     });
             });
         });
-
-        function updatePlayerStats(accountID) {
-            window.location.href = `/player_stats/${accountID}`;
-        }
 
 
         // ---------------------------------------------------------------------------------
