@@ -16,13 +16,13 @@
         <tr>
             <td style="text-align: left; padding-left: 25px; width: 20%;">
                 <div class="normal-text">
-                    Account Name: {{ account_data.nickname }}<br>
+                    <div class="account-name">[{{ account_data.clan_tag }}] {{ account_data.nickname }}</div>
                     Battles Fought: {{ account_data.statistics.battles|intcomma }}<br>
-                    Last Battle Time: {{ account_data.last_battle_time }}<br>
-                    Data Updated At: {{ account_data.updated_at }}<br><br>
+                    Last Battle: {{ account_data.last_battle_time }}<br>
+                    Updated At: {{ account_data.updated_at }}<br><br>
                 </div>
             </td>
-            <td style="padding-left: 25px;">
+            <td style="padding-left: 30px;">
                 <div class="dropdown">
                     <button class="dropbtn" id="dropdownMenuButton">
                         <img id="gameModeImage" src="{% static 'images/game_modes/pvp.png' %}" alt="Game Mode" />

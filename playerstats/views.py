@@ -145,6 +145,18 @@ def get_player_data(request, account_id):
         with open(old_ships_file_path, 'r') as file:
             old_ship_data = json.load(file)
         ship_encyclopedia.update(old_ship_data)
+        
+    
+    # ---------------------------------------------------------------------------------
+    # ----------------------------- Get Account Clan Tag ------------------------------
+    # ---------------------------------------------------------------------------------
+    
+    account_clan = requests.get(f'https://api.worldofwarships.com/wows/clans/accountinfo/',
+                                    params={
+                                        'application_id': settings.APPLICATION_ID,
+                                        'account_id': account_id,
+                                        'extra': 'clan'
+                                    }).json()
 
 
     # ---------------------------------------------------------------------------------
@@ -169,6 +181,7 @@ def get_player_data(request, account_id):
 
     
     # process account wide stats
+    account_data['clan_tag'] = f"{account_clan['data'][account_id]['clan']['tag']}"
     for mode in game_modes:
         process_stats(account_data['statistics'], mode)
 
