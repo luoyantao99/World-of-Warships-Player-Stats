@@ -286,6 +286,7 @@ body {
     margin-left: auto; 
     margin-right: 5%;
     transform: translateY(-30%);
+    z-index: 1000;
 }
 
 .search-box-standalone {
