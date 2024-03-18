@@ -181,7 +181,11 @@ def get_player_data(request, account_id):
 
     
     # process account wide stats
-    account_data['clan_tag'] = f"{account_clan['data'][account_id]['clan']['tag']}"
+    try:
+        account_data['clan_tag'] = f"[{account_clan['data'][account_id]['clan']['tag']}] "
+    except:
+        account_data['clan_tag'] = ""
+        
     for mode in game_modes:
         process_stats(account_data['statistics'], mode)
 
