@@ -11,7 +11,7 @@
 
 
 <body>
-
+    
     <table style="white-space:nowrap; margin: auto 1.5%;">
         <tr>
             <td style="text-align: left; padding-left: 25px; width: 20%;">
@@ -101,6 +101,10 @@
         </table>
     </div>
 
+    <br></br>
+
+    <div style="text-align: center;"><button id="export-data">Export Player Stats</button></div>
+
 
     {{ account_data|json_script:"account_data" }}
     {{ ship_data|json_script:"ship_data" }}
@@ -127,7 +131,7 @@
             6: "VI", 7: "VII", 8: "VIII", 9: "IX", 10: "X", 11: "★"
         };
 
-        var accountStats = JSON.parse(document.getElementById('account_data').textContent).statistics;
+        var accountData = JSON.parse(document.getElementById('account_data').textContent);
         var shipData = JSON.parse(document.getElementById('ship_data').textContent);
         var encyInfo = JSON.parse(document.getElementById('encyclopedia_info').textContent);
         var shipEncy = JSON.parse(document.getElementById('ship_encyclopedia').textContent);
@@ -410,7 +414,7 @@
             stats_container.className = 'stats-container';
 
             // Build stats table
-            build_stats_table(table_titles, table_columns, stats_container, accountStats)
+            build_stats_table(table_titles, table_columns, stats_container, accountData['statistics'])
 
             // Append the stats container to the desired location in the DOM
             document.querySelector(tableClass).appendChild(stats_container);
@@ -708,6 +712,32 @@
         function updatePlayerStats(accountID) {
             window.location.href = `/player_stats/${accountID}`;
         }
+
+
+        // ---------------------------------------------------------------------------------
+        // ---------------------------------- Export Data ----------------------------------
+        // ---------------------------------------------------------------------------------
+
+        document.getElementById('export-data').addEventListener('click', function() {
+            // Function to download data as a file
+            function downloadData(data, filename) {
+                var file = new Blob([JSON.stringify(data)], {type: 'application/json'});
+                var a = document.createElement("a"),
+                    url = URL.createObjectURL(file);
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function() {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);  
+                }, 0); 
+            }
+
+            // Trigger downloads
+            downloadData(accountData, 'account_data.json');
+            downloadData(shipData, 'ship_data.json');
+        });
 
         
         window.onload = function() {
