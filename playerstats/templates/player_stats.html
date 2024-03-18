@@ -101,9 +101,10 @@
         </table>
     </div>
 
-    <br></br>
 
-    <div style="text-align: center;"><button id="export-data">Export Player Stats</button></div>
+    <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+        <button class="dropbtn" id="export-data">Export Player Stats</button>
+    </div>
 
 
     {{ account_data|json_script:"account_data" }}
@@ -735,8 +736,8 @@
             }
 
             // Trigger downloads
-            downloadData(accountData, 'account_data.json');
-            downloadData(shipData, 'ship_data.json');
+            downloadData(accountData, accountData['account_id'] + '_AccountData.json');
+            downloadData(shipData, accountData['account_id'] + '_ShipData.json');
         });
 
         
