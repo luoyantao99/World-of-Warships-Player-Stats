@@ -12,7 +12,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: start;
-    background: linear-gradient(to right, rgba(30, 87, 153, 0.7), rgba(41, 137, 216, 0.7), rgba(32, 124, 202, 0.7), rgba(125, 185, 232, 0.7));
+    background: linear-gradient(to right, rgba(30, 87, 153, 0.8), rgba(41, 137, 216, 0.8), rgba(32, 124, 202, 0.8), rgba(125, 185, 232, 0.8));
     backdrop-filter: blur(10px);
     padding: 15px;
     border-radius: 10px;
@@ -41,7 +41,7 @@ body {
 .account-details-container img {
     height: 20px;
     width: auto;
-    margin-left: 10px;
+    margin-left: 8px;
     vertical-align: middle;
     transform: translateY(-10%);
 }
@@ -119,6 +119,7 @@ body {
 .dropdown {
     position: relative;
     display: inline-block;
+    transform: translateY(-25%);
 }
 
 /* Dropdown button */
@@ -126,7 +127,7 @@ body {
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
     color: white;
-    font-size: 17px;
+    font-size: 18px;
     text-shadow: 0.5px 0.5px 0.5px #000;
     padding: 8px 12px;
     min-width: 187px;
@@ -281,9 +282,10 @@ body {
 
 .search-box {
     position: relative;
-    max-width: 300px;
+    max-width: 400px;
     margin-left: auto; 
     margin-right: 5%;
+    transform: translateY(-30%);
 }
 
 .search-box-standalone {
@@ -294,7 +296,7 @@ body {
 .player-search {
     width: 100%;
     padding: 10px;
-    font-size: 16px;
+    font-size: 18px;
     border: 1px solid #333;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
