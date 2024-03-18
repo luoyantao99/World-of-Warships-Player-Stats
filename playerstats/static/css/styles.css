@@ -120,6 +120,7 @@ body {
     position: relative;
     display: inline-block;
     transform: translateY(-25%);
+    z-index: 1000;
 }
 
 /* Dropdown button */
