@@ -571,24 +571,24 @@
         // Main function to populate the ship list
         function populate_ship_list() {
             create_table_head();
-            var shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
+            let shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
             shipList.innerHTML = ''; // Clear existing rows
 
             if (currentGameMode !== 'clan') {
                 shipData.forEach(function(ship) {
-                    var shipStats = ship[currentGameMode]; // Access the current game mode data
+                    let shipStats = ship[currentGameMode]; // Access the current game mode data
                     if (shipStats.battles > 0) {
-                        var row = document.createElement('tr');
+                        let row = document.createElement('tr');
             
-                        var isPremium = getShipEncyData(ship.ship_id, 'is_premium');
-                        var isSpecial = getShipEncyData(ship.ship_id, 'is_special');
+                        let isPremium = getShipEncyData(ship.ship_id, 'is_premium');
+                        let isSpecial = getShipEncyData(ship.ship_id, 'is_special');
                         
-                        var nation = getShipEncyData(ship.ship_id, 'nation');
-                        var nation_image_path = staticUrl + 'images/nation_flags/' + nation + '.png';
+                        let nation = getShipEncyData(ship.ship_id, 'nation');
+                        let nation_image_path = staticUrl + 'images/nation_flags/' + nation + '.png';
                         createCell(row, nation_image_path, 'nation', isPremium || isSpecial, true);
                         
-                        var shipType = getShipEncyData(ship.ship_id, 'type');
-                        var type_image_path = staticUrl + 'images/ship_types/' + shipType;
+                        let shipType = getShipEncyData(ship.ship_id, 'type');
+                        let type_image_path = staticUrl + 'images/ship_types/' + shipType;
                         if (isPremium) type_image_path += '_premium.png';
                         else if (isSpecial) type_image_path += '_special.png';
                         else type_image_path += '_standard.png';
@@ -614,19 +614,28 @@
             } 
             else {
                 // New logic for 'clan' game mode
-                cwData.forEach(function(season) {
-                    var row = document.createElement('tr');
-                    // createCell(row, season.start_time, '', false);
-                    // createCell(row, season.finish_time, '', false);
-                    // createCell(row, season.season_id, '', false);
-
-
-                    // row.className = 'ship-item';
-                    // row.onclick = function() { show_ship_stats(ship.ship_id, row); };
+                for (let key in cwData) {
+                    let row = document.createElement('tr');
+                    row.insertCell().textContent = cwData[key].start_time.split('T')[0];
+                    row.insertCell().textContent = cwData[key].finish_time.split('T')[0];
+                    row.insertCell().textContent = cwData[key].season_id;
+                    row.insertCell().textContent = cwData[key].name;
+                    row.insertCell().textContent = cwData[key].tier;
+                    if(cwData[key].hasOwnProperty('stats')) {
+                        let bts = cwData[key].stats.battles;
+                        let wins = cwData[key].stats.wins;
+                        row.insertCell().textContent = bts
+                        row.insertCell().textContent = ((wins/bts)*100).toFixed(2) + '%'
+                        let shipID = cwData[key].stats.max_damage_dealt_ship_id;
+                        row.insertCell().textContent = getShipEncyData(shipID, 'name', shipID)
+                    } else {
+                        row.insertCell().textContent = 0
+                        row.insertCell().textContent = 'N/A'
+                        row.insertCell().textContent = 'N/A'
+                    }
                     shipList.appendChild(row);
-                });
+                }
             }
-            
         }
 
         
@@ -649,12 +658,10 @@
                 existingDetails.remove();
             }
 
-            // If the details were already shown for this row, we're done (toggle off)
+            // If the details were already shown for this row, we're done
             if (isDetailsShown) return;
+            // Otherwise, we proceed to show the details for this row
 
-            // Otherwise, we proceed to show the details for this row (toggle on)
-
-            // Create a new row for the ship stats
             var detailsRow = document.createElement('tr');
             detailsRow.className = 'details-row';
             var detailsCell = detailsRow.insertCell(0);
@@ -690,7 +697,7 @@
 
             // Determine the sort direction
             var isAscending = false;
-            // var isAscending = table.getAttribute('data-sort-dir') === 'asc';
+            var isAscending = table.getAttribute('data-sort-dir') === 'asc';
             table.setAttribute('data-sort-dir', isAscending ? 'desc' : 'asc');
             
             // Sort the rows
