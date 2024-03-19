@@ -179,32 +179,30 @@ body {
 
 .ship-list-container {
     margin: auto 1.5%;
-    background: rgba(0, 0, 0, 0.6); /* Match the opacity of the stats container */
+    background: rgba(0, 0, 0, 0.6);
     color: white;
     padding: 50px;
     border-radius: 8px;
     backdrop-filter: blur(10px);
-    text-shadow: 0.5px 0.5px 0.5px #000; /* Text shadow for better readability */
+    text-shadow: 0.5px 0.5px 0.5px #000;
 }
 
 .ship-item {
-    /* Your styles for the ship rows */
     cursor: pointer;
 }
 
 #shipTable {
     width: 100%;
-    table-layout: fixed; /* This enables even column spacing */
+    text-align: center;
     border-collapse: collapse;
-    color: white; /* Set text color */
+    color: white;
 }
 
 #shipTable th {
-    background-color: rgb(18, 18, 18, 0.95);; /* Header background */
+    background-color: rgb(18, 18, 18, 0.95);
     padding: 12px 8px;
     font-weight: bold;
     vertical-align: middle;
-    text-align: center;
     border-bottom: 1px solid #666;
     position: sticky; /* Make the header sticky */
     top: 0; /* Set the top position to 0 so it sticks to the top of the table's scrollable area */
@@ -223,16 +221,6 @@ body {
 
 #shipTable tr:hover {
     background-color: rgba(255, 255, 255, 0.1); /* Hover effect for rows */
-}
-
-#shipTable th.nation,
-#shipTable td.nation,
-#shipTable th.ship-type,
-#shipTable td.ship-type,
-#shipTable th.tier,
-#shipTable td.tier {
-    width: 4%;
-    text-align: center;
 }
 
 #shipTable td.nation img {

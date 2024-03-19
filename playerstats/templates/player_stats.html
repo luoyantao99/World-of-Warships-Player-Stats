@@ -80,24 +80,9 @@
 
     <div id="shipList" class="ship-list-container">
         <table id="shipTable">
-            <thead>
-                <tr>
-                    <th class="nation" onclick="sort_ship_list(0)" style="cursor: pointer;">Nation</th>
-                    <th class="ship-type" onclick="sort_ship_list(1)" style="cursor: pointer;">Type</th>
-                    <th class="tier" onclick="sort_ship_list(2)" style="cursor: pointer;">Tier</th>
-                    <th class="ship-icon" onclick="sort_ship_list(3)" style="cursor: pointer;"></th>
-                    <th class="ship-name" onclick="sort_ship_list(4)" style="cursor: pointer;">Warship</th>
-                    <th class="battles" onclick="sort_ship_list(5)" style="cursor: pointer;">Battles</th>
-                    <th class="win-rate" onclick="sort_ship_list(6)" style="cursor: pointer;">Win Rate</th>
-                    <th class="damage" onclick="sort_ship_list(7)" style="cursor: pointer;">Avg Damage</th>
-                    <th class="frags" onclick="sort_ship_list(8)" style="cursor: pointer;">Avg Frags</th>
-                    <th class="xp" onclick="sort_ship_list(9)" style="cursor: pointer;">Avg XP</th>
-                    <th class="kd" onclick="sort_ship_list(10)" style="cursor: pointer;">K/D Ratio</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Ship rows will be populated here -->
-            </tbody>
+            <!-- To be populated dynamically -->
+            <thead></thead> 
+            <tbody></tbody>
         </table>
     </div>
 
@@ -109,6 +94,7 @@
 
     {{ account_data|json_script:"account_data" }}
     {{ ship_data|json_script:"ship_data" }}
+    {{ cw_data|json_script:"cw_data" }}
     {{ encyclopedia_info|json_script:"encyclopedia_info" }}
     {{ ship_encyclopedia|json_script:"ship_encyclopedia" }}
 
@@ -134,6 +120,7 @@
 
         var accountData = JSON.parse(document.getElementById('account_data').textContent);
         var shipData = JSON.parse(document.getElementById('ship_data').textContent);
+        var cwData = JSON.parse(document.getElementById('cw_data').textContent);
         var encyInfo = JSON.parse(document.getElementById('encyclopedia_info').textContent);
         var shipEncy = JSON.parse(document.getElementById('ship_encyclopedia').textContent);
 
@@ -508,7 +495,7 @@
         // ------------------------------ Populate Ship List -------------------------------
         // ---------------------------------------------------------------------------------
 
-        // Helper function to create a table cell with text or an image and append it to a row
+        // Helper function to create a table cell and append it to a row
         function createCell(row, content, className, isPremium, isImage = false) {
             var cell = row.insertCell();
             cell.className = className;
@@ -529,8 +516,6 @@
                     cell.style.fontWeight = 'bold';
                 }
             }
-            
-            return cell; // In case you need to do more with the cell
         }
 
         // Helper function to safely get ship encyclopedia data
@@ -543,49 +528,105 @@
             }
         }
 
+        function create_table_head() {
+            var thead = document.getElementById('shipTable').getElementsByTagName('thead')[0];
+            thead.innerHTML = ''; // Clear existing head
+            var row = thead.insertRow();
+            var headers = currentGameMode !== 'clan' ? [
+                { text: "Nation", class: "nation" },
+                { text: "Type", class: "ship-type" },
+                { text: "Tier", class: "tier" },
+                { text: "", class: "ship-icon" },
+                { text: "Warship", class: "ship-name" },
+                { text: "Battles", class: "battles" },
+                { text: "Win Rate", class: "win-rate" },
+                { text: "Avg Damage", class: "damage" },
+                { text: "Avg Frags", class: "frags" },
+                { text: "Avg XP", class: "xp" },
+                { text: "K/D Ratio", class: "kd" }
+            ] : [
+                // Headers for 'clan battles' game mode
+                { text: "Start Time", class: "" },
+                { text: "Finish Time", class: "" },
+                { text: "Season ID", class: "" },
+                { text: "Name", class: "" },
+                { text: "Tier", class: "" },
+                { text: "Battles", class: "" },
+                { text: "Win Rate", class: "" },
+                { text: "Highest Damage Ship", class: "" }
+            ];
+
+            headers.forEach((header, index) => {
+                var th = document.createElement('th');
+                th.textContent = header.text;
+                th.className = header.class;
+                if(header.text) {
+                    th.setAttribute("onclick", `sort_ship_list(${index})`);
+                    th.style.cursor = "pointer";
+                }
+                row.appendChild(th);
+            });
+        }
+
         // Main function to populate the ship list
         function populate_ship_list() {
+            create_table_head();
             var shipList = document.getElementById('shipTable').getElementsByTagName('tbody')[0];
             shipList.innerHTML = ''; // Clear existing rows
-            shipData.forEach(function(ship) {
-                var shipStats = ship[currentGameMode]; // Access the current game mode data
-                if (shipStats.battles > 0) {
-                    var row = shipList.insertRow();
 
-                    var isPremium = getShipEncyData(ship.ship_id, 'is_premium');
-                    var isSpecial = getShipEncyData(ship.ship_id, 'is_special');
-                    var yellowText = isPremium || isSpecial
-                    
-                    var nation = getShipEncyData(ship.ship_id, 'nation');
-                    var nation_image_path = staticUrl + 'images/nation_flags/' + nation + '.png';
-                    createCell(row, nation_image_path, 'nation', yellowText, true);
-                    
-                    var shipType = getShipEncyData(ship.ship_id, 'type')
-                    var type_image_path = staticUrl + 'images/ship_types/' + shipType;
-                    if (isPremium) type_image_path += '_premium.png';
-                    else if (isSpecial) type_image_path += '_special.png';
-                    else type_image_path += '_standard.png';
-                    createCell(row, type_image_path, 'ship-type', yellowText, true);
+            if (currentGameMode !== 'clan') {
+                shipData.forEach(function(ship) {
+                    var shipStats = ship[currentGameMode]; // Access the current game mode data
+                    if (shipStats.battles > 0) {
+                        var row = document.createElement('tr');
+            
+                        var isPremium = getShipEncyData(ship.ship_id, 'is_premium');
+                        var isSpecial = getShipEncyData(ship.ship_id, 'is_special');
+                        
+                        var nation = getShipEncyData(ship.ship_id, 'nation');
+                        var nation_image_path = staticUrl + 'images/nation_flags/' + nation + '.png';
+                        createCell(row, nation_image_path, 'nation', isPremium || isSpecial, true);
+                        
+                        var shipType = getShipEncyData(ship.ship_id, 'type');
+                        var type_image_path = staticUrl + 'images/ship_types/' + shipType;
+                        if (isPremium) type_image_path += '_premium.png';
+                        else if (isSpecial) type_image_path += '_special.png';
+                        else type_image_path += '_standard.png';
+                        createCell(row, type_image_path, 'ship-type', isPremium || isSpecial, true);
 
-                    createCell(row, tier[getShipEncyData(ship.ship_id, 'tier')], 'tier', yellowText);
+                        createCell(row, tier[getShipEncyData(ship.ship_id, 'tier')], 'tier', isPremium || isSpecial);
+                        createCell(row, getShipEncyData(ship.ship_id, 'images', {}).small, 'ship-icon', isPremium || isSpecial, true);
+                        createCell(row, getShipEncyData(ship.ship_id, 'name', ship.ship_id), 'ship-name', isPremium || isSpecial);
+                        createCell(row, nf.format(shipStats.battles), 'battles', isPremium || isSpecial);
+                        createCell(row, shipStats.win_rate, 'win-rate', isPremium || isSpecial);
+                        createCell(row, nf.format(parseInt(shipStats.avg_damage_dealt)), 'damage', isPremium || isSpecial);
+                        createCell(row, nf2d.format(shipStats.avg_frags), 'frags', isPremium || isSpecial);
+                        createCell(row, nf0d.format(shipStats.avg_xp), 'xp', isPremium || isSpecial);
+                        createCell(row, nf2d.format(shipStats.kd), 'kd', isPremium || isSpecial);
 
-                    var shipIcon = getShipEncyData(ship.ship_id, 'images', {}).small;
-                    createCell(row, shipIcon, 'ship-icon', yellowText, true);
+                        row.className = 'ship-item';
+                        row.onclick = function() { show_ship_stats(ship.ship_id, row); };
+                        shipList.appendChild(row);
+                    }
+                });
+                // Sort the table by "Battles" after populating
+                sort_ship_list(5);
+            } 
+            else {
+                // New logic for 'clan' game mode
+                cwData.forEach(function(season) {
+                    var row = document.createElement('tr');
+                    // createCell(row, season.start_time, '', false);
+                    // createCell(row, season.finish_time, '', false);
+                    // createCell(row, season.season_id, '', false);
 
-                    createCell(row, getShipEncyData(ship.ship_id, 'name', ship.ship_id), 'ship-name', yellowText);
-                    createCell(row, nf.format(shipStats.battles), 'battles', yellowText);
-                    createCell(row, shipStats.win_rate, 'win-rate', yellowText);
-                    createCell(row, nf.format(parseInt(shipStats.avg_damage_dealt)), 'damage', yellowText);
-                    createCell(row, nf2d.format(shipStats.avg_frags), 'frags', yellowText);
-                    createCell(row, nf0d.format(shipStats.avg_xp), 'xp', yellowText);
-                    createCell(row, nf2d.format(shipStats.kd), 'kd', yellowText);
 
-                    row.className = 'ship-item';
-                    row.onclick = function() { show_ship_stats(ship.ship_id, row); };
-                }
-            });
-            // Sort the table by "Battles" after populating
-            sort_ship_list(5);
+                    // row.className = 'ship-item';
+                    // row.onclick = function() { show_ship_stats(ship.ship_id, row); };
+                    shipList.appendChild(row);
+                });
+            }
+            
         }
 
         
@@ -730,8 +771,9 @@
             }
 
             // Trigger downloads
-            downloadData(accountData, accountData['account_id'] + '_AccountData.json');
-            downloadData(shipData, accountData['account_id'] + '_ShipData.json');
+            downloadData(accountData, accountData['account_id'] + '_Account-Data.json');
+            downloadData(shipData, accountData['account_id'] + '_Ship-Data.json');
+            downloadData(cwData, accountData['account_id'] + '_Clan-Data.json');
         });
 
         
