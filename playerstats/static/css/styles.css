@@ -268,6 +268,47 @@ body {
     padding-right: 2%;
 }
 
+#shipTable th.date,
+#shipTable td.date {
+    width: 9%;
+}
+
+#shipTable th.season-id,
+#shipTable td.season-id {
+    text-align: right;
+    padding-right: 0%;
+}
+
+#shipTable td.season-icon img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 2%;
+}
+
+#shipTable th.season-name,
+#shipTable td.season-name {
+    text-align: left;
+    padding-left: 0%;
+}
+
+
+#shipTable th.dmg,
+#shipTable td.dmg {
+    width: 10%;
+    text-align: right;
+    padding-right: 2%;
+}
+
+#shipTable th.dmg-ship,
+#shipTable td.dmg-ship {
+    width: 10%;
+    text-align: left;
+}
+
+
 
 .search-box {
     position: relative;

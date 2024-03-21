@@ -298,6 +298,6 @@ def process_cw_stats(cw_seasons, cw_stats):
         
     for entry in cw_stats:
         seasonID = entry['season_id']
-        processed[f'{seasonID}']['stats'] = copy.deepcopy(entry)
+        processed[f'{seasonID}']['stats'] = entry
         
     return processed

@@ -503,7 +503,7 @@
             if (isImage) {
                 var img = document.createElement('img');
                 img.src = content;
-                img.alt = 'Image';
+                img.alt = '';
                 img.className = 'cell-image';
                 cell.appendChild(img);
             }
@@ -546,14 +546,16 @@
                 { text: "K/D Ratio", class: "kd" }
             ] : [
                 // Headers for 'clan battles' game mode
-                { text: "Start Time", class: "" },
-                { text: "Finish Time", class: "" },
-                { text: "Season ID", class: "" },
-                { text: "Name", class: "" },
+                { text: "Start Time", class: "date" },
+                { text: "Finish Time", class: "date" },
+                { text: "Season", class: "season-id" },
+                { text: "", class: "season-icon" },
+                { text: "Codename", class: "season-name" },
                 { text: "Tier", class: "" },
                 { text: "Battles", class: "" },
                 { text: "Win Rate", class: "" },
-                { text: "Highest Damage Ship", class: "" }
+                { text: "Highest Damage", class: "dmg" },
+                { text: "Ship", class: "dmg-ship" }
             ];
 
             headers.forEach((header, index) => {
@@ -613,25 +615,28 @@
                 sort_ship_list(5);
             } 
             else {
-                // New logic for 'clan' game mode
+                // New logic for clan battle
                 for (let key in cwData) {
                     let row = document.createElement('tr');
                     row.insertCell().textContent = cwData[key].start_time.split('T')[0];
                     row.insertCell().textContent = cwData[key].finish_time.split('T')[0];
-                    row.insertCell().textContent = cwData[key].season_id;
-                    row.insertCell().textContent = cwData[key].name;
+                    createCell(row, cwData[key].season_id, 'season-id', false);
+                    createCell(row, staticUrl+'images/clan_seasons/SEASON_'+key+'.png', 'season-icon', false, true);
+                    createCell(row, cwData[key].name, 'season-name', false);
                     row.insertCell().textContent = cwData[key].tier;
                     if(cwData[key].hasOwnProperty('stats')) {
                         let bts = cwData[key].stats.battles;
                         let wins = cwData[key].stats.wins;
                         row.insertCell().textContent = bts
                         row.insertCell().textContent = ((wins/bts)*100).toFixed(2) + '%'
+                        createCell(row, nf.format(cwData[key].stats.max_damage_dealt), 'dmg', false);
                         let shipID = cwData[key].stats.max_damage_dealt_ship_id;
-                        row.insertCell().textContent = getShipEncyData(shipID, 'name', shipID)
+                        createCell(row, getShipEncyData(shipID, 'name', shipID), 'dmg-ship', false);
                     } else {
                         row.insertCell().textContent = 0
-                        row.insertCell().textContent = 'N/A'
-                        row.insertCell().textContent = 'N/A'
+                        row.insertCell().textContent = '----'
+                        createCell(row, '----', 'dmg', false);
+                        createCell(row, '', 'dmg-ship', false);
                     }
                     shipList.appendChild(row);
                 }
