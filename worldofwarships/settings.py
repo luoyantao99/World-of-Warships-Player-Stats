@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-cfi^+23)qdt2^@tcrk3uv6y1%5ph^_3y0c_8_z$e=xqo2^ad7$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wows-stats.duckdns.org', '68.129.190.207', 'localhost']
 
 
 # Application definition
