@@ -244,8 +244,22 @@ body {
     background-color: rgba(255, 255, 255, 0.1); /* Hover effect for rows */
 }
 
+#shipTable th.nation,
+#shipTable td.nation,
+#shipTable th.ship-type,
+#shipTable td.ship-type,
+#shipTable th.tier,
+#shipTable td.tier {
+    width: 5%;
+}
+
 #shipTable td.nation img {
-    max-height: 70%;
+    max-height: 75%;
+    transform: translateY(6%);
+}
+
+#shipTable td.ship-type img {
+    transform: translateY(6%);
 }
 
 #shipTable th.ship-icon,
@@ -259,6 +273,7 @@ body {
     max-width: 100%;
     width: auto;
     display: inline-block;
+    transform: translateY(-5%);
 }
 
 #shipTable th.ship-name,
