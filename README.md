@@ -1,7 +1,9 @@
 #  World of Warships Player Stats
 ![Build Status](https://github.com/luoyantao99/World-of-Warships-Player-Stats/actions/workflows/django.yml/badge.svg)
 
-This web application serves as a comprehensive platform for players of "World of Warships" to search and view detailed statistics about their accounts and individual ship performances. Unique to this application is the inclusion of detailed statistics for the often overlooked Operation game mode, filling a gap left by the official player profile.  
+This web application serves as a comprehensive platform for players of "World of Warships" to search and view detailed statistics about their accounts and individual ship performances. Unique to this application is the inclusion of detailed statistics for the often overlooked Operation game mode, filling a gap left by the official player profile. 
+
+Access my website with this URL: http://wows-stats.duckdns.org
 
 ## 🛠️ Features
 1. Player Search: Users can search for player accounts using a search query. This sends a request to the "World of Warships" API to retrieve a list of matching player accounts. When a specific player account is searched, it fetches detailed statistics about the player's performance, including battles played, victories, defeats, and other relevant data for different game modes (Random, Co-op, Ranked, and Operation). 
@@ -10,11 +12,11 @@ This web application serves as a comprehensive platform for players of "World of
 
 The web app leverages Django's web development framework for the backend, utilizing views to handle API requests and responses effectively. It also integrates front-end technologies for dynamic content rendering, including HTML, CSS, and JavaScript, to provide an interactive and responsive user experience. 
 
-## 💻 Video Demo
+## 📺 Video Demo
 https://youtu.be/gcNY6zv0LZM
 
 
-## 📄 Documentation
+## 📚 Documentation
 ### Prerequisites
 1. Python (3.8 or newer)
 2. Django (3.2 or newer)
