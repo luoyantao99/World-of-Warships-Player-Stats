@@ -15,6 +15,11 @@ The web app leverages Django's web development framework for the backend, utiliz
 ## 📺 Video Demo
 https://youtu.be/gcNY6zv0LZM
 
+## 📄 To Do List
+* Automated testing
+* Intuitive UI for mobile devices
+* Make player search work for other servers (EU, Asia)
+* Add Login feature to access player's private stats
 
 ## 📚 Documentation
 ### Prerequisites
