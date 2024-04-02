@@ -19,6 +19,7 @@ body {
     position: relative;
     margin: auto;
     display: flex;
+    width: fit-content;
     align-items: center;
     justify-content: start;
     background: linear-gradient(to right, rgba(30, 87, 153, 0.8), rgba(41, 137, 216, 0.8), rgba(32, 124, 202, 0.8), rgba(125, 185, 232, 0.8));
@@ -32,7 +33,6 @@ body {
 }
 
 .account-name-container {
-    flex-basis: 30%;
     font-size: 36px;
     font-weight: bold;
     transform: translateY(-10%);
@@ -40,7 +40,6 @@ body {
 
 .account-details-container {
     text-align: right;
-    flex-basis: 70%;
     padding-left: 40px; /* Space between the name and the details */
     font-size: 18px;
     line-height: 1.4;
