@@ -81,10 +81,7 @@ def player_stats(request, account_id):
                                 }).json()['data'][account_id]
     
     # Redirect if account is private
-    is_empty_account = not account_data
-    is_private_account = account_data['hidden_profile']
-    
-    if is_empty_account or is_private_account:
+    if account_data['hidden_profile']:
         redirect_url = reverse('private_profile', args=[account_id])
         return redirect(redirect_url)
 
@@ -104,6 +101,15 @@ def player_stats(request, account_id):
         account_data['clan_tag'] = f"[{player_clan_data['data'][account_id]['clan']['tag']}] "
     except:
         account_data['clan_tag'] = ""
+        
+    
+    # Handle accounts with no battle record
+    if account_data['last_battle_time'] == datetime.datetime.fromtimestamp(0):
+        context = {
+            'account_data': account_data
+        }
+        template = loader.get_template('player_stats.html')
+        return HttpResponse(template.render(context, request))
     
 
     # ---------------------------------------------------------------------------------
