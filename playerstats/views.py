@@ -7,16 +7,46 @@ from django.http import HttpResponse
 from django.template import loader
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from django.urls import reverse
 import datetime
-import copy
 
 
 def player_search(request):
     return render(request, 'player_search.html')
 
 
-def private_profile(request):
-    return render(request, 'private_profile.html')
+def private_profile(request, account_id):
+    account_id = f'{account_id}'
+    account_data = requests.get(f'https://api.worldofwarships.com/wows/account/info/',
+                                params={
+                                    'application_id': settings.APPLICATION_ID,
+                                    'account_id': account_id
+                                }).json()['data'][account_id]
+    
+    # Redirect if account is public
+    if not account_data['hidden_profile']:
+        redirect_url = reverse('player_stats', args=[account_id])
+        return redirect(redirect_url)
+    
+    # Adjust time to human readable time
+    account_data['last_battle_time'] = datetime.datetime.fromtimestamp(account_data['last_battle_time'])
+    account_data['updated_at'] = datetime.datetime.fromtimestamp(account_data['updated_at'])
+    account_data['logout_at'] = datetime.datetime.fromtimestamp(account_data['logout_at'])
+    
+    # Get Clan Tag
+    player_clan_data = requests.get(f'https://api.worldofwarships.com/wows/clans/accountinfo/',
+                                    params={
+                                        'application_id': settings.APPLICATION_ID,
+                                        'account_id': account_id,
+                                        'extra': 'clan'
+                                    }).json()
+    try:
+        account_data['clan_tag'] = f"[{player_clan_data['data'][account_id]['clan']['tag']}] "
+    except:
+        account_data['clan_tag'] = ""
+        
+    context = {'account_data': account_data}
+    return render(request, 'private_profile.html', context)
 
 
 @csrf_exempt
@@ -33,24 +63,53 @@ def search_players(request):
         return JsonResponse(response.json())
     
 
-def get_player_data(request, account_id):
+def player_stats(request, account_id):
     account_id = f'{account_id}'
     game_modes = ["pvp", "pve", "rank_solo"]
     
     # ---------------------------------------------------------------------------------
-    # --------------------------- Get Account & Ship Stats ----------------------------
+    # ------------------------------- Get Account Data --------------------------------
     # ---------------------------------------------------------------------------------
     
     account_extras = ["private.port", "statistics.clan", "statistics.club", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.pve_div2", "statistics.pve_div3", "statistics.pve_solo", "statistics.pvp_div2", "statistics.pvp_div3", "statistics.pvp_solo", "statistics.rank_div2", "statistics.rank_div3", "statistics.rank_solo"]
     
-    account_json = requests.get(f'https://api.worldofwarships.com/wows/account/info/',
+    account_data = requests.get(f'https://api.worldofwarships.com/wows/account/info/',
                                 params={
                                     'application_id': settings.APPLICATION_ID,
                                     'account_id': account_id,
                                     'extra': ','.join(account_extras)
-                                }).json()
+                                }).json()['data'][account_id]
+    
+    # Redirect if account is private
+    is_empty_account = not account_data
+    is_private_account = account_data['hidden_profile']
+    
+    if is_empty_account or is_private_account:
+        redirect_url = reverse('private_profile', args=[account_id])
+        return redirect(redirect_url)
 
+    # Adjust time to human readable time
+    account_data['last_battle_time'] = datetime.datetime.fromtimestamp(account_data['last_battle_time'])
+    account_data['updated_at'] = datetime.datetime.fromtimestamp(account_data['updated_at'])
+    account_data['logout_at'] = datetime.datetime.fromtimestamp(account_data['logout_at'])
+    
+    # Get Clan Tag
+    player_clan_data = requests.get(f'https://api.worldofwarships.com/wows/clans/accountinfo/',
+                                    params={
+                                        'application_id': settings.APPLICATION_ID,
+                                        'account_id': account_id,
+                                        'extra': 'clan'
+                                    }).json()
+    try:
+        account_data['clan_tag'] = f"[{player_clan_data['data'][account_id]['clan']['tag']}] "
+    except:
+        account_data['clan_tag'] = ""
+    
 
+    # ---------------------------------------------------------------------------------
+    # -------------------------------- Get Ship Stats ---------------------------------
+    # ---------------------------------------------------------------------------------
+    
     ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/',
                             params={
                                 'application_id': settings.APPLICATION_ID,
@@ -58,16 +117,8 @@ def get_player_data(request, account_id):
                                 'extra': ','.join(["oper_div", "oper_solo", "pve", "rank_solo"])
                             }).json()
     
-    account_data = account_json['data'][account_id]
-    
-    # Handle private accounts
-    is_empty_account = not account_data
-    is_private_account = account_data['hidden_profile']
-
-    if is_empty_account or is_private_account:
-        return redirect('private_profile')
-    
     ship_data = ship_json['data'][account_id]
+    
     
     # ---------------------------------------------------------------------------------
     # ----------------------------- Get Clan Battle Stats -----------------------------
@@ -158,35 +209,10 @@ def get_player_data(request, account_id):
         
     
     # ---------------------------------------------------------------------------------
-    # ----------------------------- Get Account Clan Tag ------------------------------
-    # ---------------------------------------------------------------------------------
-    
-    account_clan = requests.get(f'https://api.worldofwarships.com/wows/clans/accountinfo/',
-                                    params={
-                                        'application_id': settings.APPLICATION_ID,
-                                        'account_id': account_id,
-                                        'extra': 'clan'
-                                    }).json()
-
-
-    # ---------------------------------------------------------------------------------
     # -------------------------------- Data Processing --------------------------------
     # ---------------------------------------------------------------------------------
-
-    
-
-    # adjust time to human readable time
-    account_data['last_battle_time'] = datetime.datetime.fromtimestamp(account_data['last_battle_time'])
-    account_data['updated_at'] = datetime.datetime.fromtimestamp(account_data['updated_at'])
-    account_data['logout_at'] = datetime.datetime.fromtimestamp(account_data['logout_at'])
-
     
     # process account wide stats
-    try:
-        account_data['clan_tag'] = f"[{account_clan['data'][account_id]['clan']['tag']}] "
-    except:
-        account_data['clan_tag'] = ""
-        
     for mode in game_modes:
         process_stats(account_data['statistics'], mode)
 

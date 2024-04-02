@@ -12,18 +12,37 @@
 
 <body>
     <div class="blur-background">
-        <div style="margin: auto; max-width: 600px; padding-top: 15%;">
-            <div class="search-box-standalone">
-                <input class="player-search" id="player-search" placeholder="Search for a player...">
-                <div class="search-results-container" id="search-results"">
+        <div style="padding-top: 10%;"></div>
+
+        <div class="search-box-standalone">
+            <input class="player-search" id="player-search" placeholder="Search for a player...">
+            <div class="search-results-container" id="search-results"">
                     <!-- Dynamically inserted search result items will go here -->
-                </div>
-            </div>
-            <div style="padding-top: 15%;"></div>
-            <div class="message-container">
-                This player's profile is private.
             </div>
         </div>
+
+
+        <div style=" padding-top: 5%;"></div>
+
+        <div class="account-info-container" style="width: 40%;">
+            <div class="account-name-container">
+                {{ account_data.clan_tag }}{{ account_data.nickname }}
+            </div>
+            <div class="account-details-container">
+                Private Profile<img src="{% static 'images/icons/gunboat.png' %}" alt=""><br>
+                Last Battle at {{ account_data.last_battle_time|date:"Y-m-d H:i" }}<img
+                    src="{% static 'images/icons/calendar.png' %}" alt=""><br>
+                Updated at {{ account_data.updated_at|date:"Y-m-d H:i" }}<img
+                    src="{% static 'images/icons/update.png' %}" alt="">
+            </div>
+        </div>
+
+        <div style=" padding-top: 3%;"></div>
+
+        <div class="message-container">
+            {{ account_data.nickname }}'s profile is private. No detailed stats available. 
+        </div>
+
     </div>
 
 
@@ -64,4 +83,5 @@
     </script>
 
 </body>
+
 </html>
