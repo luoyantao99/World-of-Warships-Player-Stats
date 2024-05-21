@@ -97,7 +97,7 @@ body {
     backdrop-filter: blur(10px);
     display: flex;
     flex-wrap: wrap; /* Wrap the children if the container is too narrow */
-    gap: 50px; /* Add some space between the columns */
+    gap: 40px; /* Add some space between the columns */
     text-shadow: 0.5px 0.5px 0.5px #000;
     justify-content: space-between; /* Space out the columns */
 }
@@ -110,7 +110,7 @@ body {
     border-radius: 8px;
     display: flex;
     flex-wrap: wrap; /* Wrap the children if the container is too narrow */
-    gap: 50px; /* Add some space between the columns */
+    gap: 40px; /* Add some space between the columns */
     text-shadow: 0.5px 0.5px 0.5px #000;
     justify-content: space-between; /* Space out the columns */
 }

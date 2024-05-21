@@ -310,7 +310,7 @@ function build_player_stats(table_titles, table_columns, table_type) {
 // --------------------- (Used by Player Stats and Ship Stats) ---------------------
 // ---------------------------------------------------------------------------------
 
-function build_stats_table(table_titles, table_columns, stats_container, jsonData) {
+function build_stats_table(table_titles, table_columns, stats_container, jsonData, isShip = false) {
     table_titles.forEach(title => {
         const column = document.createElement('div');
         column.className = 'stat-column';
@@ -362,7 +362,7 @@ function build_stats_table(table_titles, table_columns, stats_container, jsonDat
                         }
                     }
                     else {
-                        // account stats table
+                        // account & ship stats table
                         if (title.label.includes("Average") || stat.label === 'K/D Ratio') {
                             statValue.textContent = nf2d.format(jsonData[currentGameMode][stat.key]);
                         }
@@ -386,6 +386,27 @@ function build_stats_table(table_titles, table_columns, stats_container, jsonDat
         // Append the complete column to the stats container
         stats_container.appendChild(column);
     });
+
+    // Adding the last battle time of every ship
+    if (isShip) {
+        const lastBattleTime = document.createElement('div');
+        lastBattleTime.className = 'last-battle-info';
+        lastBattleTime.style.width = '100%';
+        lastBattleTime.style.textAlign = 'center';
+        var date = new Date(jsonData['last_battle_time'] * 1000);
+        lastBattleTime.textContent = 'Most Recent Battle (All Game Modes): ' + formatDate(date);
+        stats_container.appendChild(lastBattleTime);
+    }
+}
+
+function formatDate(date) {
+    var year = date.getFullYear();
+    var month = (date.getMonth() + 1).toString().padStart(2, '0');
+    var day = date.getDate().toString().padStart(2, '0');
+    var hours = date.getHours().toString().padStart(2, '0');
+    var minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
 
 
@@ -576,10 +597,10 @@ function show_ship_stats(shipId, clickedRow) {
 
     // Build stats table
     if (currentGameMode === 'oper') {
-        build_stats_table(oper_table_titles, oper_table_columns, stats_container, ship)
+        build_stats_table(oper_table_titles, oper_table_columns, stats_container, ship, true)
     }
     else {
-        build_stats_table(account_table_titles, account_table_columns, stats_container, ship)
+        build_stats_table(account_table_titles, account_table_columns, stats_container, ship, true)
     }
 
     detailsCell.appendChild(stats_container);
