@@ -245,5 +245,129 @@
     "type": "AirCarrier",
     "is_special": false,
     "name": "Enterprise (Pre Update 0.8.0)"
+  },
+  "4292851408": {
+    "description": "The first ship in the world to be specifically designed and completed as an aircraft carrier. This ship was moderately sized and could carry a small air group. She had a decent speed and was only slightly inferior to a light cruiser in terms of armament. ",
+    "price_gold": 0,
+    "ship_id_str": "PJSA104",
+    "has_demo_profile": false,
+    "images": {
+        "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PJSA104_7d7342a688ea162287c65071f89954cf0720400daa96bccbed5f3a6dc76868c8.png",
+        "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PJSA104_fee4a50e6838d92a02041c8df09961a317ac9e518af5173216104180c76c8df1.png",
+        "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PJSA104_fa79144f37a931231b87557d6c6d506f17125eb81efee5d0f709290192b79854.png",
+        "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PJSA104_6d2f02663b6917bd14988b672a3322714a322a6e864d211d1b1d1f99d198be4a.png"
+    },
+    "nation": "japan",
+    "is_premium": false,
+    "ship_id": 4292851408,
+    "tier": 4,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Hōshō (Pre Update 0.8.0)"
+  },
+  "4288657104": {
+    "description": "A small and reasonably fast aircraft carrier originally built as a submarine tender then subsequently converted into a carrier. Despite her small size, that did not allow her to carry a large air group, Zuiho was equipped with good torpedo protection and a sufficiently powerful artillery for her type. ",
+    "price_gold": 0,
+    "ship_id_str": "",
+    "has_demo_profile": false,
+    "images": {
+
+    },
+    "nation": "japan",
+    "is_premium": false,
+    "ship_id": 4288657104,
+    "tier": 5,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Zuihō (Pre Update 0.8.0)"
+  },
+  "4285511376": {
+    "description": "An aircraft carrier built under the restrictions of the Washington Naval Treaty of 1922. Owing to a double-deck hangar, she could carry an impressive air group despite her limited displacement. Her drawbacks were low survivability and the small size of her flight deck, which hampered takeoff and landing for squadrons. ",
+    "price_gold": 0,
+    "ship_id_str": "PJSA106",
+    "has_demo_profile": false,
+    "images": {
+        "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PJSA106_1d99eef53441172915ef874586aaec0e9e38250f3145e9b00026f7c2c7291460.png",
+        "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PJSA106_accf8c938ef20983b7c96e86bdf944fd2f6f4e1296620ab43d8ca19245975af8.png",
+        "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PJSA106_8ab496a9622fdbc600488e690ed96daf0ddc9920605965d0dcb77dce4c86f8f1.png",
+        "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PJSA106_66a9c3ceee9945d78d21d25ca1486dc99d0179f6d58dd1c8d12107914f08d301.png"
+    },
+    "nation": "japan",
+    "is_premium": false,
+    "ship_id": 4285511376,
+    "tier": 6,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Ryūjō (Pre Update 0.8.0)"
+  },
+  "4283414224": {
+    "description": "An aircraft carrier that had a prominent effect on the development of this type of ship in the Imperial Japanese Navy. It was a highly successful project that featured a high speed, reasonably good AA defense and a sizable air group. Poor armor protection reduced the aircraft carrier's resistance to damage. ",
+    "price_gold": 0,
+    "ship_id_str": "",
+    "has_demo_profile": false,
+    "images": {
+
+    },
+    "nation": "japan",
+    "is_premium": false,
+    "ship_id": 4283414224,
+    "tier": 7,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Hiryū (Pre Update 0.8.0)"
+  },
+  "4282365648": {
+    "description": "This heavy aircraft carrier was designed on the basis of the Hiryu class using the experience gained in building ships of the same type. Compared to her predecessor, she was larger and boasted superior armor and AA armament. During World War II, the ship's AA capabilities were significantly enhanced. ",
+    "price_gold": 0,
+    "ship_id_str": "PJSA108",
+    "has_demo_profile": false,
+    "images": {
+        "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PJSA108_fa0b8145aaed9d39cbe0ffab87bd6b044d7bf1e8397d60584a5ad961409dc49d.png",
+        "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PJSA108_ef4e7478706430f42fe0a2e6d934760c86cbb204ad3f1012affbccfe86c84c55.png",
+        "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PJSA108_b014f903635e150475c3cc521c3e60aefe2fe0998f4e57b1a36274dfbc875619.png",
+        "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PJSA108_a75b8a9159f8b649f0995b0480ccf6d311742cc9ff342b6846b8afbe62cb7cbc.png"
+    },
+    "nation": "japan",
+    "is_premium": false,
+    "ship_id": 4282365648,
+    "tier": 8,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Shōkaku (Pre Update 0.8.0)"
+  },
+  "4279219920": {
+    "description": "The mightiest aircraft carrier with the most advanced design, among ships of her type, built for the Imperial Japanese Navy. She featured an armored flight deck to provide protection from bomb hits. New dual-purpose artillery mounts significantly improved the ship's AA capabilities. ",
+    "price_gold": 0,
+    "ship_id_str": "",
+    "has_demo_profile": false,
+    "images": {
+
+    },
+    "nation": "japan",
+    "is_premium": false,
+    "ship_id": 4279219920,
+    "tier": 9,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Taihō (Pre Update 0.8.0)"
+  },
+  "4277122768": {
+    "description": "An aircraft carrier designed to be an enlarged and enhanced version of the Taiho class. Hakuryu was superior to her predecessor in size, armor and artillery power. Owing to an increased hangar, she could carry the largest air group among all Japanese aircraft carriers. ",
+    "price_gold": 0,
+    "ship_id_str": "PJSA110",
+    "has_demo_profile": false,
+    "images": {
+        "small": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/small/PJSA110_00695fda2927f4e847c390fef1fc00a72ecb9eeebb7cfa439fdb696dea539764.png",
+        "large": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/large/PJSA110_d66f258f3b1c80a5b922f7432c9c510c47e1cdd229ab80ce292b17aea2ecc559.png",
+        "medium": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/medium/PJSA110_f756e805fd3ef280d7eaa9d55b199abc1ed782f254373391cc792139b2f4f629.png",
+        "contour": "https://wows-gloss-icons.wgcdn.co/icons/vehicle/contour/PJSA110_dd45adade610f41b722f2a2dfbc43efd4ae0271d13f87a24756976025f4f34c4.png"
+    },
+    "nation": "japan",
+    "is_premium": false,
+    "ship_id": 4277122768,
+    "tier": 10,
+    "type": "AirCarrier",
+    "is_special": false,
+    "name": "Hakuryū (Pre Update 0.8.0)"
   }
 }

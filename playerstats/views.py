@@ -209,7 +209,7 @@ def player_stats(request, account_id):
             json.dump(ship_encyclopedia, file, indent=4, ensure_ascii=False)
     
     if os.path.exists(old_ships_file_path):
-        with open(old_ships_file_path, 'r') as file:
+        with open(old_ships_file_path, 'r', encoding='utf-8') as file:
             old_ship_data = json.load(file)
         ship_encyclopedia.update(old_ship_data)
         
