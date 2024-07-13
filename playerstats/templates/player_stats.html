@@ -3,6 +3,7 @@
 <head>
     {% load static %}
     {% load humanize %}
+    {% load custom_filters %}
 
     <title>World of Warships Player Profile</title>
     <link rel="icon" type="image/svg" href="{% static 'images/favicon.svg' %}">
@@ -22,7 +23,10 @@
                     <div class="account-details-container">
                         Battles Fought {{ account_data.statistics.battles|intcomma }}<img src="{% static 'images/icons/gunboat.png' %}" alt=""><br>
                         Last Battle at {{ account_data.last_battle_time|date:"Y-m-d H:i" }}<img src="{% static 'images/icons/calendar.png' %}" alt=""><br>
-                        Updated at {{ account_data.updated_at|date:"Y-m-d H:i" }}<img src="{% static 'images/icons/update.png' %}" alt="">
+                        Updated at {{ account_data.updated_at|date:"Y-m-d H:i" }}<img src="{% static 'images/icons/update.png' %}" alt=""><br>
+                        {% if account_data.private %}
+                            Battle Life Time {{ account_data.private.battle_life_time|format_time }}<img src="{% static 'images/icons/time.png' %}" alt=""><br>
+                        {% endif %}
                     </div>
                 </div>
             </td>

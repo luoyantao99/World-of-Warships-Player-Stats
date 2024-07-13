@@ -2,8 +2,7 @@ import json
 import os
 import requests
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.http import HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
@@ -65,6 +64,7 @@ def search_players(request):
 
 def player_stats(request, account_id):
     account_id = f'{account_id}'
+    access_token = request.session.get('access_token', None)
     game_modes = ["pvp", "pve", "rank_solo"]
     
     # ---------------------------------------------------------------------------------
@@ -73,12 +73,16 @@ def player_stats(request, account_id):
     
     account_extras = ["private.port", "statistics.clan", "statistics.club", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.pve_div2", "statistics.pve_div3", "statistics.pve_solo", "statistics.pvp_div2", "statistics.pvp_div3", "statistics.pvp_solo", "statistics.rank_div2", "statistics.rank_div3", "statistics.rank_solo"]
     
-    account_data = requests.get(f'https://api.worldofwarships.com/wows/account/info/',
-                                params={
-                                    'application_id': settings.APPLICATION_ID,
-                                    'account_id': account_id,
-                                    'extra': ','.join(account_extras)
-                                }).json()['data'][account_id]
+    account_data_params = {
+        'application_id': settings.APPLICATION_ID,
+        'account_id': account_id,
+        'extra': ','.join(account_extras)
+    }
+    
+    if access_token is not None:
+        account_data_params['access_token'] = access_token
+    
+    account_data = requests.get(f'https://api.worldofwarships.com/wows/account/info/', params=account_data_params).json()['data'][account_id]
     
     # Redirect if account is private
     if account_data['hidden_profile']:
@@ -256,6 +260,9 @@ def player_stats(request, account_id):
 
 
 
+# ---------------------------------------------------------------------------------
+# ----------------------- Data Processing Helper Functions ------------------------
+# ---------------------------------------------------------------------------------
 
 def process_stats(json, mode):
     # Calculate Total Potential Damage
@@ -336,3 +343,22 @@ def process_cw_stats(cw_seasons, cw_stats):
         processed[f'{seasonID}']['stats'] = entry
         
     return processed
+
+
+# ---------------------------------------------------------------------------------
+# ------------------------------ Login Functionality ------------------------------
+# ---------------------------------------------------------------------------------
+
+def login_redirect(request):
+    application_id = settings.APPLICATION_ID
+    redirect_uri = request.build_absolute_uri(reverse('login_response'))
+    login_url = f'https://api.worldoftanks.com/wot/auth/login/?application_id={application_id}&redirect_uri={redirect_uri}'
+    return redirect(login_url)
+
+
+def login_response(request):
+    account_id = request.GET.get('account_id')
+    access_token = request.GET.get('access_token')
+    request.session['access_token'] = access_token
+    redirect_url = reverse('player_stats', args=[account_id])
+    return HttpResponseRedirect(redirect_url)

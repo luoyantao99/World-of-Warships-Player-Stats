@@ -19,7 +19,6 @@ https://youtu.be/gcNY6zv0LZM
 * Automated testing
 * Intuitive UI for mobile devices
 * Make player search work for other servers (EU, Asia)
-* Add Login feature to access player's private stats
 
 ## 📚 Documentation
 ### Prerequisites
