@@ -5,7 +5,44 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    padding: 20px;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 20px 10px;
+    text-shadow: 0.5px 0.5px 0.5px #000;
+    margin-bottom: 40px;
+}
+
+.header-title {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-left: 3%;
+}
+
+.logo-link {
+    color: white;
+    text-decoration: none;
+}
+
+.header-title:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.header-right {
+    float: right;
+    margin-right: 3%;
 }
 
 .title {
@@ -23,7 +60,6 @@ body {
     align-items: center;
     justify-content: start;
     background: linear-gradient(to right, rgba(30, 87, 153, 0.8), rgba(41, 137, 216, 0.8), rgba(32, 124, 202, 0.8), rgba(125, 185, 232, 0.8));
-    backdrop-filter: blur(10px);
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -80,21 +116,21 @@ body {
 }
 
 .blur-background {
+    backdrop-filter: blur(6px);
     position: fixed;
+    width: 100%;
+    height: 100%;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-    backdrop-filter: blur(8px);
+    z-index: -1;
 }
 
 .stats-container {
-    margin: auto 1.5%;
+    margin: auto 3%;
     background: rgba(0, 0, 0, 0.6);
     color: white;
     padding: 40px 50px;
     border-radius: 8px;
-    backdrop-filter: blur(10px);
     display: flex;
     flex-wrap: wrap; /* Wrap the children if the container is too narrow */
     gap: 40px; /* Add some space between the columns */
@@ -155,7 +191,6 @@ body {
 /* Dropdown button */
 .dropbtn {
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
     color: white;
     font-size: 18px;
     text-shadow: 0.5px 0.5px 0.5px #000;
@@ -206,12 +241,11 @@ body {
 
 
 .ship-list-container {
-    margin: auto 1.5%;
+    margin: auto 3%;
     background: rgba(0, 0, 0, 0.6);
     color: white;
     padding: 50px;
     border-radius: 8px;
-    backdrop-filter: blur(10px);
     text-shadow: 0.5px 0.5px 0.5px #000;
 }
 
@@ -378,7 +412,6 @@ body {
     background: rgba(0, 0, 0, 0.6);
     color: #fff;
     outline: none;
-    backdrop-filter: blur(10px);
     box-sizing: border-box;
 }
 
@@ -433,10 +466,12 @@ body {
 	text-decoration:none;
 	text-shadow:0px 1px 0px #154682;
 }
+
 .login-button:hover {
 	background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
 	background-color:#0061a7;
 }
+
 .login-button:active {
 	position:relative;
 	top:1px;
