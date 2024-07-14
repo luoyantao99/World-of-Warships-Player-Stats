@@ -19,7 +19,13 @@
             <a href="{% url 'player_search' %}" class="logo-link">World of Warships Player Stats</a>
         </div>
         <div class="header-right">
-            <a href="{% url 'login_redirect' %}" class="login-button">Log in with your Wargaming account</a>
+            <div class="search-box-standalone">
+                <input class="player-search" id="player-search" placeholder="Search for a player...">
+                <div class="search-results-container" id="search-results">
+                    <!-- Dynamically inserted search result items will go here -->
+                </div>
+            </div>
+            <a href="{% url 'login_redirect' %}" class="login-button">Log in with Wargaming account</a>
         </div>
     </div>
     
@@ -53,14 +59,6 @@
                         <a href="#" onclick="selectDropdownOption(this)">Ranked Battles</a>
                         <!-- <a href="#" onclick="selectDropdownOption(this)">Ranked Battles (Legacy)</a> -->
                         <a href="#" onclick="selectDropdownOption(this)">Clan Battles</a>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="search-box">
-                    <input class="player-search" id="player-search" placeholder="Search for a player...">
-                    <div class="search-results-container" id="search-results"">
-                        <!-- Dynamically inserted search result items will go here -->
                     </div>
                 </div>
             </td>
