@@ -16,14 +16,20 @@ def player_search(request):
 
 def private_profile(request, account_id):
     account_id = f'{account_id}'
-    account_data = requests.get(f'https://api.worldofwarships.com/wows/account/info/',
-                                params={
-                                    'application_id': settings.APPLICATION_ID,
-                                    'account_id': account_id
-                                }).json()['data'][account_id]
+    access_token = request.session.get('access_token', None)
+    account_data_params = {
+        'application_id': settings.APPLICATION_ID,
+        'account_id': account_id
+    }
+    if access_token is not None:
+        account_data_params['access_token'] = access_token
+    
+    print(datetime.datetime.now(), "Getting Private Account Data")
+    account_data = requests.get(f'https://api.worldofwarships.com/wows/account/info/', params=account_data_params).json()['data'][account_id]
     
     # Redirect if account is public
-    if not account_data['hidden_profile']:
+    if not account_data['hidden_profile'] or account_data['statistics'] is not None:
+        print(datetime.datetime.now(), "Public Profile -> Redirecting")
         redirect_url = reverse('player_stats', args=[account_id])
         return redirect(redirect_url)
     
@@ -45,6 +51,7 @@ def private_profile(request, account_id):
         account_data['clan_tag'] = ""
         
     context = {'account_data': account_data}
+    print(datetime.datetime.now(), "Loading Private Profile Web Page")
     return render(request, 'private_profile.html', context)
 
 
@@ -67,25 +74,42 @@ def player_stats(request, account_id):
     access_token = request.session.get('access_token', None)
     game_modes = ["pvp", "pve", "rank_solo"]
     
-    # ---------------------------------------------------------------------------------
-    # ------------------------------- Get Account Data --------------------------------
-    # ---------------------------------------------------------------------------------
+    # account_extras = ["private.port", "statistics.clan", "statistics.club", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.pve_div2", "statistics.pve_div3", "statistics.pve_solo", "statistics.pvp_div2", "statistics.pvp_div3", "statistics.pvp_solo", "statistics.rank_div2", "statistics.rank_div3", "statistics.rank_solo"]
     
-    account_extras = ["private.port", "statistics.clan", "statistics.club", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.pve_div2", "statistics.pve_div3", "statistics.pve_solo", "statistics.pvp_div2", "statistics.pvp_div3", "statistics.pvp_solo", "statistics.rank_div2", "statistics.rank_div3", "statistics.rank_solo"]
+    account_extras = ["private.port", "statistics.clan", "statistics.oper_div", "statistics.oper_solo", "statistics.pve", "statistics.rank_solo"]
     
     account_data_params = {
         'application_id': settings.APPLICATION_ID,
         'account_id': account_id,
         'extra': ','.join(account_extras)
     }
+
+    ship_data_params = {
+        'application_id': settings.APPLICATION_ID,
+        'account_id': account_id,
+        'extra': ','.join(["oper_div", "oper_solo", "pve", "rank_solo"])
+    }
+
+    cw_stats_params = {
+        'application_id': settings.APPLICATION_ID,
+        'account_id': account_id
+    }
     
     if access_token is not None:
         account_data_params['access_token'] = access_token
+        ship_data_params['access_token'] = access_token
+        cw_stats_params['access_token'] = access_token
     
+    # ---------------------------------------------------------------------------------
+    # ------------------------------- Get Account Data --------------------------------
+    # ---------------------------------------------------------------------------------
+    print(datetime.datetime.now(), "Getting Account Data")
+
     account_data = requests.get(f'https://api.worldofwarships.com/wows/account/info/', params=account_data_params).json()['data'][account_id]
     
     # Redirect if account is private
-    if account_data['hidden_profile']:
+    if account_data['hidden_profile'] and account_data['statistics'] is None:
+        print(datetime.datetime.now(), "Private Profile -> Redirecting")
         redirect_url = reverse('private_profile', args=[account_id])
         return redirect(redirect_url)
 
@@ -119,20 +143,17 @@ def player_stats(request, account_id):
     # ---------------------------------------------------------------------------------
     # -------------------------------- Get Ship Stats ---------------------------------
     # ---------------------------------------------------------------------------------
+    print(datetime.datetime.now(), "Getting Player Ship Stats")
     
-    ship_json = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/',
-                            params={
-                                'application_id': settings.APPLICATION_ID,
-                                'account_id': account_id,
-                                'extra': ','.join(["oper_div", "oper_solo", "pve", "rank_solo"])
-                            }).json()
+
     
-    ship_data = ship_json['data'][account_id]
+    ship_data = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/', params=ship_data_params).json()['data'][account_id]
     
     
     # ---------------------------------------------------------------------------------
     # ----------------------------- Get Clan Battle Stats -----------------------------
     # ---------------------------------------------------------------------------------
+    print(datetime.datetime.now(), "Getting Clan Battle Season Info")
     
     cw_seasons = {}
     clan_battle_file_path = os.path.join(settings.BASE_DIR, 'data', 'cw_seasons.json')
@@ -157,43 +178,32 @@ def player_stats(request, account_id):
             json.dump(cw_seasons, file, indent=4, ensure_ascii=False)
     
     
+    print(datetime.datetime.now(), "Getting Player Clan Battle Stats")
+
     cw_stats = {}
-    response = requests.get(f'https://api.worldofwarships.com/wows/clans/seasonstats/',
-                            params={
-                                'application_id': settings.APPLICATION_ID,
-                                'account_id': account_id
-                            })
+    response = requests.get(f'https://api.worldofwarships.com/wows/clans/seasonstats/', params=cw_stats_params)
     if response.status_code == 200:
         cw_stats = response.json()['data'][account_id]['seasons']
     else:
         print(f"Failed to retrieve data for Clan Battle Stats")
-    
-    
-    # ---------------------------------------------------------------------------------
-    # ----------------------------- Get Encyclopedia Info -----------------------------
-    # ---------------------------------------------------------------------------------
-    
-    encyclopedia_info = requests.get(f'https://api.worldofwarships.com/wows/encyclopedia/info/',
-                                        params={
-                                            'application_id': settings.APPLICATION_ID
-                                        }).json()
 
 
     # ---------------------------------------------------------------------------------
     # -------------------------- Get Ship Encyclopedia Data ---------------------------
     # ---------------------------------------------------------------------------------
+    print(datetime.datetime.now(), "Getting Ship Encyclopedia Data")
     
     ship_ency_file_path = os.path.join(settings.BASE_DIR, 'data', 'ship_encyclopedia.json')
     old_ships_file_path = os.path.join(settings.BASE_DIR, 'data', 'ship_encyclopedia_old_ships.json')
 
     # Try to load the ship encyclopedia from a file if it exists
     if os.path.exists(ship_ency_file_path):
-        print("Ship encyclopedia file found.")
+        print("--Ship encyclopedia file found.")
         with open(ship_ency_file_path, 'r', encoding='utf-8') as file:
             ship_encyclopedia = json.load(file)
     else:
         # If the file does not exist, fetch the data and save it to a file
-        print("Ship encyclopedia file not found. Fetching data from API.")
+        print("--Ship encyclopedia file not found. Fetching data from API.")
         ship_encyclopedia = {}
         ship_types = ["AirCarrier", "Battleship", "Cruiser", "Destroyer", "Submarine"]
         nations = ["japan", "usa", "ussr", "germany", "uk", "france", "italy", "pan_asia", "europe", "netherlands", "pan_america", "spain", "commonwealth"]
@@ -224,6 +234,7 @@ def player_stats(request, account_id):
     # ---------------------------------------------------------------------------------
     # -------------------------------- Data Processing --------------------------------
     # ---------------------------------------------------------------------------------
+    print(datetime.datetime.now(), "Processing Data")
     
     # process account wide stats
     for mode in game_modes:
@@ -252,10 +263,10 @@ def player_stats(request, account_id):
         'account_data': account_data, 
         'ship_data': ship_data,
         'cw_data': cw_stats_processed,
-        'encyclopedia_info': encyclopedia_info['data'],
         'ship_encyclopedia': ship_encyclopedia
     }
     template = loader.get_template('player_stats.html')
+    print(datetime.datetime.now(), "Loading Player Stats Web Page")
     return HttpResponse(template.render(context, request))
 
 

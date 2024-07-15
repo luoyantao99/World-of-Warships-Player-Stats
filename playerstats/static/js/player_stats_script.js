@@ -20,7 +20,6 @@ const tier = {
 var accountData = JSON.parse(document.getElementById('account_data').textContent);
 var shipData = JSON.parse(document.getElementById('ship_data').textContent);
 var cwData = JSON.parse(document.getElementById('cw_data').textContent);
-var encyInfo = JSON.parse(document.getElementById('encyclopedia_info').textContent);
 var shipEncy = JSON.parse(document.getElementById('ship_encyclopedia').textContent);
 
 
