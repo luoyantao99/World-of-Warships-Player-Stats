@@ -7,6 +7,7 @@ from django.template import loader
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
+from concurrent.futures import ThreadPoolExecutor
 import datetime
 
 
@@ -70,6 +71,7 @@ def search_players(request):
     
 
 def player_stats(request, account_id):
+    start_time = datetime.datetime.now()
     account_id = f'{account_id}'
     access_token = request.session.get('access_token', None)
     game_modes = ["pvp", "pve", "rank_solo"]
@@ -100,18 +102,31 @@ def player_stats(request, account_id):
         ship_data_params['access_token'] = access_token
         cw_stats_params['access_token'] = access_token
     
-    # ---------------------------------------------------------------------------------
-    # ------------------------------- Get Account Data --------------------------------
-    # ---------------------------------------------------------------------------------
-    print(datetime.datetime.now(), "Getting Account Data")
-
-    account_data = requests.get(f'https://api.worldofwarships.com/wows/account/info/', params=account_data_params).json()['data'][account_id]
     
+    # ---------------------------------------------------------------------------------
+    # --------------------------- Get & Process Player Data ---------------------------
+    # ---------------------------------------------------------------------------------
+    print(datetime.datetime.now(), "Getting Player Account/Ship/Clan Data")
+
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        future_account_data = executor.submit(requests.get, f'https://api.worldofwarships.com/wows/account/info/', params=account_data_params)
+        future_ship_data = executor.submit(requests.get, f'https://api.worldofwarships.com/wows/ships/stats/', params=ship_data_params)
+        future_cw_stats = executor.submit(requests.get, f'https://api.worldofwarships.com/wows/clans/seasonstats/', params=cw_stats_params)
+
+        account_data_response = future_account_data.result()
+        ship_data_response = future_ship_data.result()
+        cw_stats_response = future_cw_stats.result()
+
+    account_data = account_data_response.json()['data'][account_id]
+
     # Redirect if account is private
     if account_data['hidden_profile'] and account_data['statistics'] is None:
         print(datetime.datetime.now(), "Private Profile -> Redirecting")
         redirect_url = reverse('private_profile', args=[account_id])
         return redirect(redirect_url)
+    
+    ship_data = ship_data_response.json()['data'][account_id]
+    cw_stats = cw_stats_response.json()['data'][account_id]['seasons']
 
     # Adjust time to human readable time
     account_data['last_battle_time'] = datetime.datetime.fromtimestamp(account_data['last_battle_time'])
@@ -141,29 +156,21 @@ def player_stats(request, account_id):
     
 
     # ---------------------------------------------------------------------------------
-    # -------------------------------- Get Ship Stats ---------------------------------
-    # ---------------------------------------------------------------------------------
-    print(datetime.datetime.now(), "Getting Player Ship Stats")
-    
-
-    
-    ship_data = requests.get(f'https://api.worldofwarships.com/wows/ships/stats/', params=ship_data_params).json()['data'][account_id]
-    
-    
-    # ---------------------------------------------------------------------------------
-    # ----------------------------- Get Clan Battle Stats -----------------------------
+    # -------------------------- Get Clan Battle Season Info --------------------------
     # ---------------------------------------------------------------------------------
     print(datetime.datetime.now(), "Getting Clan Battle Season Info")
     
     cw_seasons = {}
     clan_battle_file_path = os.path.join(settings.BASE_DIR, 'data', 'cw_seasons.json')
     
-    # Try to load the ship encyclopedia from a file if it exists
+    # Try to load Clan Battle Season Info from a file if it exists
     if os.path.exists(clan_battle_file_path):
+        print("--Clan Battle Season file found.")
         with open(clan_battle_file_path, 'r', encoding='utf-8') as file:
             cw_seasons = json.load(file)
     else:
         # If the file does not exist, fetch the data
+        print("--Clan Battle Season file not found. Fetching data from API.")
         response = requests.get(f'https://api.worldofwarships.com/wows/clans/season/',
                                 params={
                                     'application_id': settings.APPLICATION_ID
@@ -177,16 +184,6 @@ def player_stats(request, account_id):
         with open(clan_battle_file_path, 'w') as file:
             json.dump(cw_seasons, file, indent=4, ensure_ascii=False)
     
-    
-    print(datetime.datetime.now(), "Getting Player Clan Battle Stats")
-
-    cw_stats = {}
-    response = requests.get(f'https://api.worldofwarships.com/wows/clans/seasonstats/', params=cw_stats_params)
-    if response.status_code == 200:
-        cw_stats = response.json()['data'][account_id]['seasons']
-    else:
-        print(f"Failed to retrieve data for Clan Battle Stats")
-
 
     # ---------------------------------------------------------------------------------
     # -------------------------- Get Ship Encyclopedia Data ---------------------------
@@ -198,12 +195,12 @@ def player_stats(request, account_id):
 
     # Try to load the ship encyclopedia from a file if it exists
     if os.path.exists(ship_ency_file_path):
-        print("--Ship encyclopedia file found.")
+        print("--Ship Encyclopedia file found.")
         with open(ship_ency_file_path, 'r', encoding='utf-8') as file:
             ship_encyclopedia = json.load(file)
     else:
         # If the file does not exist, fetch the data and save it to a file
-        print("--Ship encyclopedia file not found. Fetching data from API.")
+        print("--Ship Encyclopedia file not found. Fetching data from API.")
         ship_encyclopedia = {}
         ship_types = ["AirCarrier", "Battleship", "Cruiser", "Destroyer", "Submarine"]
         nations = ["japan", "usa", "ussr", "germany", "uk", "france", "italy", "pan_asia", "europe", "netherlands", "pan_america", "spain", "commonwealth"]
@@ -267,6 +264,7 @@ def player_stats(request, account_id):
     }
     template = loader.get_template('player_stats.html')
     print(datetime.datetime.now(), "Loading Player Stats Web Page")
+    print("player_stats() Time Cost: ", datetime.datetime.now()-start_time)
     return HttpResponse(template.render(context, request))
 
 
