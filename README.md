@@ -1,7 +1,7 @@
 #  World of Warships Player Stats
 ![Build Status](https://github.com/luoyantao99/World-of-Warships-Player-Stats/actions/workflows/django.yml/badge.svg)
 
-This web application serves as a comprehensive platform for players of "World of Warships" to search and view detailed statistics about their accounts and individual ship performances. Unique to this application is the inclusion of detailed statistics for the often overlooked Operation game mode, filling a gap left by the official player profile. Additionally, Clan Battle statistics are shown for entertainment purposes. 
+This web application serves as a comprehensive platform for players of "World of Warships" to search and view detailed statistics about their accounts and individual ship performances. Unique to this application is the inclusion of detailed statistics for the often overlooked Operation game mode, filling a gap left by the official player profile. Additionally, Clan Battle statistics are aggregated to give players a better look at their participation each season and overall. 
 
 Access my website with this URL: http://wows-stats.duckdns.org
 
@@ -10,7 +10,7 @@ Access my website with this URL: http://wows-stats.duckdns.org
 
 2. Statistics Visualization: The application dynamically generates detailed statistics for both the account and individual ships selected. It processes data fetched from Wargaming's API, including player stats and individual ship stats. This also includes displaying calculated statistics such as KD ratios, average experience per battle, hit ratios, and more. The data is then presented in a user-friendly interface, offering insights into performance metrics across different game modes. 
 
-3. Clan Battle Statistics: Clan Battle and Clan Brawl statistics are displayed for each season. However, these stats are not intended to be taken seriously as individual player performance is not the primary focus; the key to success lies in the performance of the clan as a whole. 
+3. Clan Battle Statistics: Clan Battle and Clan Brawl statistics are displayed for each season. However, these stats are not intended to be used to measure player performance since individual performance is not the primary focus of this game mode. 
 
 4. Login Option: Players with private profiles can log in with their Wargaming account to view their own stats, even when others cannot. Players with public profiles can view additional stats after logging in, such as overall battle lifetime, credits, gold, free experience, number of port slots, and ships in port. 
 
