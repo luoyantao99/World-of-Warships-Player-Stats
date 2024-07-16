@@ -432,7 +432,7 @@ body {
 .message-container {
     position: relative;
     margin: auto;
-    max-width: 600px;
+    width: fit-content;
     color: #ffffff;
     font-size: 20px;
     padding: 8px 16px;
