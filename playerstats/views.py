@@ -30,8 +30,8 @@ def private_profile(request, account_id):
     
     # Redirect if account is public
     if not account_data['hidden_profile'] or account_data['statistics'] is not None:
-        print(datetime.datetime.now(), "Public Profile -> Redirecting")
         redirect_url = reverse('player_stats', args=[account_id])
+        print(datetime.datetime.now(), "Public Profile -> Redirecting to", redirect_url)
         return redirect(redirect_url)
     
     # Adjust time to human readable time
@@ -70,7 +70,7 @@ def search_players(request):
         return JsonResponse(response.json())
     
 
-def player_stats(request, account_id):
+def player_stats(request, account_id, game_mode='pvp'):
     start_time = datetime.datetime.now()
     account_id = f'{account_id}'
     access_token = request.session.get('access_token', None)
@@ -121,8 +121,8 @@ def player_stats(request, account_id):
 
     # Redirect if account is private
     if account_data['hidden_profile'] and account_data['statistics'] is None:
-        print(datetime.datetime.now(), "Private Profile -> Redirecting")
         redirect_url = reverse('private_profile', args=[account_id])
+        print(datetime.datetime.now(), "Private Profile -> Redirecting to", redirect_url)
         return redirect(redirect_url)
     
     ship_data = ship_data_response.json()['data'][account_id]
@@ -260,7 +260,9 @@ def player_stats(request, account_id):
         'account_data': account_data, 
         'ship_data': ship_data,
         'cw_data': cw_stats_processed,
-        'ship_encyclopedia': ship_encyclopedia
+        'ship_encyclopedia': ship_encyclopedia,
+        'account_id': account_id,
+        'selected_game_mode': game_mode
     }
     template = loader.get_template('player_stats.html')
     print(datetime.datetime.now(), "Loading Player Stats Web Page")

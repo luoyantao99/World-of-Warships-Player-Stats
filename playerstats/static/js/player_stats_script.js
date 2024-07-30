@@ -2,7 +2,6 @@ const nf = new Intl.NumberFormat('en-US');
 const nf0d = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
 const nf2d = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-var currentGameMode = 'pvp'; // Default Mode
 const gameModeMapping = {
     "Random Battles": "pvp",
     "Co-op Battles": "pve",
@@ -208,22 +207,18 @@ const oper_table_columns = {
 // ---------------------------------------------------------------------------------
 
 function selectDropdownOption(element) {
-    // Get the button by its ID
-    var button = document.getElementById('dropdownMenuButton');
-    // Get the image element by its ID
-    var gameModeImage = document.getElementById('gameModeImage');
-    // Get the text span (assuming you added it as per the instructions below)
-    var buttonText = button.querySelector('span');
-
-    // Update the button text to match the selection
-    buttonText.textContent = element.textContent;
-
-    var gameModeText = element.textContent.trim();
+    const gameModeText = element.textContent.trim();
+    const gameModeImage = document.getElementById('gameModeImage');
+    const gameModeTextSpan = document.getElementById('gameModeText');
     currentGameMode = gameModeMapping[gameModeText];
 
-    // Update the image based on the selected game mode
-    gameModeImage.src = staticUrl + 'images/game_modes/' + currentGameMode + '.png';
-    gameModeImage.alt = '{Icon}';
+    // Update dropdown button text and image
+    gameModeTextSpan.textContent = gameModeText;
+    gameModeImage.src = `${staticUrl}images/game_modes/${currentGameMode}.png`;
+
+    // Update the URL to reflect the selected game mode
+    const newURL = `/player_stats/${accountIdURL}/${currentGameMode}/`;
+    history.pushState(null, '', newURL);
 
     show_player_stats();
     populate_ship_list();
@@ -232,11 +227,11 @@ function selectDropdownOption(element) {
 
 // ---------------------- Dropdown Menu Click Event Listener ----------------------
 
+// Toggle dropdown
 document.addEventListener('click', function (event) {
     const dropdownButton = document.getElementById('dropdownMenuButton');
     const dropdownContent = document.querySelector('.dropdown-content');
 
-    // Toggle dropdown
     if (dropdownButton.contains(event.target)) {
         dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
     } else {
@@ -252,6 +247,20 @@ document.querySelectorAll('.dropdown-content a').forEach(item => {
     item.addEventListener('click', function () {
         document.querySelector('.dropdown-content').style.display = 'none';
     });
+});
+
+// Preselect dropdown option based on the current game mode
+document.addEventListener("DOMContentLoaded", () => {
+    const gameModeText = Object.keys(gameModeMapping).find(key => gameModeMapping[key] === currentGameMode);
+
+    if (gameModeText) {
+        const dropdownItems = document.querySelectorAll('.dropdown-content a');
+        dropdownItems.forEach(item => {
+            if (item.textContent.trim() === gameModeText) {
+                selectDropdownOption(item);
+            }
+        });
+    }
 });
 
 

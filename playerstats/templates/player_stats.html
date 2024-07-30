@@ -48,15 +48,15 @@
     <div class="dropdown">
         <button class="dropbtn" id="dropdownMenuButton">
             <img id="gameModeImage" src="{% static 'images/game_modes/pvp.png' %}" alt="Game Mode" />
-            <span>Random Battles</span>
-        </button>                                     
+            <span id="gameModeText">Random Battles</span>
+        </button>
         <div class="dropdown-content">
-            <a href="#" onclick="selectDropdownOption(this)">Random Battles</a>
-            <a href="#" onclick="selectDropdownOption(this)">Co-op Battles</a>
-            <a href="#" onclick="selectDropdownOption(this)">Ranked Battles</a>
-            <!-- <a href="#" onclick="selectDropdownOption(this)">Ranked Battles (Legacy)</a> -->
-            <a href="#" onclick="selectDropdownOption(this)">Operations</a>
-            <a href="#" onclick="selectDropdownOption(this)">Clan Battles</a>
+            <a onclick="selectDropdownOption(this)">Random Battles</a>
+            <a onclick="selectDropdownOption(this)">Co-op Battles</a>
+            <a onclick="selectDropdownOption(this)">Ranked Battles</a>
+            <!-- <a onclick="selectDropdownOption(this)">Ranked Battles (Legacy)</a> -->
+            <a onclick="selectDropdownOption(this)">Operations</a>
+            <a onclick="selectDropdownOption(this)">Clan Battles</a>
         </div>
     </div>
 
@@ -106,6 +106,8 @@
 
     <script>
         var staticUrl = "{% get_static_prefix %}";
+        var currentGameMode = "{{ selected_game_mode }}";
+        var accountIdURL = "{{ account_id }}";
     </script>
     <script src="{% static 'js/player_stats_script.js' %}"></script>
 
