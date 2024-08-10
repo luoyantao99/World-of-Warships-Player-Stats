@@ -370,6 +370,11 @@ def login_redirect(request):
 def login_response(request):
     account_id = request.GET.get('account_id')
     access_token = request.GET.get('access_token')
+    
+    # Store account_id and access_token in session
+    request.session['account_id'] = account_id
     request.session['access_token'] = access_token
+
+    # Redirect to the player's stats page
     redirect_url = reverse('player_stats', args=[account_id])
     return HttpResponseRedirect(redirect_url)

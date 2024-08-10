@@ -25,7 +25,15 @@
                     <!-- Dynamically inserted search result items will go here -->
                 </div>
             </div>
-            <a href="{% url 'login_redirect' %}" class="login-button">Log in with Wargaming account</a>
+            {% if request.session.account_id %}
+            <a href="{% url 'player_stats' request.session.account_id %}" class="login-button">
+                View My Profile (Logged In)
+            </a>
+            {% else %}
+            <a href="{% url 'login_redirect' %}" class="login-button">
+                Log in with Wargaming account
+            </a>
+            {% endif %}
         </div>
     </div>
 
