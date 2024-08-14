@@ -19,6 +19,9 @@
             <a href="{% url 'player_search' %}" class="logo-link">World of Warships Player Stats</a>
         </div>
         <div class="header-right">
+            <div style="align-content: center;margin-right: 50px;">
+                Players Online {{ players_online|intcomma }}
+            </div>
             <div class="search-box-standalone">
                 <input class="player-search" id="player-search" placeholder="Search for a player...">
                 <div class="search-results-container" id="search-results">

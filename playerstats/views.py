@@ -226,8 +226,8 @@ def player_stats(request, account_id, game_mode='pvp'):
         with open(old_ships_file_path, 'r', encoding='utf-8') as file:
             old_ship_data = json.load(file)
         ship_encyclopedia.update(old_ship_data)
-        
     
+
     # ---------------------------------------------------------------------------------
     # -------------------------------- Data Processing --------------------------------
     # ---------------------------------------------------------------------------------
@@ -255,6 +255,14 @@ def player_stats(request, account_id, game_mode='pvp'):
     
     # process clan battle stats
     cw_stats_processed = process_cw_stats(cw_seasons, cw_stats)
+    
+    # Get Server Population
+    server_response = requests.get(f'https://api.worldoftanks.com/wgn/servers/info/',
+                                    params={
+                                        'application_id': settings.APPLICATION_ID
+                                    }).json()
+    
+    players_online = server_response['data']['wows'][0]['players_online']
 
     context = {
         'account_data': account_data, 
@@ -262,7 +270,8 @@ def player_stats(request, account_id, game_mode='pvp'):
         'cw_data': cw_stats_processed,
         'ship_encyclopedia': ship_encyclopedia,
         'account_id': account_id,
-        'selected_game_mode': game_mode
+        'selected_game_mode': game_mode,
+        'players_online': players_online
     }
     template = loader.get_template('player_stats.html')
     print(datetime.datetime.now(), "Loading Player Stats Web Page")
