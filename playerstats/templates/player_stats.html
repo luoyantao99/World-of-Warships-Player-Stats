@@ -6,7 +6,7 @@
     {% load humanize %}
     {% load custom_filters %}
 
-    <title>World of Warships Player Profile</title>
+    <title>{{ account_data.nickname }} - World of Warships Player Profile</title>
     <link rel="icon" type="image/svg" href="{% static 'images/favicon.svg' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
@@ -16,7 +16,7 @@
 
     <div class="header">
         <div class="header-title">
-            <a href="{% url 'player_search' %}" class="logo-link">World of Warships Player Stats</a>
+            <a href="{% url 'player_search' %}" class="logo-link">World of Warships Profile Viewer</a>
         </div>
         <div class="header-right">
             <div style="align-content: center;margin-right: 50px;">
