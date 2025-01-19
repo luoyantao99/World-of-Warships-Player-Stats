@@ -25,6 +25,8 @@ https://youtu.be/gcNY6zv0LZM
 * Automated testing
 * Intuitive UI for mobile devices
 * Make player search work for other servers (EU, Asia)
+* Fix ship list sorting
+* Add achievements tab
 
 ## 📚 Documentation
 ### Prerequisites

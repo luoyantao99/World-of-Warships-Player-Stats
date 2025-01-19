@@ -47,7 +47,7 @@ def private_profile(request, account_id):
                                         'extra': 'clan'
                                     }).json()
     try:
-        account_data['clan_tag'] = f"[{player_clan_data['data'][account_id]['clan']['tag']}] "
+        account_data['clan_tag'] = f"[{player_clan_data['data'][account_id]['clan']['tag']}]"
     except:
         account_data['clan_tag'] = ""
         
@@ -141,7 +141,7 @@ def player_stats(request, account_id, game_mode='pvp'):
                                         'extra': 'clan'
                                     }).json()
     try:
-        account_data['clan_tag'] = f"[{player_clan_data['data'][account_id]['clan']['tag']}] "
+        account_data['clan_tag'] = f"[{player_clan_data['data'][account_id]['clan']['tag']}]"
     except:
         account_data['clan_tag'] = ""
         

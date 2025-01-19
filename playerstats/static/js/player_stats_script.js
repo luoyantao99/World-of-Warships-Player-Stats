@@ -473,8 +473,8 @@ function create_table_head() {
         { text: "K/D Ratio", class: "kd" }
     ] : [
         // Headers for 'clan battles' game mode
-        { text: "Start Time", class: "date" },
-        { text: "Finish Time", class: "date" },
+        { text: "Start Date", class: "date" },
+        { text: "End Date", class: "date" },
         { text: "Season", class: "season-id" },
         { text: "", class: "season-icon" },
         { text: "Codename", class: "season-name" },
@@ -548,7 +548,12 @@ function populate_ship_list() {
             row.insertCell().textContent = cwData[key].start_time.split('T')[0];
             row.insertCell().textContent = cwData[key].finish_time.split('T')[0];
             createCell(row, cwData[key].season_id, 'season-id', false);
-            createCell(row, staticUrl + 'images/clan_seasons/SEASON_' + key + '.png', 'season-icon', false, true);
+            if (Number(key) < 100) {
+                createCell(row, staticUrl + 'images/clan_seasons/SEASON_' + key + '.png', 'season-icon', false, true);
+            }
+            else {
+                createCell(row, staticUrl + 'images/clan_seasons/CVC_BRAWL.png', 'season-icon', false, true);
+            }
             createCell(row, cwData[key].name, 'season-name', false);
             row.insertCell().textContent = cwData[key].tier;
             if (cwData[key].hasOwnProperty('stats')) {
