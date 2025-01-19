@@ -699,11 +699,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // ---------------------------------------------------------------------------------
 
 document.getElementById('export-data').addEventListener('click', function () {
-    // Function to download data as a file
+    // Function to download data as a json file
     function downloadData(data, filename) {
-        var file = new Blob([JSON.stringify(data)], { type: 'application/json' });
-        var a = document.createElement("a"),
-            url = URL.createObjectURL(file);
+        const prettyJson = JSON.stringify(data, null, 4);
+        const file = new Blob([prettyJson], { type: 'application/json' });
+        const a = document.createElement("a");
+        const url = URL.createObjectURL(file);
         a.href = url;
         a.download = filename;
         document.body.appendChild(a);
