@@ -91,6 +91,109 @@
 
     <br></br>
 
+    <!--  ------------------------------------------------------------------------------------------ -->
+    <!--  -------------------------------------- Ship Filter --------------------------------------- -->
+    <!--  ------------------------------------------------------------------------------------------ -->
+
+    <div id="filters" class="filters-container">
+        <table class="filter-table">
+            <tr>
+                <th>Nation</th>
+                <th></th>
+                <th></th>
+                <th>Type</th>
+                <th>Tier</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr style="vertical-align: top;">
+                <td style="padding: 5px;">
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="japan"><img src="{% static 'images/nation_flags/japan.png' %}" alt="Japan">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="usa"><img src="{% static 'images/nation_flags/usa.png' %}" alt="USA">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="ussr"><img src="{% static 'images/nation_flags/ussr.png' %}" alt="USSR">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="germany"><img src="{% static 'images/nation_flags/germany.png' %}" alt="Germany">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="uk"><img src="{% static 'images/nation_flags/uk.png' %}" alt="UK">
+                    </div>
+                </td>
+                <td style="padding: 5px;">
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="france"><img src="{% static 'images/nation_flags/france.png' %}" alt="France">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="pan_asia"><img src="{% static 'images/nation_flags/pan_asia.png' %}" alt="Pan Asia">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="italy"><img src="{% static 'images/nation_flags/italy.png' %}" alt="Italy">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="commonwealth"><img src="{% static 'images/nation_flags/commonwealth.png' %}" alt="Commonwealth">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="pan_america"><img src="{% static 'images/nation_flags/pan_america.png' %}" alt="Pan America">
+                    </div>
+                </td>
+                <td style="padding: 5px;">
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="europe"><img src="{% static 'images/nation_flags/europe.png' %}" alt="Europe">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="netherlands"><img src="{% static 'images/nation_flags/netherlands.png' %}" alt="Netherlands">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="nation-filter" value="spain"><img src="{% static 'images/nation_flags/spain.png' %}" alt="Spain">
+                    </div>
+                </td>
+                <td style="padding: 5px;">
+                    <div>
+                        <input type="checkbox" class="type-filter" value="Submarine"><img src="{% static 'images/ship_types/Submarine_standard.png' %}" alt="Submarine">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="type-filter" value="Destroyer"><img src="{% static 'images/ship_types/Destroyer_standard.png' %}" alt="Destroyer">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="type-filter" value="Cruiser"><img src="{% static 'images/ship_types/Cruiser_standard.png' %}" alt="Cruiser">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="type-filter" value="Battleship"><img src="{% static 'images/ship_types/Battleship_standard.png' %}" alt="Battleship">
+                    </div>
+                    <div>
+                        <input type="checkbox" class="type-filter" value="AirCarrier"><img src="{% static 'images/ship_types/AirCarrier_standard.png' %}" alt="Aircraft Carrier">
+                    </div>
+                </td>
+                <td style="padding: 5px;">
+                    <div><input type="checkbox" class="tier-filter" value="I"> I</div>
+                    <div><input type="checkbox" class="tier-filter" value="II"> II</div>
+                    <div><input type="checkbox" class="tier-filter" value="III"> III</div>
+                    <div><input type="checkbox" class="tier-filter" value="IV"> IV</div>
+                    <div><input type="checkbox" class="tier-filter" value="V"> V</div>
+                </td>
+                <td style="padding: 5px;">
+                    <div><input type="checkbox" class="tier-filter" value="VI"> VI</div>
+                    <div><input type="checkbox" class="tier-filter" value="VII"> VII</div>
+                    <div><input type="checkbox" class="tier-filter" value="VIII"> VIII</div>
+                    <div><input type="checkbox" class="tier-filter" value="IX"> IX</div>
+                    <div><input type="checkbox" class="tier-filter" value="X"> X</div>
+                </td>
+                <td style="padding: 5px;">
+                    <div><input type="checkbox" class="tier-filter" value="★"> ★</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="filter-buttons">
+        <button id="toggle-filters" class="filter-button">Show Filters</button>
+        <button id="reset-filters" class="filter-button">Reset Filters</button>
+    </div>
 
     <!--  ------------------------------------------------------------------------------------------ -->
     <!--  --------------------------------------- Ship List ---------------------------------------- -->

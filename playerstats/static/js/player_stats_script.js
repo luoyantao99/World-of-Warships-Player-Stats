@@ -624,6 +624,123 @@ function show_ship_stats(shipId, clickedRow) {
 
 
 // ---------------------------------------------------------------------------------
+// ------------------------------- Filter Ship List --------------------------------
+// ---------------------------------------------------------------------------------
+
+// Function to get selected filter values
+function getSelectedFilters(className) {
+    return Array.from(document.querySelectorAll(`.${className}:checked`)).map(input => input.value);
+}
+
+// Function to filter and display the ship list
+function filterAndDisplayShips() {
+    // Get selected filters
+    const selectedNations = getSelectedFilters('nation-filter');
+    const selectedTypes = getSelectedFilters('type-filter');
+    const selectedTiers = getSelectedFilters('tier-filter');
+    console.log('Selected Nations:', selectedNations); // Debugging log
+
+    // Filter ship data
+    const filteredShips = shipData.filter(ship => {
+        const shipNation = getShipEncyData(ship.ship_id, 'nation');
+        const shipType = getShipEncyData(ship.ship_id, 'type');
+        const shipTier = tier[getShipEncyData(ship.ship_id, 'tier')];
+        console.log('Ship Nation:', shipNation); // Debugging log
+
+        return (selectedNations.length === 0 || selectedNations.includes(shipNation)) &&
+               (selectedTypes.length === 0 || selectedTypes.includes(shipType)) &&
+               (selectedTiers.length === 0 || selectedTiers.includes(shipTier));
+    });
+
+    // Clear the table
+    const tableBody = document.querySelector('#shipTable tbody');
+    tableBody.innerHTML = "";
+
+    // Populate table with filtered data
+    filteredShips.forEach(ship => {
+        const row = document.createElement('tr');
+        const shipStats = ship[currentGameMode]; // Access the current game mode data
+
+        if (shipStats.battles > 0) {
+            let isPremium = getShipEncyData(ship.ship_id, 'is_premium');
+            let isSpecial = getShipEncyData(ship.ship_id, 'is_special');
+
+            let nation = getShipEncyData(ship.ship_id, 'nation');
+            let nation_image_path = staticUrl + 'images/nation_flags/' + nation + '.png';
+            createCell(row, nation_image_path, 'nation', isPremium || isSpecial, true);
+
+            let shipType = getShipEncyData(ship.ship_id, 'type');
+            let type_image_path = staticUrl + 'images/ship_types/' + shipType;
+            if (isPremium) type_image_path += '_premium.png';
+            else if (isSpecial) type_image_path += '_special.png';
+            else type_image_path += '_standard.png';
+            createCell(row, type_image_path, 'ship-type', isPremium || isSpecial, true);
+
+            createCell(row, tier[getShipEncyData(ship.ship_id, 'tier')], 'tier', isPremium || isSpecial);
+            createCell(row, getShipEncyData(ship.ship_id, 'images', {}).small, 'ship-icon', isPremium || isSpecial, true);
+            createCell(row, getShipEncyData(ship.ship_id, 'name', ship.ship_id), 'ship-name', isPremium || isSpecial);
+            createCell(row, nf.format(shipStats.battles), 'battles', isPremium || isSpecial);
+            createCell(row, shipStats.win_rate, 'win-rate', isPremium || isSpecial);
+            createCell(row, nf.format(parseInt(shipStats.avg_damage_dealt)), 'damage', isPremium || isSpecial);
+            createCell(row, nf2d.format(shipStats.avg_frags), 'frags', isPremium || isSpecial);
+            createCell(row, nf0d.format(shipStats.avg_xp), 'xp', isPremium || isSpecial);
+            createCell(row, nf2d.format(shipStats.kd), 'kd', isPremium || isSpecial);
+
+            row.className = 'ship-item';
+            row.onclick = function () { show_ship_stats(ship.ship_id, row); };
+            tableBody.appendChild(row);
+        }
+    });
+
+    sort_ship_list(5);
+}
+
+// Add event listeners to all checkboxes
+document.querySelectorAll('.nation-filter, .type-filter, .tier-filter').forEach(checkbox => {
+    checkbox.addEventListener('change', filterAndDisplayShips);
+});
+
+
+// Function to reset all filters
+function resetFilters() {
+    document.querySelectorAll('.filters-container input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    filterAndDisplayShips();
+}
+
+// Function to toggle the visibility of the filters container
+function toggleFilters() {
+    const filtersContainer = document.getElementById('filters');
+    const toggleButton = document.getElementById('toggle-filters');
+    if (filtersContainer.style.display === 'none') {
+        filtersContainer.style.display = 'block';
+        toggleButton.textContent = 'Hide Filters';
+    } 
+    else {
+        filtersContainer.style.display = 'none';
+        toggleButton.textContent = 'Show Filters';
+    }
+}
+
+// Ensure the filter is hidden by default
+document.addEventListener('DOMContentLoaded', () => {
+    const filtersContainer = document.getElementById('filters');
+    const toggleButton = document.getElementById('toggle-filters');
+    filtersContainer.style.display = 'none';
+    toggleButton.textContent = 'Show Filters';
+    // Ensure all filters are unchecked by default
+    document.querySelectorAll('.filters-container input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+    });
+});
+
+// Add event listeners to the buttons
+document.getElementById('reset-filters').addEventListener('click', resetFilters);
+document.getElementById('toggle-filters').addEventListener('click', toggleFilters);
+
+
+// ---------------------------------------------------------------------------------
 // -------------------------------- Sort Ship List ---------------------------------
 // ---------------------------------------------------------------------------------
 
